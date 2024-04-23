@@ -59,10 +59,10 @@ namespace gestione_account_password
 
         public PasswordManager(int length, bool caps, bool numbers, bool specialChars)
         {
-            (_password, string s) = PasswordGenerator(length, caps, numbers, specialChars);
+            (_password, string? s) = PasswordGenerator(length, caps, numbers, specialChars);
         }
 
-        public (string, string) PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
+        public (string?, string?) PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
         {
             if (length < 8 || length > 30)
             {
@@ -85,7 +85,7 @@ namespace gestione_account_password
                 pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
             }
             
-            return (pw.ToString(), "");
+            return (pw.ToString(), null);
         }
 
         private static char[] ConcatArrays(params char[][] arrays)
