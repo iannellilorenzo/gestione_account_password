@@ -11,6 +11,7 @@ namespace gestione_account_password
         private string _name;
         private PasswordManager _password;
         private DateTime _lastChange;
+        private List<Account> _accounts;
 
         public string Name
         {
@@ -30,18 +31,26 @@ namespace gestione_account_password
             set => _lastChange = value;
         }
 
+        public List<Account> Accounts
+        {
+            get => _accounts;
+            set => _accounts = value;
+        }
+
         public MasterAccount()
         {
             Name = "";
             Password = new("");
             LastChange = DateTime.Now;
+            Accounts = new();
         }
 
-        public MasterAccount(string name, PasswordManager password, DateTime lastChange)
+        public MasterAccount(string name, PasswordManager password, DateTime lastChange, List<Account> accounts)
         {
             Name = name;
             Password = password;
             LastChange = lastChange;
+            Accounts = accounts;
         }
     }
 }
