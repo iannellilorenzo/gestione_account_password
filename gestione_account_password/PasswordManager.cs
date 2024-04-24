@@ -30,7 +30,7 @@ namespace gestione_account_password
             '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'
         };
         
-        private readonly string _password;
+        private string _password;
 
         public char[] LowercaseLetters
         {
@@ -55,22 +55,29 @@ namespace gestione_account_password
         public string Password
         {
             get => _password;
+            set => _password = value;
         }
 
         public PasswordManager(int length, bool caps, bool numbers, bool specialChars)
         {
-            (_password, string? s) = PasswordGenerator(length, caps, numbers, specialChars);
+            Password = PasswordGenerator(length, caps, numbers, specialChars);
         }
 
-        public (string?, string?) PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
+        public PasswordManager(string password)
+        {
+            Password = password;
+            EncryptPassword();
+        }
+
+        public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
         {
             if (length < 8 || length > 30)
             {
                 throw new ArgumentOutOfRangeException();
             }
 
-            Random rng = new Random();
-            StringBuilder pw = new StringBuilder();
+            Random rng = new();
+            StringBuilder pw = new();
             char[] allowedChars = LowercaseLetters;
 
             if (caps)
@@ -85,7 +92,7 @@ namespace gestione_account_password
                 pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
             }
             
-            return (pw.ToString(), null);
+            return pw.ToString();
         }
 
         private static char[] ConcatArrays(params char[][] arrays)
