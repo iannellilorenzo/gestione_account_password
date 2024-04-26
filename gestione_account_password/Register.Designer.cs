@@ -47,7 +47,7 @@
             // 
             this.NameMasterAccount.Location = new System.Drawing.Point(81, 145);
             this.NameMasterAccount.Name = "NameMasterAccount";
-            this.NameMasterAccount.Size = new System.Drawing.Size(100, 22);
+            this.NameMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.NameMasterAccount.TabIndex = 1;
             this.NameMasterAccount.MouseEnter += new System.EventHandler(this.NameMasterAccount_MouseEnter);
             this.NameMasterAccount.MouseLeave += new System.EventHandler(this.NameMasterAccount_MouseLeave);
@@ -57,7 +57,7 @@
             this.PassMasterAccount.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.PassMasterAccount.Location = new System.Drawing.Point(81, 182);
             this.PassMasterAccount.Name = "PassMasterAccount";
-            this.PassMasterAccount.Size = new System.Drawing.Size(100, 22);
+            this.PassMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.PassMasterAccount.TabIndex = 2;
             this.PassMasterAccount.MouseEnter += new System.EventHandler(this.PassMasterAccount_MouseEnter);
             this.PassMasterAccount.MouseLeave += new System.EventHandler(this.PassMasterAccount_MouseLeave);
@@ -71,7 +71,7 @@
             this.Controls.Add(this.NameMasterAccount);
             this.Controls.Add(this.RegNow);
             this.Name = "Register";
-            this.Text = "Registeformr";
+            this.Text = "Register";
             this.Load += new System.EventHandler(this.Register_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
