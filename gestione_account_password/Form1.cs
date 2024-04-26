@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
-    public partial class Form1 : Form
+    public partial class Access : Form
     {
-        public Form1()
+        public Access()
         {
             InitializeComponent();
         }
@@ -20,6 +20,13 @@ namespace gestione_account_password
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Register_Click(object sender, EventArgs e)
+        {
+            Register formRegister = new();
+            formRegister.Show();
+            Hide();
         }
     }
 }
