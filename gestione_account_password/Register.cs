@@ -15,6 +15,8 @@ namespace gestione_account_password
         public Register()
         {
             InitializeComponent();
+            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
+            SetPlaceHolder(PassMasterAccount, "Insert master account password here");
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -40,16 +42,24 @@ namespace gestione_account_password
             }
         }
 
-        
-
-        private void NameAccount_MouseEnter(object sender, EventArgs e)
+        private void NameMasterAccount_MouseEnter(object sender, EventArgs e)
         {
-            RemovePlaceHolder(NameAccount, "Insert your name here");
+            RemovePlaceHolder(NameMasterAccount, "Insert master account name here");
         }
 
-        private void NameAccount_MouseLeave(object sender, EventArgs e)
+        private void NameMasterAccount_MouseLeave(object sender, EventArgs e)
         {
-            SetPlaceHolder(NameAccount, "Insert your name here");
+            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
+        }
+
+        private void PassMasterAccount_MouseEnter(object sender, EventArgs e)
+        {
+            RemovePlaceHolder(PassMasterAccount, "Insert master account password here");
+        }
+
+        private void PassMasterAccount_MouseLeave(object sender, EventArgs e)
+        {
+            SetPlaceHolder(PassMasterAccount, "Insert master account password here");
         }
     }
 }

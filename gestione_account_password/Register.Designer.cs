@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.RegNow = new System.Windows.Forms.Label();
-            this.NameAccount = new System.Windows.Forms.TextBox();
-            this.Pass = new System.Windows.Forms.TextBox();
+            this.NameMasterAccount = new System.Windows.Forms.TextBox();
+            this.PassMasterAccount = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // RegNow
@@ -43,30 +43,32 @@
             this.RegNow.TabIndex = 0;
             this.RegNow.Text = "Register now!";
             // 
-            // NameAccount
+            // NameMasterAccount
             // 
-            this.NameAccount.Location = new System.Drawing.Point(81, 145);
-            this.NameAccount.Name = "NameAccount";
-            this.NameAccount.Size = new System.Drawing.Size(100, 22);
-            this.NameAccount.TabIndex = 1;
-            this.NameAccount.MouseEnter += new System.EventHandler(this.NameAccount_MouseEnter);
-            this.NameAccount.MouseLeave += new System.EventHandler(this.NameAccount_MouseLeave);
+            this.NameMasterAccount.Location = new System.Drawing.Point(81, 145);
+            this.NameMasterAccount.Name = "NameMasterAccount";
+            this.NameMasterAccount.Size = new System.Drawing.Size(100, 22);
+            this.NameMasterAccount.TabIndex = 1;
+            this.NameMasterAccount.MouseEnter += new System.EventHandler(this.NameMasterAccount_MouseEnter);
+            this.NameMasterAccount.MouseLeave += new System.EventHandler(this.NameMasterAccount_MouseLeave);
             // 
-            // Pass
+            // PassMasterAccount
             // 
-            this.Pass.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.Pass.Location = new System.Drawing.Point(81, 182);
-            this.Pass.Name = "Pass";
-            this.Pass.Size = new System.Drawing.Size(100, 22);
-            this.Pass.TabIndex = 2;
+            this.PassMasterAccount.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.PassMasterAccount.Location = new System.Drawing.Point(81, 182);
+            this.PassMasterAccount.Name = "PassMasterAccount";
+            this.PassMasterAccount.Size = new System.Drawing.Size(100, 22);
+            this.PassMasterAccount.TabIndex = 2;
+            this.PassMasterAccount.MouseEnter += new System.EventHandler(this.PassMasterAccount_MouseEnter);
+            this.PassMasterAccount.MouseLeave += new System.EventHandler(this.PassMasterAccount_MouseLeave);
             // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.Pass);
-            this.Controls.Add(this.NameAccount);
+            this.Controls.Add(this.PassMasterAccount);
+            this.Controls.Add(this.NameMasterAccount);
             this.Controls.Add(this.RegNow);
             this.Name = "Register";
             this.Text = "Registeformr";
@@ -79,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.Label RegNow;
-        private System.Windows.Forms.TextBox NameAccount;
-        private System.Windows.Forms.TextBox Pass;
+        private System.Windows.Forms.TextBox NameMasterAccount;
+        private System.Windows.Forms.TextBox PassMasterAccount;
     }
 }
