@@ -22,22 +22,34 @@ namespace gestione_account_password
 
         }
         
-        private void NameAccount_Enter(object sender, EventArgs e)
+        private void SetPlaceHolder(TextBox textBox, string placeHolder)
         {
-            if (NameAccount.Text == "Insert your name here")
+            if (textBox.Text == "")
             {
-                NameAccount.Text = "";
-                NameAccount.ForeColor = SystemColors.WindowText;
+                textBox.Text = placeHolder;
+                textBox.ForeColor = SystemColors.GrayText;
             }
         }
 
-        private void NameAccount_Leave(object sender, EventArgs e)
+        private void RemovePlaceHolder(TextBox textBox, string placeholder)
         {
-            if (string.IsNullOrEmpty(NameAccount.Text))
+            if (textBox.Text == placeholder)
             {
-                NameAccount.Text = "Insert your name here";
-                NameAccount.ForeColor = SystemColors.GrayText;
+                textBox.Text = "";
+                textBox.ForeColor = SystemColors.WindowText;
             }
+        }
+
+        
+
+        private void NameAccount_MouseEnter(object sender, EventArgs e)
+        {
+            RemovePlaceHolder(NameAccount, "Insert your name here");
+        }
+
+        private void NameAccount_MouseLeave(object sender, EventArgs e)
+        {
+            SetPlaceHolder(NameAccount, "Insert your name here");
         }
     }
 }

@@ -49,6 +49,8 @@
             this.NameAccount.Name = "NameAccount";
             this.NameAccount.Size = new System.Drawing.Size(100, 22);
             this.NameAccount.TabIndex = 1;
+            this.NameAccount.MouseEnter += new System.EventHandler(this.NameAccount_MouseEnter);
+            this.NameAccount.MouseLeave += new System.EventHandler(this.NameAccount_MouseLeave);
             // 
             // Pass
             // 
