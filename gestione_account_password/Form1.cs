@@ -28,5 +28,10 @@ namespace gestione_account_password
             formRegister.Show();
             Hide();
         }
+
+        private void LogIn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

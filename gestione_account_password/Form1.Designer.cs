@@ -58,6 +58,7 @@
             this.LogIn.TabIndex = 1;
             this.LogIn.Text = "Log in";
             this.LogIn.UseVisualStyleBackColor = false;
+            this.LogIn.Click += new System.EventHandler(this.LogIn_Click);
             // 
             // RightsReserved
             // 

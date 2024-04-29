@@ -10,20 +10,20 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
-    public partial class Register : Form
+    public partial class Login : Form
     {
-        public Register()
+        public Login()
         {
             InitializeComponent();
             SetPlaceHolder(NameMasterAccount, "Insert master account name here");
             SetPlaceHolder(PassMasterAccount, "Insert master account password here");
         }
 
-        private void Register_Load(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
 
         }
-        
+
         private void SetPlaceHolder(TextBox textBox, string placeHolder)
         {
             if (textBox.Text == "")
@@ -33,9 +33,9 @@ namespace gestione_account_password
             }
         }
 
-        private void RemovePlaceHolder(TextBox textBox, string placeHolder)
+        private void RemovePlaceHolder(TextBox textBox, string placeholder)
         {
-            if (textBox.Text == placeHolder)
+            if (textBox.Text == placeholder)
             {
                 textBox.Text = "";
                 textBox.ForeColor = SystemColors.WindowText;
@@ -49,7 +49,7 @@ namespace gestione_account_password
 
         private void NameMasterAccount_MouseLeave(object sender, EventArgs e)
         {
-            SetPlaceHolder(NameMasterAccount, "Insert master account name here");// RemovePlaceHolder(NameMasterAccount, "Insert master account name here"); SetPlaceHolder(NameMasterAccount, "Insert master account name here"); RemovePlaceHolder(PassMasterAccount, "Insert master account password here"); SetPlaceHolder(PassMasterAccount, "Insert master account password here");
+            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
         }
 
         private void PassMasterAccount_MouseEnter(object sender, EventArgs e)
