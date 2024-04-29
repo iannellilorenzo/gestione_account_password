@@ -52,9 +52,8 @@
             this.NameMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.NameMasterAccount.TabIndex = 1;
             this.NameMasterAccount.Tag = "Insert master account name here";
-            this.NameMasterAccount.TextChanged += new System.EventHandler(this.NameMasterAccount_TextChanged);
-            this.NameMasterAccount.MouseEnter += new System.EventHandler(this.NameMasterAccount_MouseEnter);
-            this.NameMasterAccount.MouseLeave += new System.EventHandler(this.NameMasterAccount_MouseLeave);
+            this.NameMasterAccount.Enter += new System.EventHandler(this.NameMasterAccount_Enter);
+            this.NameMasterAccount.Leave += new System.EventHandler(this.NameMasterAccount_Leave);
             // 
             // PassMasterAccount
             // 
@@ -64,9 +63,8 @@
             this.PassMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.PassMasterAccount.TabIndex = 2;
             this.PassMasterAccount.Tag = "Insert master account password here";
-            this.PassMasterAccount.TextChanged += new System.EventHandler(this.PassMasterAccount_TextChanged);
-            this.PassMasterAccount.MouseEnter += new System.EventHandler(this.PassMasterAccount_MouseEnter);
-            this.PassMasterAccount.MouseLeave += new System.EventHandler(this.PassMasterAccount_MouseLeave);
+            this.PassMasterAccount.Enter += new System.EventHandler(this.PassMasterAccount_Enter);
+            this.PassMasterAccount.Leave += new System.EventHandler(this.PassMasterAccount_Leave);
             // 
             // RegToLog
             // 

@@ -42,8 +42,8 @@
             this.PassMasterAccount.Name = "PassMasterAccount";
             this.PassMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.PassMasterAccount.TabIndex = 4;
-            this.PassMasterAccount.MouseEnter += new System.EventHandler(this.PassMasterAccount_MouseEnter);
-            this.PassMasterAccount.MouseLeave += new System.EventHandler(this.PassMasterAccount_MouseLeave);
+            this.PassMasterAccount.Enter += new System.EventHandler(this.PassMasterAccount_Enter);
+            this.PassMasterAccount.Leave += new System.EventHandler(this.PassMasterAccount_Leave);
             // 
             // NameMasterAccount
             // 
@@ -51,8 +51,8 @@
             this.NameMasterAccount.Name = "NameMasterAccount";
             this.NameMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.NameMasterAccount.TabIndex = 3;
-            this.NameMasterAccount.MouseEnter += new System.EventHandler(this.NameMasterAccount_MouseEnter);
-            this.NameMasterAccount.MouseLeave += new System.EventHandler(this.NameMasterAccount_MouseLeave);
+            this.NameMasterAccount.Enter += new System.EventHandler(this.NameMasterAccount_Enter);
+            this.NameMasterAccount.Leave += new System.EventHandler(this.NameMasterAccount_Leave);
             // 
             // LoginNow
             // 

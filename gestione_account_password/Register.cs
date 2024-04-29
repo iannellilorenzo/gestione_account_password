@@ -15,8 +15,8 @@ namespace gestione_account_password
         public Register()
         {
             InitializeComponent();
-            SetPlaceholder(NameMasterAccount, "Insert your master account name here");
-            SetPlaceholder(PassMasterAccount, "Insert your master account password here");
+            SetPlaceholder(NameMasterAccount, "Insert master account name here");
+            SetPlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -26,13 +26,11 @@ namespace gestione_account_password
 
         private void SetPlaceholder(TextBox textBox, string placeholder)
         {
-            if (string.IsNullOrWhiteSpace(textBox.Text))
+            if (textBox.Text == "")
             {
                 textBox.Text = placeholder;
                 textBox.ForeColor = SystemColors.GrayText;
             }
-
-            textBox.GotFocus += (sender, e) => RemovePlaceholder(textBox, placeholder);
         }
 
         private void RemovePlaceholder(TextBox textBox, string placeholder)
@@ -42,44 +40,26 @@ namespace gestione_account_password
                 textBox.Text = "";
                 textBox.ForeColor = SystemColors.WindowText;
             }
-
-            textBox.GotFocus -= (sender, e) => RemovePlaceholder(textBox, placeholder);
         }
 
-        private void NameMasterAccount_MouseEnter(object sender, EventArgs e)
+        private void NameMasterAccount_Enter(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                RemovePlaceholder(textBox, "Insert your master account name here");
-            }
+            RemovePlaceholder(NameMasterAccount, "Insert master account name here");
         }
 
-        private void NameMasterAccount_MouseLeave(object sender, EventArgs e)
+        private void NameMasterAccount_Leave(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                SetPlaceholder(textBox, "Insert your master account name here");
-            }
+            SetPlaceholder(NameMasterAccount, "Insert master account name here");
         }
 
-        private void PassMasterAccount_MouseEnter(object sender, EventArgs e)
+        private void PassMasterAccount_Enter(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                RemovePlaceholder(textBox, "Insert your master account password here");
-            }
+            RemovePlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
-        private void PassMasterAccount_MouseLeave(object sender, EventArgs e)
+        private void PassMasterAccount_Leave(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                SetPlaceholder(textBox, "Insert your master account password here");
-            }
+            SetPlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
         private void RegToLog_MouseClick(object sender, MouseEventArgs e)
@@ -95,26 +75,6 @@ namespace gestione_account_password
             formService.Show();
             formService.Focus();
             Close();
-        }
-
-        private void NameMasterAccount_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                RemovePlaceholder(textBox, "Insert your master account name here");
-                textBox.ForeColor = SystemColors.WindowText;
-            }
-        }
-
-        private void PassMasterAccount_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = (TextBox)sender;
-            if (textBox != null)
-            {
-                RemovePlaceholder(textBox, "Insert your master account password here");
-                textBox.ForeColor = SystemColors.WindowText;
-            }
         }
     }
 }

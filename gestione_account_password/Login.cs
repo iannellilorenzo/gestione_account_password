@@ -15,8 +15,8 @@ namespace gestione_account_password
         public Login()
         {
             InitializeComponent();
-            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
-            SetPlaceHolder(PassMasterAccount, "Insert master account password here");
+            SetPlaceholder(NameMasterAccount, "Insert master account name here");
+            SetPlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -24,16 +24,16 @@ namespace gestione_account_password
             ActiveControl = null;
         }
 
-        private void SetPlaceHolder(TextBox textBox, string placeHolder)
+        private void SetPlaceholder(TextBox textBox, string placeholder)
         {
             if (textBox.Text == "")
             {
-                textBox.Text = placeHolder;
+                textBox.Text = placeholder;
                 textBox.ForeColor = SystemColors.GrayText;
             }
         }
 
-        private void RemovePlaceHolder(TextBox textBox, string placeholder)
+        private void RemovePlaceholder(TextBox textBox, string placeholder)
         {
             if (textBox.Text == placeholder)
             {
@@ -41,25 +41,25 @@ namespace gestione_account_password
                 textBox.ForeColor = SystemColors.WindowText;
             }
         }
-
-        private void NameMasterAccount_MouseEnter(object sender, EventArgs e)
+        
+        private void NameMasterAccount_Enter(object sender, EventArgs e)
         {
-            RemovePlaceHolder(NameMasterAccount, "Insert master account name here");
+            RemovePlaceholder(NameMasterAccount, "Insert master account name here");
         }
 
-        private void NameMasterAccount_MouseLeave(object sender, EventArgs e)
+        private void NameMasterAccount_Leave(object sender, EventArgs e)
         {
-            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
+            SetPlaceholder(NameMasterAccount, "Insert master account name here");
         }
 
-        private void PassMasterAccount_MouseEnter(object sender, EventArgs e)
+        private void PassMasterAccount_Enter(object sender, EventArgs e)
         {
-            RemovePlaceHolder(PassMasterAccount, "Insert master account password here");
+            RemovePlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
-        private void PassMasterAccount_MouseLeave(object sender, EventArgs e)
+        private void PassMasterAccount_Leave(object sender, EventArgs e)
         {
-            SetPlaceHolder(PassMasterAccount, "Insert master account password here");
+            SetPlaceholder(PassMasterAccount, "Insert master account password here");
         }
 
         private void LogToReg_MouseClick(object sender, MouseEventArgs e)
