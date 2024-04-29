@@ -9,7 +9,7 @@ namespace gestione_account_password
     public sealed class FileManager
     {
         private static FileManager instance = null;
-        private static readonly object padlock = new object();
+        private static readonly object padlock = new();
 
         private FileManager()
         {
@@ -24,10 +24,7 @@ namespace gestione_account_password
                 {
                     lock (padlock)
                     {
-                        if (instance == null)
-                        {
-                            instance = new FileManager();
-                        }
+                        instance ??= new FileManager();
                     }
                 }
 

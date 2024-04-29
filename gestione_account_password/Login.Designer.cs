@@ -32,6 +32,7 @@
             this.NameMasterAccount = new System.Windows.Forms.TextBox();
             this.LoginNow = new System.Windows.Forms.Label();
             this.LogToReg = new System.Windows.Forms.LinkLabel();
+            this.LoginBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PassMasterAccount
@@ -59,7 +60,7 @@
             this.LoginNow.Font = new System.Drawing.Font("Verdana", 11F);
             this.LoginNow.Location = new System.Drawing.Point(43, 34);
             this.LoginNow.Name = "LoginNow";
-            this.LoginNow.Size = new System.Drawing.Size(146, 29);
+            this.LoginNow.Size = new System.Drawing.Size(117, 23);
             this.LoginNow.TabIndex = 5;
             this.LoginNow.Text = "Login now!";
             // 
@@ -74,17 +75,32 @@
             this.LogToReg.Text = "Don\'t have an account yet? Register now!";
             this.LogToReg.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LogToReg_MouseClick);
             // 
+            // LoginBut
+            // 
+            this.LoginBut.BackColor = System.Drawing.Color.Silver;
+            this.LoginBut.FlatAppearance.BorderSize = 0;
+            this.LoginBut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LoginBut.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LoginBut.Location = new System.Drawing.Point(432, 114);
+            this.LoginBut.Name = "LoginBut";
+            this.LoginBut.Size = new System.Drawing.Size(137, 59);
+            this.LoginBut.TabIndex = 7;
+            this.LoginBut.Text = "Login";
+            this.LoginBut.UseVisualStyleBackColor = false;
+            this.LoginBut.Click += new System.EventHandler(this.LoginBut_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LoginBut);
             this.Controls.Add(this.LogToReg);
             this.Controls.Add(this.LoginNow);
             this.Controls.Add(this.PassMasterAccount);
             this.Controls.Add(this.NameMasterAccount);
             this.Name = "Login";
-            this.Text = "Form2";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -97,5 +113,6 @@
         private System.Windows.Forms.TextBox NameMasterAccount;
         private System.Windows.Forms.Label LoginNow;
         private System.Windows.Forms.LinkLabel LogToReg;
+        private System.Windows.Forms.Button LoginBut;
     }
 }

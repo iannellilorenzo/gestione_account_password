@@ -21,7 +21,7 @@ namespace gestione_account_password
 
         private void Login_Load(object sender, EventArgs e)
         {
-
+            ActiveControl = null;
         }
 
         private void SetPlaceHolder(TextBox textBox, string placeHolder)
@@ -67,6 +67,14 @@ namespace gestione_account_password
             Register formRegister = new();
             formRegister.Show();
             Hide();
+        }
+
+        private void LoginBut_Click(object sender, EventArgs e)
+        {
+            Service formService = new();
+            formService.Show();
+            formService.Focus();
+            Close();
         }
     }
 }

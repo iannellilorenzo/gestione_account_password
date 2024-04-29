@@ -19,7 +19,7 @@ namespace gestione_account_password
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            ActiveControl = null;
         }
 
         private void Register_Click(object sender, EventArgs e)
