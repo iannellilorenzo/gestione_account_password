@@ -31,6 +31,7 @@
             this.RegNow = new System.Windows.Forms.Label();
             this.NameMasterAccount = new System.Windows.Forms.TextBox();
             this.PassMasterAccount = new System.Windows.Forms.TextBox();
+            this.RegToLog = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // RegNow
@@ -62,11 +63,23 @@
             this.PassMasterAccount.MouseEnter += new System.EventHandler(this.PassMasterAccount_MouseEnter);
             this.PassMasterAccount.MouseLeave += new System.EventHandler(this.PassMasterAccount_MouseLeave);
             // 
+            // RegToLog
+            // 
+            this.RegToLog.AutoSize = true;
+            this.RegToLog.Location = new System.Drawing.Point(104, 217);
+            this.RegToLog.Name = "RegToLog";
+            this.RegToLog.Size = new System.Drawing.Size(249, 16);
+            this.RegToLog.TabIndex = 8;
+            this.RegToLog.TabStop = true;
+            this.RegToLog.Text = "Already have an account yet? Login now!";
+            this.RegToLog.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RegToLog_MouseClick);
+            // 
             // Register
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.RegToLog);
             this.Controls.Add(this.PassMasterAccount);
             this.Controls.Add(this.NameMasterAccount);
             this.Controls.Add(this.RegNow);
@@ -83,5 +96,6 @@
         private System.Windows.Forms.Label RegNow;
         private System.Windows.Forms.TextBox NameMasterAccount;
         private System.Windows.Forms.TextBox PassMasterAccount;
+        private System.Windows.Forms.LinkLabel RegToLog;
     }
 }

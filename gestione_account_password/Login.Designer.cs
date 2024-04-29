@@ -30,6 +30,8 @@
         {
             this.PassMasterAccount = new System.Windows.Forms.TextBox();
             this.NameMasterAccount = new System.Windows.Forms.TextBox();
+            this.LoginNow = new System.Windows.Forms.Label();
+            this.LogToReg = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // PassMasterAccount
@@ -51,11 +53,34 @@
             this.NameMasterAccount.MouseEnter += new System.EventHandler(this.NameMasterAccount_MouseEnter);
             this.NameMasterAccount.MouseLeave += new System.EventHandler(this.NameMasterAccount_MouseLeave);
             // 
+            // LoginNow
+            // 
+            this.LoginNow.AutoSize = true;
+            this.LoginNow.Font = new System.Drawing.Font("Verdana", 11F);
+            this.LoginNow.Location = new System.Drawing.Point(43, 34);
+            this.LoginNow.Name = "LoginNow";
+            this.LoginNow.Size = new System.Drawing.Size(146, 29);
+            this.LoginNow.TabIndex = 5;
+            this.LoginNow.Text = "Login now!";
+            // 
+            // LogToReg
+            // 
+            this.LogToReg.AutoSize = true;
+            this.LogToReg.Location = new System.Drawing.Point(108, 193);
+            this.LogToReg.Name = "LogToReg";
+            this.LogToReg.Size = new System.Drawing.Size(251, 16);
+            this.LogToReg.TabIndex = 6;
+            this.LogToReg.TabStop = true;
+            this.LogToReg.Text = "Don\'t have an account yet? Register now!";
+            this.LogToReg.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LogToReg_MouseClick);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.LogToReg);
+            this.Controls.Add(this.LoginNow);
             this.Controls.Add(this.PassMasterAccount);
             this.Controls.Add(this.NameMasterAccount);
             this.Name = "Login";
@@ -70,5 +95,7 @@
 
         private System.Windows.Forms.TextBox PassMasterAccount;
         private System.Windows.Forms.TextBox NameMasterAccount;
+        private System.Windows.Forms.Label LoginNow;
+        private System.Windows.Forms.LinkLabel LogToReg;
     }
 }

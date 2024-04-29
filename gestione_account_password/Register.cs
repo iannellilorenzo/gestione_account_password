@@ -49,7 +49,7 @@ namespace gestione_account_password
 
         private void NameMasterAccount_MouseLeave(object sender, EventArgs e)
         {
-            SetPlaceHolder(NameMasterAccount, "Insert master account name here");// RemovePlaceHolder(NameMasterAccount, "Insert master account name here"); SetPlaceHolder(NameMasterAccount, "Insert master account name here"); RemovePlaceHolder(PassMasterAccount, "Insert master account password here"); SetPlaceHolder(PassMasterAccount, "Insert master account password here");
+            SetPlaceHolder(NameMasterAccount, "Insert master account name here");
         }
 
         private void PassMasterAccount_MouseEnter(object sender, EventArgs e)
@@ -60,6 +60,13 @@ namespace gestione_account_password
         private void PassMasterAccount_MouseLeave(object sender, EventArgs e)
         {
             SetPlaceHolder(PassMasterAccount, "Insert master account password here");
+        }
+
+        private void RegToLog_MouseClick(object sender, MouseEventArgs e)
+        {
+            Login formLogin = new();
+            formLogin.Show();
+            Hide();
         }
     }
 }

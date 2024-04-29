@@ -61,5 +61,12 @@ namespace gestione_account_password
         {
             SetPlaceHolder(PassMasterAccount, "Insert master account password here");
         }
+
+        private void LogToReg_MouseClick(object sender, MouseEventArgs e)
+        {
+            Register formRegister = new();
+            formRegister.Show();
+            Hide();
+        }
     }
 }

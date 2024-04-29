@@ -31,7 +31,9 @@ namespace gestione_account_password
 
         private void LogIn_Click(object sender, EventArgs e)
         {
-
+            Login formLogin = new();
+            formLogin.Show();
+            Hide();
         }
     }
 }
