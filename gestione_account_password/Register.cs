@@ -12,11 +12,14 @@ namespace gestione_account_password
 {
     public partial class Register : Form
     {
+        protected static readonly string namePlaceholder = "Insert master account name here";
+        protected static readonly string passPlaceholder = "Insert master account password here";
+
         public Register()
         {
             InitializeComponent();
-            SetPlaceholder(NameMasterAccount, "Insert master account name here");
-            SetPlaceholder(PassMasterAccount, "Insert master account password here");
+            SetPlaceholder(NameMasterAccount, namePlaceholder);
+            SetPlaceholder(PassMasterAccount, passPlaceholder);
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -44,22 +47,27 @@ namespace gestione_account_password
 
         private void NameMasterAccount_Enter(object sender, EventArgs e)
         {
-            RemovePlaceholder(NameMasterAccount, "Insert master account name here");
+            RemovePlaceholder(NameMasterAccount, namePlaceholder);
         }
 
         private void NameMasterAccount_Leave(object sender, EventArgs e)
         {
-            SetPlaceholder(NameMasterAccount, "Insert master account name here");
+            SetPlaceholder(NameMasterAccount, namePlaceholder);
         }
 
         private void PassMasterAccount_Enter(object sender, EventArgs e)
         {
-            RemovePlaceholder(PassMasterAccount, "Insert master account password here");
+            PassMasterAccount.UseSystemPasswordChar = true;
+            RemovePlaceholder(PassMasterAccount, passPlaceholder);
         }
 
         private void PassMasterAccount_Leave(object sender, EventArgs e)
         {
-            SetPlaceholder(PassMasterAccount, "Insert master account password here");
+            SetPlaceholder(PassMasterAccount, passPlaceholder);
+            if (PassMasterAccount.Text == passPlaceholder)
+            {
+                PassMasterAccount.UseSystemPasswordChar = false;
+            }
         }
 
         private void RegToLog_MouseClick(object sender, MouseEventArgs e)
