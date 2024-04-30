@@ -67,7 +67,7 @@
             // LogToReg
             // 
             this.LogToReg.AutoSize = true;
-            this.LogToReg.Location = new System.Drawing.Point(108, 193);
+            this.LogToReg.Location = new System.Drawing.Point(107, 185);
             this.LogToReg.Name = "LogToReg";
             this.LogToReg.Size = new System.Drawing.Size(251, 16);
             this.LogToReg.TabIndex = 6;

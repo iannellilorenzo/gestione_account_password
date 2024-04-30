@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,7 +22,7 @@ namespace gestione_account_password
             InitializeComponent();
             SetPlaceholder(NameMasterAccount, namePlaceholder);
             SetPlaceholder(PassMasterAccount, passPlaceholder);
-            masterAccountsSaved = new();
+            masterAccountsSaved = [];
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -87,10 +87,30 @@ namespace gestione_account_password
                 Name = NameMasterAccount.Text,
                 Password = new(PassMasterAccount.Text),
                 LastChange = DateTime.Now,
-                Accounts = new()
+                Accounts = []
             };
+            masterAccountsSaved.Add(master);
 
             FileManager manager = FileManager.Instance;
+            // int result = manager.Serializer("data.json", masterAccountsSaved);
+            int result = -1;
+            if (result == -1)
+            {
+                DialogResult choice = MessageBox.Show("Would you like to switch to log in page?", "Account already exists", MessageBoxButtons.YesNo);
+                if (choice == DialogResult.Yes)
+                {
+                    Login formLogin = new();
+                    formLogin.Show();
+                    Close();
+                }
+                
+                NameMasterAccount.Text = "";
+                PassMasterAccount.Text = "";
+                PassMasterAccount.UseSystemPasswordChar = false;
+                SetPlaceholder(NameMasterAccount, namePlaceholder);
+                SetPlaceholder(PassMasterAccount, passPlaceholder);
+                return;
+            }
 
             Service formService = new();
             formService.Show();

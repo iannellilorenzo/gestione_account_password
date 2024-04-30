@@ -69,7 +69,7 @@
             // RegToLog
             // 
             this.RegToLog.AutoSize = true;
-            this.RegToLog.Location = new System.Drawing.Point(104, 217);
+            this.RegToLog.Location = new System.Drawing.Point(99, 216);
             this.RegToLog.Name = "RegToLog";
             this.RegToLog.Size = new System.Drawing.Size(249, 16);
             this.RegToLog.TabIndex = 8;

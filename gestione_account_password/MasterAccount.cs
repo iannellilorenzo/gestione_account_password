@@ -42,7 +42,7 @@ namespace gestione_account_password
             Name = "";
             Password = new("");
             LastChange = DateTime.Now;
-            Accounts = new();
+            Accounts = [];
         }
 
         public MasterAccount(string name, PasswordManager password, DateTime lastChange, List<Account> accounts)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace gestione_account_password
@@ -38,24 +38,26 @@ namespace gestione_account_password
         {
             if (!File.Exists(fileName))
             {
-                string toSerialize = JsonSerializer.Serialize(masterAccounts);
+                string toSerialize = JsonConvert.SerializeObject(masterAccounts);
                 File.WriteAllText(fileName, toSerialize);
                 return 0;
             }
 
-            List<MasterAccount> masters = JsonSerializer.Deserialize();
+            List<MasterAccount> masters = JsonConvert.DeserializeObject<List<MasterAccount>>(File.ReadAllText(fileName));
 
-            foreach (var item in masterAccounts)
+            foreach (var item in masters)
             {
-                
+                if (masterAccounts.Any(x => x.Name == item.Name && x.Password == item.Password))
+                {
+                    return -1;
+                }
             }
 
-            return -1;
-        }
+            masters.Add(masterAccounts[0]);
+            string updatedJson = JsonConvert.SerializeObject(masters);
+            File.WriteAllText(fileName, updatedJson);
 
-        public void Serializer(string fileName, List<Account> accounts, MasterAccount masterAccount)
-        {
-
+            return 0;
         }
     }
 }

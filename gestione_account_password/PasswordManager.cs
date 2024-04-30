@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Remoting.Messaging;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace gestione_account_password
@@ -13,24 +13,24 @@ namespace gestione_account_password
     public class PasswordManager
     {
         private static readonly char[] _lowercaseLetters =
-        {
+        [
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-        };
+        ];
 
         private static readonly char[] _uppercaseLetters =
-        {
+        [
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-        };
+        ];
 
         private static readonly char[] _numbers =
-        {
+        [
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-        };
+        ];
 
         private static readonly char[] _specialChars =
-        {
+        [
             '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'
-        };
+        ];
         
         private string _password;
 
