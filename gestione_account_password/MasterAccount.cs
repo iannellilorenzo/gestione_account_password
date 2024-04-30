@@ -45,12 +45,12 @@ namespace gestione_account_password
             Accounts = [];
         }
 
-        public MasterAccount(string name, PasswordManager password, DateTime lastChange, List<Account> accounts)
+        public MasterAccount(string name, PasswordManager password, DateTime lastChange)
         {
             Name = name;
             Password = password;
             LastChange = lastChange;
-            Accounts = accounts;
+            Accounts = [];
         }
     }
 }

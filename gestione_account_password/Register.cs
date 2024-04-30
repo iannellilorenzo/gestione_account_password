@@ -77,23 +77,19 @@ namespace gestione_account_password
         {
             Login formLogin = new();
             formLogin.Show();
-            Hide();
+            Close();
         }
 
         private void RegBut_Click(object sender, EventArgs e)
         {
-            MasterAccount master = new()
-            {
-                Name = NameMasterAccount.Text,
-                Password = new(PassMasterAccount.Text),
-                LastChange = DateTime.Now,
-                Accounts = []
-            };
+            MessageBox.Show(PassMasterAccount.Text);
+            PasswordManager password = new(PassMasterAccount.Text);
+            MasterAccount master = new(NameMasterAccount.Text, password, DateTime.Now);
+            MessageBox.Show(master.Password.Password);
             masterAccountsSaved.Add(master);
 
             FileManager manager = FileManager.Instance;
-            // int result = manager.Serializer("data.json", masterAccountsSaved);
-            int result = -1;
+            int result = manager.RegisterSerializer("data.json", masterAccountsSaved);
             if (result == -1)
             {
                 DialogResult choice = MessageBox.Show("Would you like to switch to log in page?", "Account already exists", MessageBoxButtons.YesNo);
@@ -107,6 +103,7 @@ namespace gestione_account_password
                 NameMasterAccount.Text = "";
                 PassMasterAccount.Text = "";
                 PassMasterAccount.UseSystemPasswordChar = false;
+
                 SetPlaceholder(NameMasterAccount, namePlaceholder);
                 SetPlaceholder(PassMasterAccount, passPlaceholder);
                 return;

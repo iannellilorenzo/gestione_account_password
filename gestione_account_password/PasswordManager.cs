@@ -34,21 +34,25 @@ namespace gestione_account_password
         
         private string _password;
 
+        [JsonIgnore]
         public char[] LowercaseLetters
         {
             get => _lowercaseLetters;
         }
 
+        [JsonIgnore]
         public char[] UppercaseLetters
         {
             get => _uppercaseLetters;
         }
 
+        [JsonIgnore]
         public char[] Numbers
         {
             get => _numbers;
         }
 
+        [JsonIgnore]
         public char[] SpecialChars
         {
             get => _specialChars;

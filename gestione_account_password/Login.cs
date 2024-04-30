@@ -74,7 +74,7 @@ namespace gestione_account_password
         {
             Register formRegister = new();
             formRegister.Show();
-            Hide();
+            Close();
         }
 
         private void LoginBut_Click(object sender, EventArgs e)

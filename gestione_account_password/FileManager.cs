@@ -34,7 +34,7 @@ namespace gestione_account_password
             }
         }
 
-        public int Serializer(string fileName, List<MasterAccount> masterAccounts)
+        public int RegisterSerializer(string fileName, List<MasterAccount> masterAccounts)
         {
             if (!File.Exists(fileName))
             {
