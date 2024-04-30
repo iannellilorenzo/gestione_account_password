@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,12 +15,14 @@ namespace gestione_account_password
     {
         protected static readonly string namePlaceholder = "Insert master account name here";
         protected static readonly string passPlaceholder = "Insert master account password here";
+        protected static List<MasterAccount> masterAccountsSaved;
 
         public Register()
         {
             InitializeComponent();
             SetPlaceholder(NameMasterAccount, namePlaceholder);
             SetPlaceholder(PassMasterAccount, passPlaceholder);
+            masterAccountsSaved = new();
         }
 
         private void Register_Load(object sender, EventArgs e)
@@ -79,6 +82,16 @@ namespace gestione_account_password
 
         private void RegBut_Click(object sender, EventArgs e)
         {
+            MasterAccount master = new()
+            {
+                Name = NameMasterAccount.Text,
+                Password = new(PassMasterAccount.Text),
+                LastChange = DateTime.Now,
+                Accounts = new()
+            };
+
+            FileManager manager = FileManager.Instance;
+
             Service formService = new();
             formService.Show();
             formService.Focus();
