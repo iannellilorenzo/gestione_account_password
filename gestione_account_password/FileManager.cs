@@ -47,7 +47,7 @@ namespace gestione_account_password
 
             foreach (var item in masters)
             {
-                if (masterAccounts.Any(x => x.Name == item.Name && x.Password == item.Password))
+                if (masterAccounts.Any(x => x.Name == item.Name && x.Password.DecryptPassword() == item.Password.DecryptPassword()))
                 {
                     return -1;
                 }
@@ -58,6 +58,16 @@ namespace gestione_account_password
             File.WriteAllText(fileName, updatedJson);
 
             return 0;
+        }
+
+        public List<MasterAccount> Deserializer(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                throw new InvalidOperationException();
+            }
+
+            return JsonConvert.DeserializeObject<List<MasterAccount>>(File.ReadAllText(fileName));
         }
     }
 }

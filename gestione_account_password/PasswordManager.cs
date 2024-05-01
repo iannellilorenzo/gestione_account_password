@@ -125,9 +125,9 @@ namespace gestione_account_password
             return Convert.ToBase64String(plainPassword);
         }
 
-        public string DecryptPassword(string encryptedPassword)
+        public string DecryptPassword()
         {
-            byte[] encryptedBytes = Convert.FromBase64String(encryptedPassword);
+            byte[] encryptedBytes = Convert.FromBase64String(Password);
             return Encoding.UTF8.GetString(encryptedBytes);
         }
     }

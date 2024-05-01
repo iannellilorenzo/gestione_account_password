@@ -1,6 +1,6 @@
 ﻿namespace gestione_account_password
 {
-    partial class Access
+    partial class Home
     {
         /// <summary>
         /// Variabile di progettazione necessaria.
@@ -88,7 +88,7 @@
             this.Welcome.TabIndex = 4;
             this.Welcome.Text = "Welcome to SentinelKey";
             // 
-            // Access
+            // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,7 +97,7 @@
             this.Controls.Add(this.RightsReserved);
             this.Controls.Add(this.LogIn);
             this.Controls.Add(this.Register);
-            this.Name = "Access";
+            this.Name = "Home";
             this.Text = "SentinelKey";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

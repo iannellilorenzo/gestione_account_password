@@ -79,10 +79,41 @@ namespace gestione_account_password
 
         private void LoginBut_Click(object sender, EventArgs e)
         {
-            Service formService = new();
-            formService.Show();
-            formService.Focus();
-            Close();
+            FileManager manager = FileManager.Instance;
+            List<MasterAccount> masters = [];
+
+            try
+            {
+                masters = manager.Deserializer("data.json");
+            }
+            catch(InvalidOperationException)
+            {
+                MessageBox.Show("File does not exist yet, register first. The program will shut down.", "Error", MessageBoxButtons.OK);
+                Application.Exit();
+            }
+
+            string name = NameMasterAccount.Text;
+            string password = PassMasterAccount.Text;
+
+            foreach (MasterAccount master in masters)
+            {
+                if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword() == master.Password.DecryptPassword()))
+                {
+                    Service formService = new();
+                    formService.Show();
+                    formService.Focus();
+                    Close();
+                    return;
+                }
+            }
+
+            MessageBox.Show("Account not found, check your credentials or register first.", "Error", MessageBoxButtons.OK);
+            NameMasterAccount.Text = "";
+            PassMasterAccount.Text = "";
+            PassMasterAccount.UseSystemPasswordChar = false;
+
+            SetPlaceholder(NameMasterAccount, namePlaceholder);
+            SetPlaceholder(PassMasterAccount, passPlaceholder);
         }
     }
 }

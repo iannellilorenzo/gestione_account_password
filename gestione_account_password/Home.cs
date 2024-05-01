@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
-    public partial class Access : Form
+    public partial class Home : Form
     {
-        public Access()
+        public Home()
         {
             InitializeComponent();
         }
