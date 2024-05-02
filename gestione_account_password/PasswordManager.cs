@@ -32,7 +32,7 @@ namespace gestione_account_password
         {
             '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'
         };
-        
+
         private string _password;
 
         public static char[] LowercaseLetters
@@ -93,7 +93,7 @@ namespace gestione_account_password
             {
                 pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
             }
-            
+
             return pw.ToString();
         }
 
@@ -121,7 +121,7 @@ namespace gestione_account_password
             string keyString = username;
             byte[] key = Encoding.UTF8.GetBytes(keyString);
 
-            while(key.Length < 32)
+            while (key.Length < 32)
             {
                 key = key.Concat(Encoding.UTF8.GetBytes(keyString)).ToArray();
             }
@@ -138,21 +138,36 @@ namespace gestione_account_password
         {
             byte[] key = GetKey(username);
 
-            using Aes advEncrStandard = Aes.Create();
-            advEncrStandard.Key = key;
-            advEncrStandard.GenerateIV();
-
-            using ICryptoTransform encryptor = advEncrStandard.CreateEncryptor(advEncrStandard.Key, advEncrStandard.IV);
-            using MemoryStream msEncrypt = new();
-            using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
+            using (Aes advEncrStandard = Aes.Create())
             {
-                using StreamWriter swEncrypt = new(csEncrypt);
-                swEncrypt.Write(password);
-            }
+                advEncrStandard.Key = key;
+                advEncrStandard.GenerateIV();
 
-            byte[] encryptedBytes = msEncrypt.ToArray();
-            string encryptedPassword = BitConverter.ToString(encryptedBytes).Replace("-", "");
-            return encryptedPassword;
+                using (ICryptoTransform encryptor = advEncrStandard.CreateEncryptor(advEncrStandard.Key, advEncrStandard.IV))
+                {
+                    using (MemoryStream msEncrypt = new())
+                    {
+                        using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        {
+                            using (StreamWriter swEncrypt = new(csEncrypt))
+                            {
+                                swEncrypt.Write(password);
+                                swEncrypt.Close();
+                            }
+
+                            csEncrypt.Close();
+                        }
+                        
+                        byte[] encryptedBytes = msEncrypt.ToArray();
+                        string encryptedPassword = BitConverter.ToString(encryptedBytes).Replace("-", "");
+                        msEncrypt.Close();
+                        encryptor.Dispose();
+                        advEncrStandard.Dispose();
+
+                        return encryptedPassword;
+                    }
+                }
+            }
         }
 
         private byte[] StringtoByteArray(string hex)
