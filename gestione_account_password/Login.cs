@@ -80,7 +80,7 @@ namespace gestione_account_password
         private void LoginBut_Click(object sender, EventArgs e)
         {
             FileManager manager = FileManager.Instance;
-            List<MasterAccount> masters = [];
+            List<MasterAccount> masters = new();
 
             try
             {

@@ -22,7 +22,7 @@ namespace gestione_account_password
             InitializeComponent();
             SetPlaceholder(NameMasterAccount, namePlaceholder);
             SetPlaceholder(PassMasterAccount, passPlaceholder);
-            masterAccountsSaved = [];
+            masterAccountsSaved = new();
         }
 
         private void Register_Load(object sender, EventArgs e)
