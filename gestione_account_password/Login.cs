@@ -89,7 +89,7 @@ namespace gestione_account_password
             }
             catch(InvalidOperationException)
             {
-                MessageBox.Show("File does not exist yet, register first. The program will shut down.", "Error", MessageBoxButtons.OK);
+                MessageBox.Show("Account does not exist yet, please register first. The program will shut down.", "Error", MessageBoxButtons.OK);
                 Application.Exit();
             }
 
@@ -98,7 +98,7 @@ namespace gestione_account_password
 
             foreach (MasterAccount master in masters)
             {
-                if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword() == master.Password.DecryptPassword()))
+                if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword(x.Name) == master.Password.DecryptPassword(x.Name)))
                 {
                     Home formService = new();
                     formService.Show();

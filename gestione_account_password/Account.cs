@@ -41,7 +41,7 @@ namespace gestione_account_password
         {
             Name = "";
             Email = "";
-            Password = new("");
+            Password = new("", "");
             Description = "";
         }
 

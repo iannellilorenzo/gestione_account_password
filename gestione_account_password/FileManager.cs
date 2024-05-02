@@ -47,7 +47,7 @@ namespace gestione_account_password
 
             foreach (var item in masters)
             {
-                if (masterAccounts.Any(x => x.Name == item.Name && x.Password.DecryptPassword() == item.Password.DecryptPassword()))
+                if (masterAccounts.Any(x => x.Name == item.Name && x.Password.DecryptPassword(x.Name) == item.Password.DecryptPassword(x.Name)))
                 {
                     return -1;
                 }

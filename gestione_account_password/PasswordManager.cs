@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace gestione_account_password
 {
@@ -65,9 +66,9 @@ namespace gestione_account_password
             Password = PasswordGenerator(length, caps, numbers, specialChars);
         }
 
-        public PasswordManager(string password)
+        public PasswordManager(string password, string username)
         {
-            Password = EncryptPassword(password);
+            Password = EncryptPassword(password, username);
         }
 
         public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
@@ -115,16 +116,75 @@ namespace gestione_account_password
             return result;
         }
 
-        public string EncryptPassword(string password)
+        private byte[] GetKey(string username)
         {
-            byte[] plainPassword = Encoding.UTF8.GetBytes(password);
-            return Convert.ToBase64String(plainPassword); // da cambiare in un algoritmo a chiave simmetrica con librearia con chiave a scelta da me (basato su username che non cambia)
+            string keyString = username;
+            byte[] key = Encoding.UTF8.GetBytes(keyString);
+
+            while(key.Length < 32)
+            {
+                key = key.Concat(Encoding.UTF8.GetBytes(keyString)).ToArray();
+            }
+
+            if (key.Length > 32)
+            {
+                key = key.Take(32).ToArray();
+            }
+
+            return key;
         }
 
-        public string DecryptPassword()
+        public string EncryptPassword(string password, string username)
         {
-            byte[] encryptedBytes = Convert.FromBase64String(Password);
-            return Encoding.UTF8.GetString(encryptedBytes);
+            byte[] key = GetKey(username);
+
+            using Aes advEncrStandard = Aes.Create();
+            advEncrStandard.Key = key;
+            advEncrStandard.GenerateIV();
+
+            using ICryptoTransform encryptor = advEncrStandard.CreateEncryptor(advEncrStandard.Key, advEncrStandard.IV);
+            using MemoryStream msEncrypt = new();
+            using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
+            {
+                using StreamWriter swEncrypt = new(csEncrypt);
+                swEncrypt.Write(password);
+            }
+
+            byte[] encryptedBytes = msEncrypt.ToArray();
+            string encryptedPassword = BitConverter.ToString(encryptedBytes).Replace("-", "");
+            return encryptedPassword;
+        }
+
+        private byte[] StringtoByteArray(string hex)
+        {
+            int numChars = hex.Length;
+            byte[] bytes = new byte[numChars / 2];
+
+            for (int i = 0; i < numChars; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            }
+
+            return bytes;
+        }
+
+        public string DecryptPassword(string username)
+        {
+            byte[] key = GetKey(username);
+            using Aes advEncrStandard = Aes.Create();
+            advEncrStandard.Key = key;
+
+            byte[] encryptedBytes = StringtoByteArray(Password);
+            byte[] iv = encryptedBytes.Take(16).ToArray();
+            byte[] encryptedData = encryptedBytes.Skip(16).ToArray();
+
+            using ICryptoTransform decryptor = advEncrStandard.CreateDecryptor(advEncrStandard.Key, iv);
+            using MemoryStream msDecrypt = new(encryptedData);
+            using CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read);
+            using StreamReader srDecrypt = new(csDecrypt);
+
+            string decryptedPassword = srDecrypt.ReadToEnd();
+            return decryptedPassword;
         }
     }
 }

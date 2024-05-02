@@ -83,7 +83,7 @@ namespace gestione_account_password
 
         private void RegBut_Click(object sender, EventArgs e)
         {
-            MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text), DateTime.Now);
+            MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text, NameMasterAccount.Text), DateTime.Now);
             masterAccountsSaved.Add(master);
 
             FileManager manager = FileManager.Instance;
