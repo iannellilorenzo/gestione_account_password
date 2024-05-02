@@ -16,7 +16,7 @@ namespace gestione_account_password
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Home());
+            Application.Run(new Access());
         }
     }
 }

@@ -28,6 +28,7 @@ namespace gestione_account_password
         private void Register_Load(object sender, EventArgs e)
         {
             ActiveControl = null;
+            CenterToScreen();
         }
 
         private void SetPlaceholder(TextBox textBox, string placeholder)
@@ -106,7 +107,7 @@ namespace gestione_account_password
                 return;
             }
 
-            Service formService = new();
+            Home formService = new();
             formService.Show();
             formService.Focus();
             Close();

@@ -118,7 +118,7 @@ namespace gestione_account_password
         public string EncryptPassword(string password)
         {
             byte[] plainPassword = Encoding.UTF8.GetBytes(password);
-            return Convert.ToBase64String(plainPassword);
+            return Convert.ToBase64String(plainPassword); // da cambiare in un algoritmo a chiave simmetrica con librearia con chiave a scelta da me (basato su username che non cambia)
         }
 
         public string DecryptPassword()

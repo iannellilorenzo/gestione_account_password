@@ -17,23 +17,11 @@ namespace gestione_account_password
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Service_Load(object sender, EventArgs e)
         {
             ActiveControl = null;
-        }
-
-        private void Register_Click(object sender, EventArgs e)
-        {
-            Register formRegister = new();
-            formRegister.Show();
-            Hide();
-        }
-
-        private void LogIn_Click(object sender, EventArgs e)
-        {
-            Login formLogin = new();
-            formLogin.Show();
-            Hide();
+            Scale(2.25f);
+            CenterToScreen();
         }
     }
 }

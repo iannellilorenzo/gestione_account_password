@@ -38,18 +38,20 @@
             // PassMasterAccount
             // 
             this.PassMasterAccount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.PassMasterAccount.Location = new System.Drawing.Point(90, 151);
+            this.PassMasterAccount.Location = new System.Drawing.Point(68, 123);
+            this.PassMasterAccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PassMasterAccount.Name = "PassMasterAccount";
-            this.PassMasterAccount.Size = new System.Drawing.Size(293, 22);
+            this.PassMasterAccount.Size = new System.Drawing.Size(221, 20);
             this.PassMasterAccount.TabIndex = 4;
             this.PassMasterAccount.Enter += new System.EventHandler(this.PassMasterAccount_Enter);
             this.PassMasterAccount.Leave += new System.EventHandler(this.PassMasterAccount_Leave);
             // 
             // NameMasterAccount
             // 
-            this.NameMasterAccount.Location = new System.Drawing.Point(90, 114);
+            this.NameMasterAccount.Location = new System.Drawing.Point(68, 93);
+            this.NameMasterAccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.NameMasterAccount.Name = "NameMasterAccount";
-            this.NameMasterAccount.Size = new System.Drawing.Size(293, 22);
+            this.NameMasterAccount.Size = new System.Drawing.Size(221, 20);
             this.NameMasterAccount.TabIndex = 3;
             this.NameMasterAccount.Enter += new System.EventHandler(this.NameMasterAccount_Enter);
             this.NameMasterAccount.Leave += new System.EventHandler(this.NameMasterAccount_Leave);
@@ -58,18 +60,20 @@
             // 
             this.LoginNow.AutoSize = true;
             this.LoginNow.Font = new System.Drawing.Font("Verdana", 11F);
-            this.LoginNow.Location = new System.Drawing.Point(43, 34);
+            this.LoginNow.Location = new System.Drawing.Point(32, 28);
+            this.LoginNow.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LoginNow.Name = "LoginNow";
-            this.LoginNow.Size = new System.Drawing.Size(117, 23);
+            this.LoginNow.Size = new System.Drawing.Size(90, 18);
             this.LoginNow.TabIndex = 5;
             this.LoginNow.Text = "Login now!";
             // 
             // LogToReg
             // 
             this.LogToReg.AutoSize = true;
-            this.LogToReg.Location = new System.Drawing.Point(107, 185);
+            this.LogToReg.Location = new System.Drawing.Point(80, 150);
+            this.LogToReg.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LogToReg.Name = "LogToReg";
-            this.LogToReg.Size = new System.Drawing.Size(251, 16);
+            this.LogToReg.Size = new System.Drawing.Size(207, 13);
             this.LogToReg.TabIndex = 6;
             this.LogToReg.TabStop = true;
             this.LogToReg.Text = "Don\'t have an account yet? Register now!";
@@ -81,9 +85,10 @@
             this.LoginBut.FlatAppearance.BorderSize = 0;
             this.LoginBut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LoginBut.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoginBut.Location = new System.Drawing.Point(432, 114);
+            this.LoginBut.Location = new System.Drawing.Point(324, 93);
+            this.LoginBut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.LoginBut.Name = "LoginBut";
-            this.LoginBut.Size = new System.Drawing.Size(137, 59);
+            this.LoginBut.Size = new System.Drawing.Size(103, 48);
             this.LoginBut.TabIndex = 7;
             this.LoginBut.Text = "Login";
             this.LoginBut.UseVisualStyleBackColor = false;
@@ -91,16 +96,17 @@
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.LoginBut);
             this.Controls.Add(this.LogToReg);
             this.Controls.Add(this.LoginNow);
             this.Controls.Add(this.PassMasterAccount);
             this.Controls.Add(this.NameMasterAccount);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Login";
-            this.Text = "Login";
+            this.Text = "SentinelKey - Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

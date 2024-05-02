@@ -25,6 +25,7 @@ namespace gestione_account_password
         private void Login_Load(object sender, EventArgs e)
         {
             ActiveControl = null;
+            CenterToScreen();
         }
 
         private void SetPlaceholder(TextBox textBox, string placeholder)
@@ -99,7 +100,7 @@ namespace gestione_account_password
             {
                 if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword() == master.Password.DecryptPassword()))
                 {
-                    Service formService = new();
+                    Home formService = new();
                     formService.Show();
                     formService.Focus();
                     Close();

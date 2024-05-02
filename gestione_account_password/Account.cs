@@ -11,6 +11,7 @@ namespace gestione_account_password
         private string _name;
         private string _email;
         private PasswordManager _password;
+        private string _description;
 
         public string Name
         {
@@ -30,18 +31,26 @@ namespace gestione_account_password
             set => _password = value;
         }
 
+        public string Description
+        {
+            get => _description;
+            set => _description = value;
+        }
+
         public Account()
         {
             Name = "";
             Email = "";
             Password = new("");
+            Description = "";
         }
 
-        public Account(string name, string email, PasswordManager password)
+        public Account(string name, string email, PasswordManager password, string description)
         {
             Name = name;
             Email = email;
             Password = password;
+            Description = description;
         }
     }
 }

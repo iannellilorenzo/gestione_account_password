@@ -38,7 +38,7 @@ namespace gestione_account_password
         {
             if (!File.Exists(fileName))
             {
-                string toSerialize = JsonConvert.SerializeObject(masterAccounts);
+                string toSerialize = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
                 File.WriteAllText(fileName, toSerialize);
                 return 0;
             }
