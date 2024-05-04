@@ -157,7 +157,7 @@ namespace gestione_account_password
 
                             csEncrypt.Close();
                         }
-                        
+
                         byte[] encryptedBytes = msEncrypt.ToArray();
                         string encryptedPassword = BitConverter.ToString(encryptedBytes).Replace("-", "");
                         msEncrypt.Close();
@@ -186,19 +186,37 @@ namespace gestione_account_password
         public string DecryptPassword(string username)
         {
             byte[] key = GetKey(username);
-            using Aes advEncrStandard = Aes.Create();
-            advEncrStandard.Key = key;
+            string decryptedPassword = "";
 
-            byte[] encryptedBytes = StringtoByteArray(Password);
-            byte[] iv = encryptedBytes.Take(16).ToArray();
-            byte[] encryptedData = encryptedBytes.Skip(16).ToArray();
+            using (Aes advEncrStandard = Aes.Create())
+            {
+                advEncrStandard.Key = key;
 
-            using ICryptoTransform decryptor = advEncrStandard.CreateDecryptor(advEncrStandard.Key, iv);
-            using MemoryStream msDecrypt = new(encryptedData);
-            using CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read);
-            using StreamReader srDecrypt = new(csDecrypt);
+                byte[] encryptedBytes = StringtoByteArray(Password);
+                byte[] iv = encryptedBytes.Take(16).ToArray();
+                byte[] encryptedData = encryptedBytes.Skip(16).ToArray();
+                
+                using (ICryptoTransform decryptor = advEncrStandard.CreateDecryptor(advEncrStandard.Key, iv))
+                {
+                    using (MemoryStream msDecrypt = new(encryptedData))
+                    {
+                        using (CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+                            using (StreamReader srDecrypt = new(csDecrypt))
+                            {
+                                decryptedPassword = srDecrypt.ReadToEnd();
+                                decryptor.Dispose();
+                                msDecrypt.Close();
+                                csDecrypt.Close();
+                                srDecrypt.Close();
+                            }
+                        }
 
-            string decryptedPassword = srDecrypt.ReadToEnd();
+                    }
+
+                }
+            }
+
             return decryptedPassword;
         }
     }

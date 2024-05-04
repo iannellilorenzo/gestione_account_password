@@ -12,16 +12,26 @@ namespace gestione_account_password
 {
     public partial class Home : Form
     {
+        Center centerUC;
         public Home()
         {
             InitializeComponent();
+            centerUC = new();
+            AddUserControl(centerUC);
         }
 
         private void Service_Load(object sender, EventArgs e)
         {
             ActiveControl = null;
-            Scale(2.25f);
             CenterToScreen();
+        }
+
+        private void AddUserControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            CenterPanel.Controls.Clear();
+            CenterPanel.Controls.Add(userControl);
+            userControl.BringToFront();
         }
     }
 }
