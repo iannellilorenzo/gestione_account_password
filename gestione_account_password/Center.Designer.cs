@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "Center";
-            this.Size = new System.Drawing.Size(806, 463);
+            this.Size = new System.Drawing.Size(487, 384);
             this.ResumeLayout(false);
 
         }

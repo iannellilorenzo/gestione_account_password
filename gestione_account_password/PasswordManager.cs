@@ -205,16 +205,16 @@ namespace gestione_account_password
                             using (StreamReader srDecrypt = new(csDecrypt))
                             {
                                 decryptedPassword = srDecrypt.ReadToEnd();
-                                decryptor.Dispose();
-                                msDecrypt.Close();
-                                csDecrypt.Close();
                                 srDecrypt.Close();
                             }
+                            
+                            csDecrypt.Close();
                         }
-
+                        msDecrypt.Close();
                     }
-
+                    decryptor.Dispose();
                 }
+                advEncrStandard.Dispose();
             }
 
             return decryptedPassword;

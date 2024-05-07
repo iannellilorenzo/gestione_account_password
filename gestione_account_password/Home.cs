@@ -33,5 +33,10 @@ namespace gestione_account_password
             CenterPanel.Controls.Add(userControl);
             userControl.BringToFront();
         }
+
+        private void ResetPassword_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Reset password");
+        }
     }
 }

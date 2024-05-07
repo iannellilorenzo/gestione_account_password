@@ -39,11 +39,24 @@ namespace gestione_account_password
             if (!File.Exists(fileName))
             {
                 string toSerialize = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-                File.WriteAllText(fileName, toSerialize);
+                using (FileStream fs = File.Create(fileName))
+                {
+                    byte[] data = new UTF8Encoding(true).GetBytes(toSerialize);
+                    fs.Write(data, 0, data.Length);
+                }
+                
                 return 0;
             }
 
-            List<MasterAccount> masters = JsonConvert.DeserializeObject<List<MasterAccount>>(File.ReadAllText(fileName));
+            List<MasterAccount> masters;
+
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[fs.Length];
+                int bytesRead = fs.Read(bytes, 0, bytes.Length);
+                string fileContent = Encoding.UTF8.GetString(bytes);
+                masters = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+            }
 
             foreach (var item in masters)
             {
