@@ -107,7 +107,7 @@ namespace gestione_account_password
                 return;
             }
 
-            Home formService = new();
+            Home formService = new(NameMasterAccount.Text);
             formService.Show();
             formService.Focus();
             Close();

@@ -100,7 +100,7 @@ namespace gestione_account_password
             {
                 if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword(x.Name) == master.Password.DecryptPassword(x.Name)))
                 {
-                    Home formService = new();
+                    Home formService = new(name);
                     formService.Show();
                     formService.Focus();
                     Close();

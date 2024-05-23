@@ -16,5 +16,10 @@ namespace gestione_account_password
         {
             InitializeComponent();
         }
+
+        private void Center_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

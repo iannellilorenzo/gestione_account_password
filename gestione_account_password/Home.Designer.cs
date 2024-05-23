@@ -37,11 +37,14 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterPassowrdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.PrinterList = new System.Windows.Forms.ListView();
+            this.CenterPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // CenterPanel
             // 
+            this.CenterPanel.Controls.Add(this.PrinterList);
             this.CenterPanel.Location = new System.Drawing.Point(170, 25);
             this.CenterPanel.Name = "CenterPanel";
             this.CenterPanel.Size = new System.Drawing.Size(487, 384);
@@ -56,10 +59,11 @@
             this.Print.Location = new System.Drawing.Point(-2, 154);
             this.Print.Margin = new System.Windows.Forms.Padding(2);
             this.Print.Name = "Print";
-            this.Print.Size = new System.Drawing.Size(160, 31);
+            this.Print.Size = new System.Drawing.Size(172, 31);
             this.Print.TabIndex = 10;
             this.Print.Text = "Print accounts";
             this.Print.UseVisualStyleBackColor = false;
+            this.Print.Click += new System.EventHandler(this.Print_Click);
             // 
             // button1
             // 
@@ -70,7 +74,7 @@
             this.button1.Location = new System.Drawing.Point(-2, 109);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 31);
+            this.button1.Size = new System.Drawing.Size(172, 31);
             this.button1.TabIndex = 11;
             this.button1.Text = "Add new account";
             this.button1.UseVisualStyleBackColor = false;
@@ -113,15 +117,24 @@
             this.masterPassowrdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetPassword});
             this.masterPassowrdToolStripMenuItem.Name = "masterPassowrdToolStripMenuItem";
-            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.masterPassowrdToolStripMenuItem.Text = "Master passowrd";
             // 
             // ResetPassword
             // 
             this.ResetPassword.Name = "ResetPassword";
-            this.ResetPassword.Size = new System.Drawing.Size(180, 22);
+            this.ResetPassword.Size = new System.Drawing.Size(155, 22);
             this.ResetPassword.Text = "Reset password";
             this.ResetPassword.Click += new System.EventHandler(this.ResetPassword_Click);
+            // 
+            // PrinterList
+            // 
+            this.PrinterList.HideSelection = false;
+            this.PrinterList.Location = new System.Drawing.Point(0, 0);
+            this.PrinterList.Name = "PrinterList";
+            this.PrinterList.Size = new System.Drawing.Size(487, 384);
+            this.PrinterList.TabIndex = 0;
+            this.PrinterList.UseCompatibleStateImageBehavior = false;
             // 
             // Home
             // 
@@ -136,6 +149,7 @@
             this.Name = "Home";
             this.Text = "SentinelKey - Home";
             this.Load += new System.EventHandler(this.Service_Load);
+            this.CenterPanel.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -154,5 +168,6 @@
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem masterPassowrdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPassword;
+        private System.Windows.Forms.ListView PrinterList;
     }
 }
