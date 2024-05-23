@@ -44,7 +44,12 @@ namespace gestione_account_password
 
         private void Print_Click(object sender, EventArgs e)
         {
+            PrinterList.Items.Clear();
+            PrinterList.Visible = true;
+            AddAccount.BackColor = Color.Silver;
+            PrintAccounts.BackColor = Color.LightSeaGreen;
 
+            // actually print
         }
 
         private void GetAccounts()
@@ -58,11 +63,23 @@ namespace gestione_account_password
                 {
                     string toPrint = "Username: ";
                     JsonToken token = JsonConvert.DeserializeObject<JsonToken>("Accounts");
+                    PrinterList.Items.Add(token.ToString());
                     // da capire come entrare dentro ogni oggetto del json per stampare
                     
                     
                 }
             }
+        }
+
+        private void AddAccount_Click(object sender, EventArgs e)
+        {
+            PrinterList.Visible = false;
+            AddAccount.BackColor = Color.LightSeaGreen;
+            PrintAccounts.BackColor = Color.Silver;
+            
+            List<Account> accounts = new List<Account>();
+            accounts.Add(new(NameBox.Text, EmailBox.Text, new()));
+
         }
     }
 }

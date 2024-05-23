@@ -43,8 +43,9 @@ namespace gestione_account_password
                 {
                     byte[] data = new UTF8Encoding(true).GetBytes(toSerialize);
                     fs.Write(data, 0, data.Length);
+                    fs.Close();
                 }
-                
+
                 return 0;
             }
 
@@ -56,6 +57,7 @@ namespace gestione_account_password
                 int bytesRead = fs.Read(bytes, 0, bytes.Length);
                 string fileContent = Encoding.UTF8.GetString(bytes);
                 masters = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+                fs.Close();
             }
 
             foreach (var item in masters)
@@ -68,7 +70,13 @@ namespace gestione_account_password
 
             masters.Add(masterAccounts[0]);
             string updatedJson = JsonConvert.SerializeObject(masters);
-            File.WriteAllText(fileName, updatedJson);
+
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
+            {
+                byte[] data = new UTF8Encoding(true).GetBytes(updatedJson);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
 
             return 0;
         }
@@ -80,7 +88,18 @@ namespace gestione_account_password
                 throw new InvalidOperationException();
             }
 
-            return JsonConvert.DeserializeObject<List<MasterAccount>>(File.ReadAllText(fileName));
+            List<MasterAccount> masterAccounts = new();
+
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[fs.Length];
+                fs.Read(bytes, 0, bytes.Length);
+                string fileContent = Encoding.UTF8.GetString(bytes);
+                masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+                fs.Close();
+            }
+
+            return masterAccounts;
         }
     }
 }
