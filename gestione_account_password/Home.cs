@@ -49,6 +49,10 @@ namespace gestione_account_password
             AddAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
 
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, LenBox, DescBox);
+            LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
             // actually print
         }
 
@@ -76,10 +80,38 @@ namespace gestione_account_password
             PrinterList.Visible = false;
             AddAccount.BackColor = Color.LightSeaGreen;
             PrintAccounts.BackColor = Color.Silver;
-            
-            List<Account> accounts = new List<Account>();
-            accounts.Add(new(NameBox.Text, EmailBox.Text, new()));
 
+            TextBoxesVisiblityChange(true, UserBox, EmailBox, LenBox, DescBox);
+            LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
+            CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
+            
+            List<Account> accounts = new();
+            accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked), DescBox.Text));
+
+        }
+
+        private void TextBoxesVisiblityChange(bool visibility, params TextBox[] textBoxes)
+        {
+            foreach(TextBox textBox in textBoxes)
+            {
+                textBox.Visible = visibility;
+            }
+        }
+
+        private void LabelsVisiblityChange(bool visibility, params Label[] labels)
+        {
+            foreach(Label label in labels)
+            {
+                label.Visible = visibility;
+            }
+        }
+
+        private void CheckBoxesVisiblityChange(bool visibility, params CheckBox[] checkBoxes)
+        {
+            foreach (CheckBox checkBox in checkBoxes)
+            {
+                checkBox.Visible = visibility;
+            }
         }
     }
 }

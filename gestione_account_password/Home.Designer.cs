@@ -39,46 +39,36 @@
             this.masterPassowrdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.UserBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.UserLabel = new System.Windows.Forms.Label();
+            this.EmailLabel = new System.Windows.Forms.Label();
+            this.ClarifyLabel = new System.Windows.Forms.Label();
+            this.DescLabel = new System.Windows.Forms.Label();
             this.EmailBox = new System.Windows.Forms.TextBox();
             this.DescBox = new System.Windows.Forms.TextBox();
-            this.LowerCaseBox = new System.Windows.Forms.CheckBox();
             this.UpperCaseBox = new System.Windows.Forms.CheckBox();
             this.NumbersBox = new System.Windows.Forms.CheckBox();
             this.SpecialCharsBox = new System.Windows.Forms.CheckBox();
             this.AddNewAccount = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.MinLenBox = new System.Windows.Forms.TextBox();
-            this.MaxLenBox = new System.Windows.Forms.TextBox();
-            this.MinLen = new System.Windows.Forms.Label();
-            this.MaxLen = new System.Windows.Forms.Label();
-            this.Clarify = new System.Windows.Forms.Label();
+            this.PassLenLabel = new System.Windows.Forms.Label();
+            this.LenBox = new System.Windows.Forms.TextBox();
             this.CenterPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // CenterPanel
             // 
-            this.CenterPanel.Controls.Add(this.Clarify);
-            this.CenterPanel.Controls.Add(this.MaxLen);
-            this.CenterPanel.Controls.Add(this.MinLen);
-            this.CenterPanel.Controls.Add(this.MaxLenBox);
-            this.CenterPanel.Controls.Add(this.MinLenBox);
-            this.CenterPanel.Controls.Add(this.label5);
+            this.CenterPanel.Controls.Add(this.LenBox);
+            this.CenterPanel.Controls.Add(this.PassLenLabel);
             this.CenterPanel.Controls.Add(this.AddNewAccount);
             this.CenterPanel.Controls.Add(this.SpecialCharsBox);
             this.CenterPanel.Controls.Add(this.NumbersBox);
             this.CenterPanel.Controls.Add(this.UpperCaseBox);
-            this.CenterPanel.Controls.Add(this.LowerCaseBox);
             this.CenterPanel.Controls.Add(this.DescBox);
             this.CenterPanel.Controls.Add(this.EmailBox);
-            this.CenterPanel.Controls.Add(this.label4);
-            this.CenterPanel.Controls.Add(this.label3);
-            this.CenterPanel.Controls.Add(this.label2);
-            this.CenterPanel.Controls.Add(this.label1);
+            this.CenterPanel.Controls.Add(this.DescLabel);
+            this.CenterPanel.Controls.Add(this.ClarifyLabel);
+            this.CenterPanel.Controls.Add(this.EmailLabel);
+            this.CenterPanel.Controls.Add(this.UserLabel);
             this.CenterPanel.Controls.Add(this.UserBox);
             this.CenterPanel.Controls.Add(this.PrinterList);
             this.CenterPanel.Location = new System.Drawing.Point(227, 31);
@@ -185,41 +175,41 @@
             this.UserBox.Size = new System.Drawing.Size(100, 22);
             this.UserBox.TabIndex = 1;
             // 
-            // label1
+            // UserLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(86, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Username";
+            this.UserLabel.AutoSize = true;
+            this.UserLabel.Location = new System.Drawing.Point(86, 18);
+            this.UserLabel.Name = "UserLabel";
+            this.UserLabel.Size = new System.Drawing.Size(70, 16);
+            this.UserLabel.TabIndex = 2;
+            this.UserLabel.Text = "Username";
             // 
-            // label2
+            // EmailLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(286, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 16);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Email";
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(286, 18);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(41, 16);
+            this.EmailLabel.TabIndex = 3;
+            this.EmailLabel.Text = "Email";
             // 
-            // label3
+            // ClarifyLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(45, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(238, 32);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "We create a secure password for you!\r\nCheck the preferences you want below:";
+            this.ClarifyLabel.AutoSize = true;
+            this.ClarifyLabel.Location = new System.Drawing.Point(45, 93);
+            this.ClarifyLabel.Name = "ClarifyLabel";
+            this.ClarifyLabel.Size = new System.Drawing.Size(238, 32);
+            this.ClarifyLabel.TabIndex = 4;
+            this.ClarifyLabel.Text = "We create a secure password for you!\r\nCheck the preferences you want below:";
             // 
-            // label4
+            // DescLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(501, 18);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Description";
+            this.DescLabel.AutoSize = true;
+            this.DescLabel.Location = new System.Drawing.Point(501, 18);
+            this.DescLabel.Name = "DescLabel";
+            this.DescLabel.Size = new System.Drawing.Size(75, 16);
+            this.DescLabel.TabIndex = 5;
+            this.DescLabel.Text = "Description";
             // 
             // EmailBox
             // 
@@ -235,20 +225,10 @@
             this.DescBox.Size = new System.Drawing.Size(100, 22);
             this.DescBox.TabIndex = 8;
             // 
-            // LowerCaseBox
-            // 
-            this.LowerCaseBox.AutoSize = true;
-            this.LowerCaseBox.Location = new System.Drawing.Point(45, 137);
-            this.LowerCaseBox.Name = "LowerCaseBox";
-            this.LowerCaseBox.Size = new System.Drawing.Size(137, 20);
-            this.LowerCaseBox.TabIndex = 9;
-            this.LowerCaseBox.Text = "Lower case letters";
-            this.LowerCaseBox.UseVisualStyleBackColor = true;
-            // 
             // UpperCaseBox
             // 
             this.UpperCaseBox.AutoSize = true;
-            this.UpperCaseBox.Location = new System.Drawing.Point(45, 163);
+            this.UpperCaseBox.Location = new System.Drawing.Point(48, 135);
             this.UpperCaseBox.Name = "UpperCaseBox";
             this.UpperCaseBox.Size = new System.Drawing.Size(139, 20);
             this.UpperCaseBox.TabIndex = 10;
@@ -258,7 +238,7 @@
             // NumbersBox
             // 
             this.NumbersBox.AutoSize = true;
-            this.NumbersBox.Location = new System.Drawing.Point(45, 189);
+            this.NumbersBox.Location = new System.Drawing.Point(48, 161);
             this.NumbersBox.Name = "NumbersBox";
             this.NumbersBox.Size = new System.Drawing.Size(84, 20);
             this.NumbersBox.TabIndex = 11;
@@ -268,7 +248,7 @@
             // SpecialCharsBox
             // 
             this.SpecialCharsBox.AutoSize = true;
-            this.SpecialCharsBox.Location = new System.Drawing.Point(45, 215);
+            this.SpecialCharsBox.Location = new System.Drawing.Point(48, 187);
             this.SpecialCharsBox.Name = "SpecialCharsBox";
             this.SpecialCharsBox.Size = new System.Drawing.Size(141, 20);
             this.SpecialCharsBox.TabIndex = 12;
@@ -289,55 +269,21 @@
             this.AddNewAccount.Text = "Add new account";
             this.AddNewAccount.UseVisualStyleBackColor = false;
             // 
-            // label5
+            // PassLenLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(389, 118);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 16);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Password length";
+            this.PassLenLabel.AutoSize = true;
+            this.PassLenLabel.Location = new System.Drawing.Point(389, 118);
+            this.PassLenLabel.Name = "PassLenLabel";
+            this.PassLenLabel.Size = new System.Drawing.Size(106, 16);
+            this.PassLenLabel.TabIndex = 14;
+            this.PassLenLabel.Text = "Password length";
             // 
-            // MinLenBox
+            // LenBox
             // 
-            this.MinLenBox.Location = new System.Drawing.Point(289, 169);
-            this.MinLenBox.Name = "MinLenBox";
-            this.MinLenBox.Size = new System.Drawing.Size(100, 22);
-            this.MinLenBox.TabIndex = 15;
-            // 
-            // MaxLenBox
-            // 
-            this.MaxLenBox.Location = new System.Drawing.Point(493, 169);
-            this.MaxLenBox.Name = "MaxLenBox";
-            this.MaxLenBox.Size = new System.Drawing.Size(100, 22);
-            this.MaxLenBox.TabIndex = 16;
-            // 
-            // MinLen
-            // 
-            this.MinLen.AutoSize = true;
-            this.MinLen.Location = new System.Drawing.Point(290, 150);
-            this.MinLen.Name = "MinLen";
-            this.MinLen.Size = new System.Drawing.Size(99, 16);
-            this.MinLen.TabIndex = 17;
-            this.MinLen.Text = "Minimum length";
-            // 
-            // MaxLen
-            // 
-            this.MaxLen.AutoSize = true;
-            this.MaxLen.Location = new System.Drawing.Point(490, 150);
-            this.MaxLen.Name = "MaxLen";
-            this.MaxLen.Size = new System.Drawing.Size(103, 16);
-            this.MaxLen.TabIndex = 18;
-            this.MaxLen.Text = "Maximum length";
-            // 
-            // Clarify
-            // 
-            this.Clarify.AutoSize = true;
-            this.Clarify.Location = new System.Drawing.Point(408, 172);
-            this.Clarify.Name = "Clarify";
-            this.Clarify.Size = new System.Drawing.Size(67, 16);
-            this.Clarify.TabIndex = 19;
-            this.Clarify.Text = "< Length <";
+            this.LenBox.Location = new System.Drawing.Point(392, 137);
+            this.LenBox.Name = "LenBox";
+            this.LenBox.Size = new System.Drawing.Size(100, 22);
+            this.LenBox.TabIndex = 15;
             // 
             // Home
             // 
@@ -375,21 +321,16 @@
         private System.Windows.Forms.ListView PrinterList;
         private System.Windows.Forms.TextBox DescBox;
         private System.Windows.Forms.TextBox EmailBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label DescLabel;
+        private System.Windows.Forms.Label ClarifyLabel;
+        private System.Windows.Forms.Label EmailLabel;
+        private System.Windows.Forms.Label UserLabel;
         private System.Windows.Forms.TextBox UserBox;
         private System.Windows.Forms.CheckBox NumbersBox;
         private System.Windows.Forms.CheckBox UpperCaseBox;
-        private System.Windows.Forms.CheckBox LowerCaseBox;
         private System.Windows.Forms.Button AddNewAccount;
         private System.Windows.Forms.CheckBox SpecialCharsBox;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label Clarify;
-        private System.Windows.Forms.Label MaxLen;
-        private System.Windows.Forms.Label MinLen;
-        private System.Windows.Forms.TextBox MaxLenBox;
-        private System.Windows.Forms.TextBox MinLenBox;
+        private System.Windows.Forms.Label PassLenLabel;
+        private System.Windows.Forms.TextBox LenBox;
     }
 }
