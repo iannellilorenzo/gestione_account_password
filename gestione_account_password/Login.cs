@@ -87,10 +87,11 @@ namespace gestione_account_password
             {
                 masters = manager.Deserializer("data.json");
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 MessageBox.Show("Account does not exist yet, please register first. The program will shut down.", "Error", MessageBoxButtons.OK);
                 Application.Exit();
+                return;
             }
 
             string name = NameMasterAccount.Text;

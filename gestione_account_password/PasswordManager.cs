@@ -61,9 +61,14 @@ namespace gestione_account_password
             set => _password = value;
         }
 
-        public PasswordManager(int length, bool caps, bool numbers, bool specialChars)
+        public PasswordManager()
         {
-            Password = PasswordGenerator(length, caps, numbers, specialChars);
+            Password = "default";
+        }
+
+        public PasswordManager(int length, bool caps, bool numbers, bool specialChars, string username)
+        {
+            Password = PasswordGenerator(length, caps, numbers, specialChars, username);
         }
 
         public PasswordManager(string password, string username)
@@ -71,7 +76,12 @@ namespace gestione_account_password
             Password = EncryptPassword(password, username);
         }
 
-        public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars)
+        public PasswordManager(string encryptedPassword)
+        {
+            Password = encryptedPassword;
+        }
+
+        public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars, string username)
         {
             if (length < 8 || length > 30)
             {
@@ -94,7 +104,8 @@ namespace gestione_account_password
                 pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
             }
 
-            return pw.ToString();
+            string encryptedPassword = EncryptPassword(pw.ToString(), username);
+            return encryptedPassword;
         }
 
         private static char[] ConcatArrays(params char[][] arrays)

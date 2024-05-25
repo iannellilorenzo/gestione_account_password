@@ -69,7 +69,7 @@ namespace gestione_account_password
             }
 
             masters.Add(masterAccounts[0]);
-            string updatedJson = JsonConvert.SerializeObject(masters);
+            string updatedJson = JsonConvert.SerializeObject(masters, Formatting.Indented);
 
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
             {

@@ -40,7 +40,7 @@ namespace gestione_account_password
         public MasterAccount()
         {
             Name = "";
-            Password = new("", "");
+            Password = new();
             LastChange = DateTime.Now;
             Accounts = new();
         }

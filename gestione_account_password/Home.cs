@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,13 +16,18 @@ namespace gestione_account_password
     public partial class Home : Form
     {
         Center centerUC;
-        public string user;
-        public Home(string currentUser)
+        public string currentUser;
+        List<Account> accounts;
+        public string fileName;
+
+        public Home(string user)
         {
             InitializeComponent();
             centerUC = new();
             AddUserControl(centerUC);
-            user = currentUser;
+            currentUser = user;
+            accounts = new();
+            fileName = "data.json";
         }
 
         private void Service_Load(object sender, EventArgs e)
@@ -59,18 +66,41 @@ namespace gestione_account_password
         private void GetAccounts()
         {
             FileManager fm = FileManager.Instance;
-            List<MasterAccount> masterAccounts = fm.Deserializer("data.json");
+            List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
             List<Account> accounts = new();
+            string fileContent;
             foreach (MasterAccount ma in masterAccounts)
             {
-                if (ma.Name == user)
+                if (ma.Name == currentUser)
                 {
                     string toPrint = "Username: ";
-                    JsonToken token = JsonConvert.DeserializeObject<JsonToken>("Accounts");
-                    PrinterList.Items.Add(token.ToString());
-                    // da capire come entrare dentro ogni oggetto del json per stampare
-                    
-                    
+                    using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+                    {
+                        byte[] bytes = new byte[fs.Length];
+                        int bytesRead = fs.Read(bytes, 0, bytes.Length);
+                        fileContent = Encoding.UTF8.GetString(bytes);
+                        fs.Close();
+                    }
+
+                    List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(fileContent);
+
+                    foreach (JObject obj in jsonObjects)
+                    {
+                        string currentName = (string)obj["Name"];
+                        if (currentName == currentUser)
+                        {
+                            JArray accountsFromJson = (JArray)obj["Accounts"];
+                            if (accountsFromJson != null)
+                            {
+                                foreach (JObject account in accountsFromJson)
+                                {
+                                    string encrPass = (string)account["Password"]["Password"];
+                                    PasswordManager pass = new(encrPass);
+                                    toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}";
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -84,15 +114,44 @@ namespace gestione_account_password
             TextBoxesVisiblityChange(true, UserBox, EmailBox, LenBox, DescBox);
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
-            
-            List<Account> accounts = new();
-            accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked), DescBox.Text));
+        }
 
+        private void AddNewAccount_Click(object sender, EventArgs e)
+        {
+            accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
+
+            string fileContent;
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[fs.Length];
+                int bytesRead = fs.Read(bytes, 0, bytes.Length);
+                fileContent = Encoding.UTF8.GetString(bytes);
+                fs.Close();
+            }
+
+            List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(fileContent);
+
+            foreach (JObject obj in jsonObjects)
+            {
+                string currentName = (string)obj["Name"];
+                if (currentName == currentUser)
+                {
+                    obj["Accounts"] = JArray.FromObject(accounts);
+                }
+            }
+
+            string updatedJson = JsonConvert.SerializeObject(jsonObjects, Formatting.Indented);
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
+            {
+                byte[] data = new UTF8Encoding(true).GetBytes(updatedJson);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
+            }
         }
 
         private void TextBoxesVisiblityChange(bool visibility, params TextBox[] textBoxes)
         {
-            foreach(TextBox textBox in textBoxes)
+            foreach (TextBox textBox in textBoxes)
             {
                 textBox.Visible = visibility;
             }
@@ -100,7 +159,7 @@ namespace gestione_account_password
 
         private void LabelsVisiblityChange(bool visibility, params Label[] labels)
         {
-            foreach(Label label in labels)
+            foreach (Label label in labels)
             {
                 label.Visible = visibility;
             }
@@ -113,5 +172,7 @@ namespace gestione_account_password
                 checkBox.Visible = visibility;
             }
         }
+
+
     }
 }

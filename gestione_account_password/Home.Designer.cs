@@ -29,6 +29,19 @@
         private void InitializeComponent()
         {
             this.CenterPanel = new System.Windows.Forms.Panel();
+            this.LenBox = new System.Windows.Forms.TextBox();
+            this.PassLenLabel = new System.Windows.Forms.Label();
+            this.AddNewAccount = new System.Windows.Forms.Button();
+            this.SpecialCharsBox = new System.Windows.Forms.CheckBox();
+            this.NumbersBox = new System.Windows.Forms.CheckBox();
+            this.UpperCaseBox = new System.Windows.Forms.CheckBox();
+            this.DescBox = new System.Windows.Forms.TextBox();
+            this.EmailBox = new System.Windows.Forms.TextBox();
+            this.DescLabel = new System.Windows.Forms.Label();
+            this.ClarifyLabel = new System.Windows.Forms.Label();
+            this.EmailLabel = new System.Windows.Forms.Label();
+            this.UserLabel = new System.Windows.Forms.Label();
+            this.UserBox = new System.Windows.Forms.TextBox();
             this.PrinterList = new System.Windows.Forms.ListView();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
@@ -38,19 +51,6 @@
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterPassowrdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPassword = new System.Windows.Forms.ToolStripMenuItem();
-            this.UserBox = new System.Windows.Forms.TextBox();
-            this.UserLabel = new System.Windows.Forms.Label();
-            this.EmailLabel = new System.Windows.Forms.Label();
-            this.ClarifyLabel = new System.Windows.Forms.Label();
-            this.DescLabel = new System.Windows.Forms.Label();
-            this.EmailBox = new System.Windows.Forms.TextBox();
-            this.DescBox = new System.Windows.Forms.TextBox();
-            this.UpperCaseBox = new System.Windows.Forms.CheckBox();
-            this.NumbersBox = new System.Windows.Forms.CheckBox();
-            this.SpecialCharsBox = new System.Windows.Forms.CheckBox();
-            this.AddNewAccount = new System.Windows.Forms.Button();
-            this.PassLenLabel = new System.Windows.Forms.Label();
-            this.LenBox = new System.Windows.Forms.TextBox();
             this.CenterPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -72,16 +72,134 @@
             this.CenterPanel.Controls.Add(this.UserBox);
             this.CenterPanel.Controls.Add(this.PrinterList);
             this.CenterPanel.Location = new System.Drawing.Point(227, 31);
-            this.CenterPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CenterPanel.Margin = new System.Windows.Forms.Padding(4);
             this.CenterPanel.Name = "CenterPanel";
             this.CenterPanel.Size = new System.Drawing.Size(649, 473);
             this.CenterPanel.TabIndex = 0;
+            // 
+            // LenBox
+            // 
+            this.LenBox.Location = new System.Drawing.Point(392, 137);
+            this.LenBox.Name = "LenBox";
+            this.LenBox.Size = new System.Drawing.Size(100, 22);
+            this.LenBox.TabIndex = 15;
+            // 
+            // PassLenLabel
+            // 
+            this.PassLenLabel.AutoSize = true;
+            this.PassLenLabel.Location = new System.Drawing.Point(389, 118);
+            this.PassLenLabel.Name = "PassLenLabel";
+            this.PassLenLabel.Size = new System.Drawing.Size(106, 16);
+            this.PassLenLabel.TabIndex = 14;
+            this.PassLenLabel.Text = "Password length";
+            // 
+            // AddNewAccount
+            // 
+            this.AddNewAccount.BackColor = System.Drawing.Color.Silver;
+            this.AddNewAccount.FlatAppearance.BorderSize = 0;
+            this.AddNewAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddNewAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddNewAccount.Location = new System.Drawing.Point(178, 312);
+            this.AddNewAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AddNewAccount.Name = "AddNewAccount";
+            this.AddNewAccount.Size = new System.Drawing.Size(229, 38);
+            this.AddNewAccount.TabIndex = 13;
+            this.AddNewAccount.Text = "Add new account";
+            this.AddNewAccount.UseVisualStyleBackColor = false;
+            this.AddNewAccount.Click += new System.EventHandler(this.AddNewAccount_Click);
+            // 
+            // SpecialCharsBox
+            // 
+            this.SpecialCharsBox.AutoSize = true;
+            this.SpecialCharsBox.Location = new System.Drawing.Point(48, 187);
+            this.SpecialCharsBox.Name = "SpecialCharsBox";
+            this.SpecialCharsBox.Size = new System.Drawing.Size(141, 20);
+            this.SpecialCharsBox.TabIndex = 12;
+            this.SpecialCharsBox.Text = "Special characters";
+            this.SpecialCharsBox.UseVisualStyleBackColor = true;
+            // 
+            // NumbersBox
+            // 
+            this.NumbersBox.AutoSize = true;
+            this.NumbersBox.Location = new System.Drawing.Point(48, 161);
+            this.NumbersBox.Name = "NumbersBox";
+            this.NumbersBox.Size = new System.Drawing.Size(84, 20);
+            this.NumbersBox.TabIndex = 11;
+            this.NumbersBox.Text = "Numbers";
+            this.NumbersBox.UseVisualStyleBackColor = true;
+            // 
+            // UpperCaseBox
+            // 
+            this.UpperCaseBox.AutoSize = true;
+            this.UpperCaseBox.Location = new System.Drawing.Point(48, 135);
+            this.UpperCaseBox.Name = "UpperCaseBox";
+            this.UpperCaseBox.Size = new System.Drawing.Size(139, 20);
+            this.UpperCaseBox.TabIndex = 10;
+            this.UpperCaseBox.Text = "Upper case letters";
+            this.UpperCaseBox.UseVisualStyleBackColor = true;
+            // 
+            // DescBox
+            // 
+            this.DescBox.Location = new System.Drawing.Point(504, 40);
+            this.DescBox.Name = "DescBox";
+            this.DescBox.Size = new System.Drawing.Size(100, 22);
+            this.DescBox.TabIndex = 8;
+            // 
+            // EmailBox
+            // 
+            this.EmailBox.Location = new System.Drawing.Point(289, 40);
+            this.EmailBox.Name = "EmailBox";
+            this.EmailBox.Size = new System.Drawing.Size(100, 22);
+            this.EmailBox.TabIndex = 6;
+            // 
+            // DescLabel
+            // 
+            this.DescLabel.AutoSize = true;
+            this.DescLabel.Location = new System.Drawing.Point(501, 18);
+            this.DescLabel.Name = "DescLabel";
+            this.DescLabel.Size = new System.Drawing.Size(75, 16);
+            this.DescLabel.TabIndex = 5;
+            this.DescLabel.Text = "Description";
+            // 
+            // ClarifyLabel
+            // 
+            this.ClarifyLabel.AutoSize = true;
+            this.ClarifyLabel.Location = new System.Drawing.Point(45, 93);
+            this.ClarifyLabel.Name = "ClarifyLabel";
+            this.ClarifyLabel.Size = new System.Drawing.Size(238, 32);
+            this.ClarifyLabel.TabIndex = 4;
+            this.ClarifyLabel.Text = "We create a secure password for you!\r\nCheck the preferences you want below:";
+            // 
+            // EmailLabel
+            // 
+            this.EmailLabel.AutoSize = true;
+            this.EmailLabel.Location = new System.Drawing.Point(286, 18);
+            this.EmailLabel.Name = "EmailLabel";
+            this.EmailLabel.Size = new System.Drawing.Size(41, 16);
+            this.EmailLabel.TabIndex = 3;
+            this.EmailLabel.Text = "Email";
+            // 
+            // UserLabel
+            // 
+            this.UserLabel.AutoSize = true;
+            this.UserLabel.Location = new System.Drawing.Point(86, 18);
+            this.UserLabel.Name = "UserLabel";
+            this.UserLabel.Size = new System.Drawing.Size(70, 16);
+            this.UserLabel.TabIndex = 2;
+            this.UserLabel.Text = "Username";
+            // 
+            // UserBox
+            // 
+            this.UserBox.Location = new System.Drawing.Point(86, 40);
+            this.UserBox.Name = "UserBox";
+            this.UserBox.Size = new System.Drawing.Size(100, 22);
+            this.UserBox.TabIndex = 1;
             // 
             // PrinterList
             // 
             this.PrinterList.HideSelection = false;
             this.PrinterList.Location = new System.Drawing.Point(0, 0);
-            this.PrinterList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PrinterList.Margin = new System.Windows.Forms.Padding(4);
             this.PrinterList.Name = "PrinterList";
             this.PrinterList.Size = new System.Drawing.Size(649, 473);
             this.PrinterList.TabIndex = 0;
@@ -127,7 +245,7 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(876, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(876, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -136,7 +254,7 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
             // exportToolStripMenuItem
@@ -150,7 +268,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -167,123 +285,6 @@
             this.ResetPassword.Size = new System.Drawing.Size(195, 26);
             this.ResetPassword.Text = "Reset password";
             this.ResetPassword.Click += new System.EventHandler(this.ResetPassword_Click);
-            // 
-            // UserBox
-            // 
-            this.UserBox.Location = new System.Drawing.Point(86, 40);
-            this.UserBox.Name = "UserBox";
-            this.UserBox.Size = new System.Drawing.Size(100, 22);
-            this.UserBox.TabIndex = 1;
-            // 
-            // UserLabel
-            // 
-            this.UserLabel.AutoSize = true;
-            this.UserLabel.Location = new System.Drawing.Point(86, 18);
-            this.UserLabel.Name = "UserLabel";
-            this.UserLabel.Size = new System.Drawing.Size(70, 16);
-            this.UserLabel.TabIndex = 2;
-            this.UserLabel.Text = "Username";
-            // 
-            // EmailLabel
-            // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(286, 18);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(41, 16);
-            this.EmailLabel.TabIndex = 3;
-            this.EmailLabel.Text = "Email";
-            // 
-            // ClarifyLabel
-            // 
-            this.ClarifyLabel.AutoSize = true;
-            this.ClarifyLabel.Location = new System.Drawing.Point(45, 93);
-            this.ClarifyLabel.Name = "ClarifyLabel";
-            this.ClarifyLabel.Size = new System.Drawing.Size(238, 32);
-            this.ClarifyLabel.TabIndex = 4;
-            this.ClarifyLabel.Text = "We create a secure password for you!\r\nCheck the preferences you want below:";
-            // 
-            // DescLabel
-            // 
-            this.DescLabel.AutoSize = true;
-            this.DescLabel.Location = new System.Drawing.Point(501, 18);
-            this.DescLabel.Name = "DescLabel";
-            this.DescLabel.Size = new System.Drawing.Size(75, 16);
-            this.DescLabel.TabIndex = 5;
-            this.DescLabel.Text = "Description";
-            // 
-            // EmailBox
-            // 
-            this.EmailBox.Location = new System.Drawing.Point(289, 40);
-            this.EmailBox.Name = "EmailBox";
-            this.EmailBox.Size = new System.Drawing.Size(100, 22);
-            this.EmailBox.TabIndex = 6;
-            // 
-            // DescBox
-            // 
-            this.DescBox.Location = new System.Drawing.Point(504, 40);
-            this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(100, 22);
-            this.DescBox.TabIndex = 8;
-            // 
-            // UpperCaseBox
-            // 
-            this.UpperCaseBox.AutoSize = true;
-            this.UpperCaseBox.Location = new System.Drawing.Point(48, 135);
-            this.UpperCaseBox.Name = "UpperCaseBox";
-            this.UpperCaseBox.Size = new System.Drawing.Size(139, 20);
-            this.UpperCaseBox.TabIndex = 10;
-            this.UpperCaseBox.Text = "Upper case letters";
-            this.UpperCaseBox.UseVisualStyleBackColor = true;
-            // 
-            // NumbersBox
-            // 
-            this.NumbersBox.AutoSize = true;
-            this.NumbersBox.Location = new System.Drawing.Point(48, 161);
-            this.NumbersBox.Name = "NumbersBox";
-            this.NumbersBox.Size = new System.Drawing.Size(84, 20);
-            this.NumbersBox.TabIndex = 11;
-            this.NumbersBox.Text = "Numbers";
-            this.NumbersBox.UseVisualStyleBackColor = true;
-            // 
-            // SpecialCharsBox
-            // 
-            this.SpecialCharsBox.AutoSize = true;
-            this.SpecialCharsBox.Location = new System.Drawing.Point(48, 187);
-            this.SpecialCharsBox.Name = "SpecialCharsBox";
-            this.SpecialCharsBox.Size = new System.Drawing.Size(141, 20);
-            this.SpecialCharsBox.TabIndex = 12;
-            this.SpecialCharsBox.Text = "Special characters";
-            this.SpecialCharsBox.UseVisualStyleBackColor = true;
-            // 
-            // AddNewAccount
-            // 
-            this.AddNewAccount.BackColor = System.Drawing.Color.Silver;
-            this.AddNewAccount.FlatAppearance.BorderSize = 0;
-            this.AddNewAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddNewAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNewAccount.Location = new System.Drawing.Point(178, 312);
-            this.AddNewAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.AddNewAccount.Name = "AddNewAccount";
-            this.AddNewAccount.Size = new System.Drawing.Size(229, 38);
-            this.AddNewAccount.TabIndex = 13;
-            this.AddNewAccount.Text = "Add new account";
-            this.AddNewAccount.UseVisualStyleBackColor = false;
-            // 
-            // PassLenLabel
-            // 
-            this.PassLenLabel.AutoSize = true;
-            this.PassLenLabel.Location = new System.Drawing.Point(389, 118);
-            this.PassLenLabel.Name = "PassLenLabel";
-            this.PassLenLabel.Size = new System.Drawing.Size(106, 16);
-            this.PassLenLabel.TabIndex = 14;
-            this.PassLenLabel.Text = "Password length";
-            // 
-            // LenBox
-            // 
-            this.LenBox.Location = new System.Drawing.Point(392, 137);
-            this.LenBox.Name = "LenBox";
-            this.LenBox.Size = new System.Drawing.Size(100, 22);
-            this.LenBox.TabIndex = 15;
             // 
             // Home
             // 
