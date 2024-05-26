@@ -67,7 +67,7 @@ namespace gestione_account_password
             string fileContent;
             foreach (MasterAccount ma in masterAccounts)
             {
-                if (ma.Name == currentUser)
+                if (ma.MasterName == currentUser)
                 {
                     string toPrint = "Username: ";
                     using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))

@@ -8,15 +8,15 @@ namespace gestione_account_password
 {
     public class MasterAccount
     {
-        private string _name;
+        private string _masterName;
         private PasswordManager _password;
         private DateTime _lastChange;
         private List<Account> _accounts;
 
-        public string Name
+        public string MasterName
         {
-            get => _name;
-            set => _name = value;
+            get => _masterName;
+            set => _masterName = value;
         }
 
         public PasswordManager Password
@@ -39,16 +39,16 @@ namespace gestione_account_password
 
         public MasterAccount()
         {
-            Name = "";
+            MasterName = "";
             Accounts = new();
             Password = new();
             LastChange = DateTime.Now;
             return;
         }
 
-        public MasterAccount(string name, PasswordManager password, DateTime lastChange)
+        public MasterAccount(string masterName, PasswordManager password, DateTime lastChange)
         {
-            Name = name;
+            MasterName = masterName;
             Accounts = new();
             Password = password;
             LastChange = lastChange;

@@ -99,7 +99,7 @@ namespace gestione_account_password
 
             foreach (MasterAccount master in masters)
             {
-                if (masters.Any(x => x.Name == master.Name && x.Password.DecryptPassword(x.Name) == master.Password.DecryptPassword(x.Name)))
+                if (masters.Any(x => x.MasterName == master.MasterName && x.Password.DecryptPassword(x.MasterName) == master.Password.DecryptPassword(x.MasterName)))
                 {
                     Home formService = new(name);
                     formService.Show();

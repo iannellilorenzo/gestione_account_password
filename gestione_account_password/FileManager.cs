@@ -6,6 +6,7 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace gestione_account_password
 {
@@ -63,7 +64,7 @@ namespace gestione_account_password
 
             foreach (var item in masters)
             {
-                if (masterAccounts.Any(x => x.Name == item.Name && x.Password.DecryptPassword(x.Name) == item.Password.DecryptPassword(x.Name)))
+                if (masterAccounts.Any(x => x.MasterName == item.MasterName && x.Password.DecryptPassword(x.MasterName) == item.Password.DecryptPassword(x.MasterName)))
                 {
                     return -1;
                 }
@@ -96,6 +97,7 @@ namespace gestione_account_password
                 byte[] bytes = new byte[fs.Length];
                 fs.Read(bytes, 0, bytes.Length);
                 string fileContent = Encoding.UTF8.GetString(bytes);
+                MessageBox.Show($"File content read: {fileContent.Substring(0, Math.Min(fileContent.Length, 200))}");
                 Thread.Sleep(5000);
                 masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
                 Thread.Sleep(5000);
