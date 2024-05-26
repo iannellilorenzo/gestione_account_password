@@ -43,6 +43,7 @@ namespace gestione_account_password
             Accounts = new();
             Password = new();
             LastChange = DateTime.Now;
+            return;
         }
 
         public MasterAccount(string name, PasswordManager password, DateTime lastChange)
