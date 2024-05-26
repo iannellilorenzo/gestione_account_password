@@ -40,17 +40,17 @@ namespace gestione_account_password
         public MasterAccount()
         {
             Name = "";
+            Accounts = new();
             Password = new();
             LastChange = DateTime.Now;
-            Accounts = new();
         }
 
         public MasterAccount(string name, PasswordManager password, DateTime lastChange)
         {
             Name = name;
+            Accounts = new();
             Password = password;
             LastChange = lastChange;
-            Accounts = new();
         }
     }
 }

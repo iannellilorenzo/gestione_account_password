@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace gestione_account_password
 {
@@ -96,6 +97,7 @@ namespace gestione_account_password
                 fs.Read(bytes, 0, bytes.Length);
                 string fileContent = Encoding.UTF8.GetString(bytes);
                 masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+                Thread.Sleep(5000);
                 fs.Close();
             }
 

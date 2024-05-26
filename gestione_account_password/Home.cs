@@ -15,7 +15,6 @@ namespace gestione_account_password
 {
     public partial class Home : Form
     {
-        Center centerUC;
         public string currentUser;
         List<Account> accounts;
         public string fileName;
@@ -23,8 +22,6 @@ namespace gestione_account_password
         public Home(string user)
         {
             InitializeComponent();
-            centerUC = new();
-            AddUserControl(centerUC);
             currentUser = user;
             accounts = new();
             fileName = "data.json";
@@ -34,14 +31,9 @@ namespace gestione_account_password
         {
             ActiveControl = null;
             CenterToScreen();
-        }
-
-        private void AddUserControl(UserControl userControl)
-        {
-            userControl.Dock = DockStyle.Fill;
-            CenterPanel.Controls.Clear();
-            CenterPanel.Controls.Add(userControl);
-            userControl.BringToFront();
+            PrinterList.Hide();
+            PrintAccountsPanel.Hide();
+            AddAccountPanel.BringToFront();
         }
 
         private void ResetPassword_Click(object sender, EventArgs e)
@@ -56,14 +48,18 @@ namespace gestione_account_password
             AddAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
 
-            TextBoxesVisiblityChange(false, UserBox, EmailBox, LenBox, DescBox);
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+            LenBox.Visible = false;
+            AddNewAccount.Visible = false;
 
-            // actually print
+            PrinterList.BringToFront();
+
+            // PrinterList.Items.Add(GetAccounts());
         }
 
-        private void GetAccounts()
+        private string GetAccounts()
         {
             FileManager fm = FileManager.Instance;
             List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
@@ -96,13 +92,17 @@ namespace gestione_account_password
                                 {
                                     string encrPass = (string)account["Password"]["Password"];
                                     PasswordManager pass = new(encrPass);
-                                    toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}";
+                                    toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}\n";
                                 }
+
+                                return toPrint;
                             }
                         }
                     }
                 }
             }
+
+            return "No accounts found";
         }
 
         private void AddAccount_Click(object sender, EventArgs e)
@@ -111,9 +111,13 @@ namespace gestione_account_password
             AddAccount.BackColor = Color.LightSeaGreen;
             PrintAccounts.BackColor = Color.Silver;
 
-            TextBoxesVisiblityChange(true, UserBox, EmailBox, LenBox, DescBox);
+            TextBoxesVisiblityChange(true, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
+            LenBox.Visible = true;
+            AddNewAccount.Visible = true;
+
+            PrinterList.Hide();
         }
 
         private void AddNewAccount_Click(object sender, EventArgs e)
@@ -172,7 +176,5 @@ namespace gestione_account_password
                 checkBox.Visible = visibility;
             }
         }
-
-
     }
 }
