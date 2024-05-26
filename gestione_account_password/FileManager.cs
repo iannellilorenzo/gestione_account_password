@@ -90,17 +90,22 @@ namespace gestione_account_password
                 throw new InvalidOperationException();
             }
 
-            List<MasterAccount> masterAccounts = new();
+            List<MasterAccount> masterAccounts;
 
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
             {
-                byte[] bytes = new byte[fs.Length];
-                fs.Read(bytes, 0, bytes.Length);
-                string fileContent = Encoding.UTF8.GetString(bytes);
-                MessageBox.Show($"File content read: {fileContent.Substring(0, Math.Min(fileContent.Length, 200))}");
-                Thread.Sleep(5000);
-                masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
-                Thread.Sleep(5000);
+                using (StreamReader sr = new(fs, Encoding.UTF8))
+                {
+                    using (JsonTextReader jsonReader = new(sr))
+                    {
+                        JsonSerializer ser = new();
+                        masterAccounts = ser.Deserialize<List<MasterAccount>>(jsonReader);
+                        jsonReader.Close();
+                    }
+
+                    sr.Close();
+                }
+
                 fs.Close();
             }
 

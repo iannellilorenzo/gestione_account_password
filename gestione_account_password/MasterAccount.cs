@@ -37,15 +37,6 @@ namespace gestione_account_password
             set => _accounts = value;
         }
 
-        public MasterAccount()
-        {
-            MasterName = "";
-            Accounts = new();
-            Password = new();
-            LastChange = DateTime.Now;
-            return;
-        }
-
         public MasterAccount(string masterName, PasswordManager password, DateTime lastChange)
         {
             MasterName = masterName;
