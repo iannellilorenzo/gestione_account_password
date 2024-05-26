@@ -96,6 +96,7 @@ namespace gestione_account_password
                 byte[] bytes = new byte[fs.Length];
                 fs.Read(bytes, 0, bytes.Length);
                 string fileContent = Encoding.UTF8.GetString(bytes);
+                Thread.Sleep(5000);
                 masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
                 Thread.Sleep(5000);
                 fs.Close();
