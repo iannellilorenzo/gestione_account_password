@@ -149,86 +149,71 @@ namespace gestione_account_password
         {
             byte[] key = GetKey(username);
 
-            using (Aes advEncrStandard = Aes.Create())
+            using (Aes aesAlg = Aes.Create())
             {
-                advEncrStandard.Key = key;
-                advEncrStandard.GenerateIV();
+                aesAlg.Key = key;
+                aesAlg.GenerateIV();
 
-                using (ICryptoTransform encryptor = advEncrStandard.CreateEncryptor(advEncrStandard.Key, advEncrStandard.IV))
+                byte[] iv = aesAlg.IV;
+
+                using (ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV))
                 {
-                    using (MemoryStream msEncrypt = new())
+                    using (MemoryStream msEncrypt = new MemoryStream())
                     {
-                        using (CryptoStream csEncrypt = new(msEncrypt, encryptor, CryptoStreamMode.Write))
+                        using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
                         {
-                            using (StreamWriter swEncrypt = new(csEncrypt))
+                            using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                             {
                                 swEncrypt.Write(password);
-                                swEncrypt.Close();
                             }
-
-                            csEncrypt.Close();
                         }
 
-                        byte[] encryptedBytes = msEncrypt.ToArray();
-                        string encryptedPassword = BitConverter.ToString(encryptedBytes).Replace("-", "");
-                        msEncrypt.Close();
-                        encryptor.Dispose();
-                        advEncrStandard.Dispose();
+                        byte[] encrypted = msEncrypt.ToArray();
+                        string encryptedPassword = Convert.ToBase64String(encrypted);
+                        string ivString = Convert.ToBase64String(iv);
 
-                        return encryptedPassword;
+                        return $"{encryptedPassword}-{ivString}";
                     }
                 }
             }
-        }
-
-        private byte[] StringtoByteArray(string hex)
-        {
-            int numChars = hex.Length;
-            byte[] bytes = new byte[numChars / 2];
-
-            for (int i = 0; i < numChars; i += 2)
-            {
-                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
-            }
-
-            return bytes;
         }
 
         public string DecryptPassword(string username)
         {
             byte[] key = GetKey(username);
-            string decryptedPassword = "";
 
-            using (Aes advEncrStandard = Aes.Create())
+            // Split the encrypted password and IV
+            string[] parts = Password.Split('-');
+            if (parts.Length != 2)
             {
-                advEncrStandard.Key = key;
-
-                byte[] encryptedBytes = StringtoByteArray(Password);
-                byte[] iv = encryptedBytes.Take(16).ToArray();
-                byte[] encryptedData = encryptedBytes.Skip(16).ToArray();
-                
-                using (ICryptoTransform decryptor = advEncrStandard.CreateDecryptor(advEncrStandard.Key, iv))
-                {
-                    using (MemoryStream msDecrypt = new(encryptedData))
-                    {
-                        using (CryptoStream csDecrypt = new(msDecrypt, decryptor, CryptoStreamMode.Read))
-                        {
-                            using (StreamReader srDecrypt = new(csDecrypt))
-                            {
-                                decryptedPassword = srDecrypt.ReadToEnd();
-                                srDecrypt.Close();
-                            }
-                            
-                            csDecrypt.Close();
-                        }
-                        msDecrypt.Close();
-                    }
-                    decryptor.Dispose();
-                }
-                advEncrStandard.Dispose();
+                throw new ArgumentException("The input string is not in the correct format.");
             }
 
-            return decryptedPassword;
+            string encryptedPassword = parts[0];
+            string ivString = parts[1];
+
+            byte[] iv = Convert.FromBase64String(ivString);
+            byte[] cipherText = Convert.FromBase64String(encryptedPassword);
+
+            using (Aes aesAlg = Aes.Create())
+            {
+                aesAlg.Key = key;
+                aesAlg.IV = iv;
+
+                using (ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV))
+                {
+                    using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                    {
+                        using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                        {
+                            using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                            {
+                                return srDecrypt.ReadToEnd();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

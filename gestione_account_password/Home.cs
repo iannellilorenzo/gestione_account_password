@@ -87,20 +87,17 @@ namespace gestione_account_password
                     foreach (JObject obj in jsonObjects)
                     {
                         string currentName = (string)obj["Name"];
-                        if (currentName == currentUser)
+                        JArray accountsFromJson = (JArray)obj["Accounts"];
+                        if (accountsFromJson != null)
                         {
-                            JArray accountsFromJson = (JArray)obj["Accounts"];
-                            if (accountsFromJson != null)
+                            foreach (JObject account in accountsFromJson)
                             {
-                                foreach (JObject account in accountsFromJson)
-                                {
-                                    string encrPass = (string)account["Password"]["Password"];
-                                    PasswordManager pass = new(encrPass);
-                                    toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}\n";
-                                }
-
-                                return toPrint;
+                                string encrPass = (string)account["Password"]["Password"];
+                                PasswordManager pass = new(encrPass);
+                                toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}, Description: {account["Description"]}\n";
                             }
+
+                            return toPrint;
                         }
                     }
                 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace gestione_account_password
 {
@@ -108,6 +109,7 @@ namespace gestione_account_password
             }
 
             Home formService = new(NameMasterAccount.Text);
+            MessageBox.Show(master.Password.DecryptPassword(NameMasterAccount.Text));
             formService.Show();
             formService.Focus();
             Close();
