@@ -43,6 +43,7 @@ namespace gestione_account_password
 
         private void Print_Click(object sender, EventArgs e)
         {
+
             PrinterList.Items.Clear();
             PrinterList.Visible = true;
             AddAccount.BackColor = Color.Silver;
@@ -55,6 +56,9 @@ namespace gestione_account_password
             AddNewAccount.Visible = false;
 
             PrinterList.BringToFront();
+
+            string print = GetAccounts();
+            MessageBox.Show(print);
 
             // PrinterList.Items.Add(GetAccounts());
         }
@@ -137,7 +141,7 @@ namespace gestione_account_password
 
             foreach (JObject obj in jsonObjects)
             {
-                string currentName = (string)obj["Name"];
+                string currentName = (string)obj["MasterName"];
                 if (currentName == currentUser)
                 {
                     obj["Accounts"] = JArray.FromObject(accounts);
