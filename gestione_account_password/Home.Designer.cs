@@ -49,8 +49,8 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
+            this.PrinterList = new System.Windows.Forms.ListView();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
@@ -260,7 +260,7 @@
             // 
             // AddAccountPanel
             // 
-            this.AddAccountPanel.Controls.Add(this.listView1);
+            this.AddAccountPanel.Controls.Add(this.PrinterList);
             this.AddAccountPanel.Controls.Add(this.LenBox);
             this.AddAccountPanel.Controls.Add(this.UserBox);
             this.AddAccountPanel.Controls.Add(this.PassLenLabel);
@@ -279,6 +279,19 @@
             this.AddAccountPanel.Size = new System.Drawing.Size(487, 384);
             this.AddAccountPanel.TabIndex = 0;
             // 
+            // PrinterList
+            // 
+            this.PrinterList.BackColor = System.Drawing.Color.White;
+            this.PrinterList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.PrinterList.HideSelection = false;
+            this.PrinterList.Location = new System.Drawing.Point(0, 0);
+            this.PrinterList.Margin = new System.Windows.Forms.Padding(4);
+            this.PrinterList.Name = "PrinterList";
+            this.PrinterList.Size = new System.Drawing.Size(487, 384);
+            this.PrinterList.TabIndex = 17;
+            this.PrinterList.UseCompatibleStateImageBehavior = false;
+            this.PrinterList.View = System.Windows.Forms.View.List;
+            // 
             // LenBox
             // 
             this.LenBox.Location = new System.Drawing.Point(294, 111);
@@ -286,15 +299,6 @@
             this.LenBox.Name = "LenBox";
             this.LenBox.Size = new System.Drawing.Size(77, 20);
             this.LenBox.TabIndex = 16;
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(487, 384);
-            this.listView1.TabIndex = 17;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Home
             // 
@@ -342,6 +346,6 @@
         private System.Windows.Forms.TextBox UserBox;
         private System.Windows.Forms.Panel AddAccountPanel;
         private System.Windows.Forms.NumericUpDown LenBox;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView PrinterList;
     }
 }
