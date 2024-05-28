@@ -49,12 +49,10 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.PrintAccountsPanel = new System.Windows.Forms.Panel();
-            this.PrinterList = new System.Windows.Forms.ListView();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
-            this.PrintAccountsPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,10 +62,10 @@
             this.PrintAccounts.FlatAppearance.BorderSize = 0;
             this.PrintAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintAccounts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrintAccounts.Location = new System.Drawing.Point(-3, 190);
-            this.PrintAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PrintAccounts.Location = new System.Drawing.Point(-2, 154);
+            this.PrintAccounts.Margin = new System.Windows.Forms.Padding(2);
             this.PrintAccounts.Name = "PrintAccounts";
-            this.PrintAccounts.Size = new System.Drawing.Size(229, 38);
+            this.PrintAccounts.Size = new System.Drawing.Size(172, 31);
             this.PrintAccounts.TabIndex = 10;
             this.PrintAccounts.Text = "Print accounts";
             this.PrintAccounts.UseVisualStyleBackColor = false;
@@ -79,10 +77,10 @@
             this.AddAccount.FlatAppearance.BorderSize = 0;
             this.AddAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddAccount.Location = new System.Drawing.Point(-3, 134);
-            this.AddAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AddAccount.Location = new System.Drawing.Point(-2, 109);
+            this.AddAccount.Margin = new System.Windows.Forms.Padding(2);
             this.AddAccount.Name = "AddAccount";
-            this.AddAccount.Size = new System.Drawing.Size(229, 38);
+            this.AddAccount.Size = new System.Drawing.Size(172, 31);
             this.AddAccount.TabIndex = 11;
             this.AddAccount.Text = "Add new account";
             this.AddAccount.UseVisualStyleBackColor = false;
@@ -96,7 +94,8 @@
             this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(876, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(657, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,13 +104,13 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(37, 20);
             this.toolStripMenuItem1.Text = "File";
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // settingsToolStripMenuItem
@@ -119,7 +118,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -127,72 +126,79 @@
             this.masterPassowrdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetPassword});
             this.masterPassowrdToolStripMenuItem.Name = "masterPassowrdToolStripMenuItem";
-            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.masterPassowrdToolStripMenuItem.Text = "Master passowrd";
             // 
             // ResetPassword
             // 
             this.ResetPassword.Name = "ResetPassword";
-            this.ResetPassword.Size = new System.Drawing.Size(195, 26);
+            this.ResetPassword.Size = new System.Drawing.Size(155, 22);
             this.ResetPassword.Text = "Reset password";
             this.ResetPassword.Click += new System.EventHandler(this.ResetPassword_Click);
             // 
             // UserLabel
             // 
             this.UserLabel.AutoSize = true;
-            this.UserLabel.Location = new System.Drawing.Point(86, 18);
+            this.UserLabel.Location = new System.Drawing.Point(64, 15);
+            this.UserLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.UserLabel.Name = "UserLabel";
-            this.UserLabel.Size = new System.Drawing.Size(70, 16);
+            this.UserLabel.Size = new System.Drawing.Size(55, 13);
             this.UserLabel.TabIndex = 2;
             this.UserLabel.Text = "Username";
             // 
             // EmailLabel
             // 
             this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(286, 18);
+            this.EmailLabel.Location = new System.Drawing.Point(214, 15);
+            this.EmailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(41, 16);
+            this.EmailLabel.Size = new System.Drawing.Size(32, 13);
             this.EmailLabel.TabIndex = 3;
             this.EmailLabel.Text = "Email";
             // 
             // ClarifyLabel
             // 
             this.ClarifyLabel.AutoSize = true;
-            this.ClarifyLabel.Location = new System.Drawing.Point(45, 93);
+            this.ClarifyLabel.Location = new System.Drawing.Point(34, 76);
+            this.ClarifyLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.ClarifyLabel.Name = "ClarifyLabel";
-            this.ClarifyLabel.Size = new System.Drawing.Size(238, 32);
+            this.ClarifyLabel.Size = new System.Drawing.Size(195, 26);
             this.ClarifyLabel.TabIndex = 4;
             this.ClarifyLabel.Text = "We create a secure password for you!\r\nCheck the preferences you want below:";
             // 
             // DescLabel
             // 
             this.DescLabel.AutoSize = true;
-            this.DescLabel.Location = new System.Drawing.Point(501, 18);
+            this.DescLabel.Location = new System.Drawing.Point(376, 15);
+            this.DescLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.DescLabel.Name = "DescLabel";
-            this.DescLabel.Size = new System.Drawing.Size(75, 16);
+            this.DescLabel.Size = new System.Drawing.Size(60, 13);
             this.DescLabel.TabIndex = 5;
             this.DescLabel.Text = "Description";
             // 
             // EmailBox
             // 
-            this.EmailBox.Location = new System.Drawing.Point(289, 40);
+            this.EmailBox.Location = new System.Drawing.Point(217, 32);
+            this.EmailBox.Margin = new System.Windows.Forms.Padding(2);
             this.EmailBox.Name = "EmailBox";
-            this.EmailBox.Size = new System.Drawing.Size(100, 22);
+            this.EmailBox.Size = new System.Drawing.Size(76, 20);
             this.EmailBox.TabIndex = 6;
             // 
             // DescBox
             // 
-            this.DescBox.Location = new System.Drawing.Point(504, 40);
+            this.DescBox.Location = new System.Drawing.Point(378, 32);
+            this.DescBox.Margin = new System.Windows.Forms.Padding(2);
             this.DescBox.Name = "DescBox";
-            this.DescBox.Size = new System.Drawing.Size(100, 22);
+            this.DescBox.Size = new System.Drawing.Size(76, 20);
             this.DescBox.TabIndex = 8;
             // 
             // UpperCaseBox
             // 
             this.UpperCaseBox.AutoSize = true;
-            this.UpperCaseBox.Location = new System.Drawing.Point(48, 135);
+            this.UpperCaseBox.Location = new System.Drawing.Point(36, 110);
+            this.UpperCaseBox.Margin = new System.Windows.Forms.Padding(2);
             this.UpperCaseBox.Name = "UpperCaseBox";
-            this.UpperCaseBox.Size = new System.Drawing.Size(139, 20);
+            this.UpperCaseBox.Size = new System.Drawing.Size(112, 17);
             this.UpperCaseBox.TabIndex = 10;
             this.UpperCaseBox.Text = "Upper case letters";
             this.UpperCaseBox.UseVisualStyleBackColor = true;
@@ -200,9 +206,10 @@
             // NumbersBox
             // 
             this.NumbersBox.AutoSize = true;
-            this.NumbersBox.Location = new System.Drawing.Point(48, 161);
+            this.NumbersBox.Location = new System.Drawing.Point(36, 131);
+            this.NumbersBox.Margin = new System.Windows.Forms.Padding(2);
             this.NumbersBox.Name = "NumbersBox";
-            this.NumbersBox.Size = new System.Drawing.Size(84, 20);
+            this.NumbersBox.Size = new System.Drawing.Size(68, 17);
             this.NumbersBox.TabIndex = 11;
             this.NumbersBox.Text = "Numbers";
             this.NumbersBox.UseVisualStyleBackColor = true;
@@ -210,9 +217,10 @@
             // SpecialCharsBox
             // 
             this.SpecialCharsBox.AutoSize = true;
-            this.SpecialCharsBox.Location = new System.Drawing.Point(48, 187);
+            this.SpecialCharsBox.Location = new System.Drawing.Point(36, 152);
+            this.SpecialCharsBox.Margin = new System.Windows.Forms.Padding(2);
             this.SpecialCharsBox.Name = "SpecialCharsBox";
-            this.SpecialCharsBox.Size = new System.Drawing.Size(141, 20);
+            this.SpecialCharsBox.Size = new System.Drawing.Size(114, 17);
             this.SpecialCharsBox.TabIndex = 12;
             this.SpecialCharsBox.Text = "Special characters";
             this.SpecialCharsBox.UseVisualStyleBackColor = true;
@@ -223,10 +231,10 @@
             this.AddNewAccount.FlatAppearance.BorderSize = 0;
             this.AddNewAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddNewAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddNewAccount.Location = new System.Drawing.Point(178, 312);
-            this.AddNewAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.AddNewAccount.Location = new System.Drawing.Point(134, 254);
+            this.AddNewAccount.Margin = new System.Windows.Forms.Padding(2);
             this.AddNewAccount.Name = "AddNewAccount";
-            this.AddNewAccount.Size = new System.Drawing.Size(229, 38);
+            this.AddNewAccount.Size = new System.Drawing.Size(172, 31);
             this.AddNewAccount.TabIndex = 13;
             this.AddNewAccount.Text = "Add new account";
             this.AddNewAccount.UseVisualStyleBackColor = false;
@@ -235,21 +243,24 @@
             // PassLenLabel
             // 
             this.PassLenLabel.AutoSize = true;
-            this.PassLenLabel.Location = new System.Drawing.Point(389, 118);
+            this.PassLenLabel.Location = new System.Drawing.Point(292, 96);
+            this.PassLenLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PassLenLabel.Name = "PassLenLabel";
-            this.PassLenLabel.Size = new System.Drawing.Size(106, 16);
+            this.PassLenLabel.Size = new System.Drawing.Size(85, 13);
             this.PassLenLabel.TabIndex = 14;
             this.PassLenLabel.Text = "Password length";
             // 
             // UserBox
             // 
-            this.UserBox.Location = new System.Drawing.Point(86, 40);
+            this.UserBox.Location = new System.Drawing.Point(64, 32);
+            this.UserBox.Margin = new System.Windows.Forms.Padding(2);
             this.UserBox.Name = "UserBox";
-            this.UserBox.Size = new System.Drawing.Size(100, 22);
+            this.UserBox.Size = new System.Drawing.Size(76, 20);
             this.UserBox.TabIndex = 1;
             // 
             // AddAccountPanel
             // 
+            this.AddAccountPanel.Controls.Add(this.listView1);
             this.AddAccountPanel.Controls.Add(this.LenBox);
             this.AddAccountPanel.Controls.Add(this.UserBox);
             this.AddAccountPanel.Controls.Add(this.PassLenLabel);
@@ -263,52 +274,38 @@
             this.AddAccountPanel.Controls.Add(this.ClarifyLabel);
             this.AddAccountPanel.Controls.Add(this.EmailLabel);
             this.AddAccountPanel.Controls.Add(this.UserLabel);
-            this.AddAccountPanel.Location = new System.Drawing.Point(227, 31);
-            this.AddAccountPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.AddAccountPanel.Location = new System.Drawing.Point(170, 25);
             this.AddAccountPanel.Name = "AddAccountPanel";
-            this.AddAccountPanel.Size = new System.Drawing.Size(649, 473);
+            this.AddAccountPanel.Size = new System.Drawing.Size(487, 384);
             this.AddAccountPanel.TabIndex = 0;
-            // 
-            // PrintAccountsPanel
-            // 
-            this.PrintAccountsPanel.Controls.Add(this.PrinterList);
-            this.PrintAccountsPanel.Location = new System.Drawing.Point(227, 31);
-            this.PrintAccountsPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.PrintAccountsPanel.Name = "PrintAccountsPanel";
-            this.PrintAccountsPanel.Size = new System.Drawing.Size(649, 473);
-            this.PrintAccountsPanel.TabIndex = 13;
-            this.PrintAccountsPanel.Visible = false;
-            // 
-            // PrinterList
-            // 
-            this.PrinterList.BackColor = System.Drawing.SystemColors.Control;
-            this.PrinterList.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.PrinterList.HideSelection = false;
-            this.PrinterList.Location = new System.Drawing.Point(0, 0);
-            this.PrinterList.Name = "PrinterList";
-            this.PrinterList.Size = new System.Drawing.Size(649, 473);
-            this.PrinterList.TabIndex = 0;
-            this.PrinterList.UseCompatibleStateImageBehavior = false;
-            this.PrinterList.Visible = false;
             // 
             // LenBox
             // 
-            this.LenBox.Location = new System.Drawing.Point(392, 137);
+            this.LenBox.Location = new System.Drawing.Point(294, 111);
+            this.LenBox.Margin = new System.Windows.Forms.Padding(2);
             this.LenBox.Name = "LenBox";
-            this.LenBox.Size = new System.Drawing.Size(103, 22);
+            this.LenBox.Size = new System.Drawing.Size(77, 20);
             this.LenBox.TabIndex = 16;
+            // 
+            // listView1
+            // 
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(487, 384);
+            this.listView1.TabIndex = 17;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // Home
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(876, 502);
-            this.Controls.Add(this.PrintAccountsPanel);
+            this.ClientSize = new System.Drawing.Size(657, 408);
             this.Controls.Add(this.AddAccount);
             this.Controls.Add(this.PrintAccounts);
             this.Controls.Add(this.AddAccountPanel);
             this.Controls.Add(this.menuStrip1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Home";
             this.Text = "SentinelKey - Home";
             this.Load += new System.EventHandler(this.Service_Load);
@@ -316,7 +313,6 @@
             this.menuStrip1.PerformLayout();
             this.AddAccountPanel.ResumeLayout(false);
             this.AddAccountPanel.PerformLayout();
-            this.PrintAccountsPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -345,8 +341,7 @@
         private System.Windows.Forms.Label PassLenLabel;
         private System.Windows.Forms.TextBox UserBox;
         private System.Windows.Forms.Panel AddAccountPanel;
-        private System.Windows.Forms.Panel PrintAccountsPanel;
-        private System.Windows.Forms.ListView PrinterList;
         private System.Windows.Forms.NumericUpDown LenBox;
+        private System.Windows.Forms.ListView listView1;
     }
 }

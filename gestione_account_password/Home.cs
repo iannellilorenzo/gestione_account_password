@@ -55,12 +55,13 @@ namespace gestione_account_password
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
 
+            PrintAccountsPanel.BringToFront();
             PrinterList.BringToFront();
+            PrinterList.BackColor = Color.Bisque;
 
             string print = GetAccounts();
             MessageBox.Show(print);
-
-            // PrinterList.Items.Add(GetAccounts());
+            PrinterList.Items.Add(print);
         }
 
         private string GetAccounts()
