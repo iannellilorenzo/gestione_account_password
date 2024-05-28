@@ -32,6 +32,11 @@ namespace gestione_account_password
             CenterToScreen();
         }
 
+        /// <summary>
+        /// Sets a string as placeholder in a textbox
+        /// </summary>
+        /// <param name="textBox"> Textbox placeholdered </param>
+        /// <param name="placeholder"> Placeholder string </param>
         private void SetPlaceholder(TextBox textBox, string placeholder)
         {
             if (textBox.Text == "")
@@ -41,6 +46,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Removes the placeholder string inside the textbox
+        /// </summary>
+        /// <param name="textBox"> Textbox to remove placeholder string from </param>
+        /// <param name="placeholder"> Placeholder string to remove </param>
         private void RemovePlaceholder(TextBox textBox, string placeholder)
         {
             if (textBox.Text == placeholder)
@@ -82,6 +92,11 @@ namespace gestione_account_password
             Close();
         }
 
+        /// <summary>
+        /// Lets the user register
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegBut_Click(object sender, EventArgs e)
         {
             MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text, NameMasterAccount.Text), DateTime.Now);

@@ -32,7 +32,6 @@ namespace gestione_account_password
             ActiveControl = null;
             CenterToScreen();
             PrinterList.Hide();
-            PrintAccountsPanel.Hide();
             AddAccountPanel.BringToFront();
         }
 
@@ -41,9 +40,13 @@ namespace gestione_account_password
             MessageBox.Show("Reset password");
         }
 
+        /// <summary>
+        /// Prints every saved account details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Print_Click(object sender, EventArgs e)
         {
-
             PrinterList.Items.Clear();
             PrinterList.Visible = true;
             AddAccount.BackColor = Color.Silver;
@@ -55,15 +58,23 @@ namespace gestione_account_password
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
 
-            PrintAccountsPanel.BringToFront();
             PrinterList.BringToFront();
-            PrinterList.BackColor = Color.Bisque;
 
             string print = GetAccounts();
-            MessageBox.Show(print);
-            PrinterList.Items.Add(print);
+            if (print == "")
+            {
+                PrinterList.Items.Add("No accounts found.");
+            }
+            else
+            {
+                PrinterList.Items.Add(print);
+            }
         }
 
+        /// <summary>
+        /// Gets saved account details in a string ready to be displayed on screen
+        /// </summary>
+        /// <returns> String ready to be displayed if accounts are found, otherwise returns "No accounts found." </returns>
         private string GetAccounts()
         {
             FileManager fm = FileManager.Instance;
@@ -74,7 +85,7 @@ namespace gestione_account_password
             {
                 if (ma.MasterName == currentUser)
                 {
-                    string toPrint = "Username: ";
+                    string toPrint = "";
                     using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
                     {
                         byte[] bytes = new byte[fs.Length];
@@ -95,7 +106,7 @@ namespace gestione_account_password
                             {
                                 string encrPass = (string)account["Password"]["Password"];
                                 PasswordManager pass = new(encrPass);
-                                toPrint += $"{account["Name"]}, Email: {account["Email"]}, Password: {pass.DecryptPassword(currentUser)}, Description: {account["Description"]}\n";
+                                toPrint += $"Username: {account["Name"]}, Email: {account["Email"]},\nPassword: {pass.DecryptPassword(currentUser)}, Description: {account["Description"]}\n";
                             }
 
                             return toPrint;
@@ -122,6 +133,11 @@ namespace gestione_account_password
             PrinterList.Hide();
         }
 
+        /// <summary>
+        /// Lets the user save a new account, saving username, email, password and a description of what the account is for
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNewAccount_Click(object sender, EventArgs e)
         {
             accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
@@ -155,6 +171,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="textBoxes"> Every textbox that needs to change it's visibility </param>
         private void TextBoxesVisiblityChange(bool visibility, params TextBox[] textBoxes)
         {
             foreach (TextBox textBox in textBoxes)
@@ -163,6 +184,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="labels"> Every label that needs to change it's visibility </param>
         private void LabelsVisiblityChange(bool visibility, params Label[] labels)
         {
             foreach (Label label in labels)
@@ -171,6 +197,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="checkBoxes"> Every textbox that needs to change it's visibility </param>
         private void CheckBoxesVisiblityChange(bool visibility, params CheckBox[] checkBoxes)
         {
             foreach (CheckBox checkBox in checkBoxes)

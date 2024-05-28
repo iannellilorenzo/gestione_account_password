@@ -95,7 +95,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(657, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(701, 24);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -149,7 +149,7 @@
             // EmailLabel
             // 
             this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(214, 15);
+            this.EmailLabel.Location = new System.Drawing.Point(219, 15);
             this.EmailLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EmailLabel.Name = "EmailLabel";
             this.EmailLabel.Size = new System.Drawing.Size(32, 13);
@@ -178,7 +178,7 @@
             // 
             // EmailBox
             // 
-            this.EmailBox.Location = new System.Drawing.Point(217, 32);
+            this.EmailBox.Location = new System.Drawing.Point(222, 32);
             this.EmailBox.Margin = new System.Windows.Forms.Padding(2);
             this.EmailBox.Name = "EmailBox";
             this.EmailBox.Size = new System.Drawing.Size(76, 20);
@@ -276,18 +276,19 @@
             this.AddAccountPanel.Controls.Add(this.UserLabel);
             this.AddAccountPanel.Location = new System.Drawing.Point(170, 25);
             this.AddAccountPanel.Name = "AddAccountPanel";
-            this.AddAccountPanel.Size = new System.Drawing.Size(487, 384);
+            this.AddAccountPanel.Size = new System.Drawing.Size(531, 384);
             this.AddAccountPanel.TabIndex = 0;
             // 
             // PrinterList
             // 
-            this.PrinterList.BackColor = System.Drawing.Color.White;
+            this.PrinterList.AutoArrange = false;
+            this.PrinterList.BackColor = System.Drawing.SystemColors.Control;
             this.PrinterList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PrinterList.HideSelection = false;
             this.PrinterList.Location = new System.Drawing.Point(0, 0);
             this.PrinterList.Margin = new System.Windows.Forms.Padding(4);
             this.PrinterList.Name = "PrinterList";
-            this.PrinterList.Size = new System.Drawing.Size(487, 384);
+            this.PrinterList.Size = new System.Drawing.Size(531, 384);
             this.PrinterList.TabIndex = 17;
             this.PrinterList.UseCompatibleStateImageBehavior = false;
             this.PrinterList.View = System.Windows.Forms.View.List;
@@ -304,7 +305,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 408);
+            this.ClientSize = new System.Drawing.Size(701, 408);
             this.Controls.Add(this.AddAccount);
             this.Controls.Add(this.PrintAccounts);
             this.Controls.Add(this.AddAccountPanel);

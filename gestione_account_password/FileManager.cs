@@ -36,6 +36,12 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Serializes a new master account registered
+        /// </summary>
+        /// <param name="fileName"> Specifies where to serialize </param>
+        /// <param name="masterAccounts"> Master account to be serialized </param>
+        /// <returns> Int code to determine if the operation was successful or not </returns>
         public int RegisterSerializer(string fileName, List<MasterAccount> masterAccounts)
         {
             if (!File.Exists(fileName))
@@ -83,6 +89,12 @@ namespace gestione_account_password
             return 0;
         }
 
+        /// <summary>
+        /// Deserializes the file saving in memory master accounts
+        /// </summary>
+        /// <param name="fileName"> File name to get information from </param>
+        /// <returns> Every master account saved on the file </returns>
+        /// <exception cref="InvalidOperationException"> If the file doesn't exits, it can deserialize from it </exception>
         public List<MasterAccount> Deserializer(string fileName)
         {
             if (!File.Exists(fileName))
