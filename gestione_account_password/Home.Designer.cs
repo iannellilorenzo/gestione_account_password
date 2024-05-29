@@ -32,7 +32,7 @@
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Export = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterPassowrdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPassword = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +49,10 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.LenBox = new System.Windows.Forms.NumericUpDown();
             this.Printer = new System.Windows.Forms.RichTextBox();
+            this.LenBox = new System.Windows.Forms.NumericUpDown();
+            this.developerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportXMLDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
@@ -95,23 +97,25 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(935, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem});
+            this.Export,
+            this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
-            // exportToolStripMenuItem
+            // Export
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(135, 26);
-            this.exportToolStripMenuItem.Text = "Export";
+            this.Export.Name = "Export";
+            this.Export.Size = new System.Drawing.Size(245, 26);
+            this.Export.Text = "Export accounts details";
+            this.Export.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -270,18 +274,10 @@
             this.AddAccountPanel.Controls.Add(this.EmailLabel);
             this.AddAccountPanel.Controls.Add(this.UserLabel);
             this.AddAccountPanel.Location = new System.Drawing.Point(227, 31);
-            this.AddAccountPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.AddAccountPanel.Margin = new System.Windows.Forms.Padding(4);
             this.AddAccountPanel.Name = "AddAccountPanel";
             this.AddAccountPanel.Size = new System.Drawing.Size(708, 473);
             this.AddAccountPanel.TabIndex = 0;
-            // 
-            // LenBox
-            // 
-            this.LenBox.Location = new System.Drawing.Point(392, 137);
-            this.LenBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.LenBox.Name = "LenBox";
-            this.LenBox.Size = new System.Drawing.Size(103, 22);
-            this.LenBox.TabIndex = 16;
             // 
             // Printer
             // 
@@ -297,6 +293,29 @@
             this.Printer.TabStop = false;
             this.Printer.Text = "";
             this.Printer.Click += new System.EventHandler(this.Printer_Click);
+            // 
+            // LenBox
+            // 
+            this.LenBox.Location = new System.Drawing.Point(392, 137);
+            this.LenBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LenBox.Name = "LenBox";
+            this.LenBox.Size = new System.Drawing.Size(103, 22);
+            this.LenBox.TabIndex = 16;
+            // 
+            // developerOptionsToolStripMenuItem
+            // 
+            this.developerOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportXMLDocumentationToolStripMenuItem});
+            this.developerOptionsToolStripMenuItem.Name = "developerOptionsToolStripMenuItem";
+            this.developerOptionsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.developerOptionsToolStripMenuItem.Text = "Developer options";
+            // 
+            // ExportXMLDocumentationToolStripMenuItem
+            // 
+            this.ExportXMLDocumentationToolStripMenuItem.Name = "ExportXMLDocumentationToolStripMenuItem";
+            this.ExportXMLDocumentationToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
+            this.ExportXMLDocumentationToolStripMenuItem.Text = "Export XML documentation";
+            this.ExportXMLDocumentationToolStripMenuItem.Click += new System.EventHandler(this.ExportXMLDocumentationToolStripMenuItem_Click);
             // 
             // Home
             // 
@@ -326,7 +345,7 @@
         private System.Windows.Forms.Button AddAccount;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Export;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem masterPassowrdToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ResetPassword;
@@ -345,5 +364,7 @@
         private System.Windows.Forms.Panel AddAccountPanel;
         private System.Windows.Forms.NumericUpDown LenBox;
         private System.Windows.Forms.RichTextBox Printer;
+        private System.Windows.Forms.ToolStripMenuItem developerOptionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExportXMLDocumentationToolStripMenuItem;
     }
 }

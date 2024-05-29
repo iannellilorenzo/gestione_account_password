@@ -113,7 +113,7 @@ namespace gestione_account_password
         /// <exception cref="ArgumentOutOfRangeException"> Length of the password must be between 8 and 30 chars for security reasons </exception>
         public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars, string username)
         {
-            if (length < 8 || length > 30)
+            if (length < 8 || length > 32)
             {
                 throw new ArgumentOutOfRangeException();
             }

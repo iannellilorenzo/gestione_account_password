@@ -60,37 +60,49 @@ namespace gestione_account_password
 
             Printer.BringToFront();
 
-            string print = GetAccounts();
+            string print = PrintAccountsOnDisplay();
             Printer.Text = print;
         }
 
         /// <summary>
-        /// Gets saved account details in a string ready to be displayed on screen
+        /// Gets the current master account logged in
         /// </summary>
-        /// <returns> String ready to be displayed if accounts are found, otherwise returns "No accounts found." </returns>
-        private string GetAccounts()
+        /// <returns> Master account logged in </returns>
+        private MasterAccount GetCurrentMasterAccount()
         {
             FileManager fm = FileManager.Instance;
             List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
-            string toPrint = "";
 
             foreach (MasterAccount ma in masterAccounts)
             {
                 if (ma.MasterName == currentUser)
                 {
-                    foreach (Account account in ma.Accounts)
-                    {
-                        string encrPass = account.Password.Password;
-                        PasswordManager pass = new(encrPass);
-                        string decryptedPassword = pass.DecryptPassword(currentUser);
-                        toPrint += $"Username: {account.Name}, Email: {account.Email},\nPassword: {decryptedPassword}, Description: {account.Description}\n";
-                    }
-
-                    return toPrint;
+                    return ma;
                 }
             }
 
-            return "No accounts found";
+            return null;
+        }
+
+        private string PrintAccountsOnDisplay()
+        {
+            MasterAccount ma = GetCurrentMasterAccount();
+            string toPrint = "";
+
+            foreach (Account account in ma.Accounts)
+            {
+                string encrPass = account.Password.Password;
+                PasswordManager pass = new(encrPass);
+                string decryptedPassword = pass.DecryptPassword(currentUser);
+                toPrint += $"Username: {account.Name}, Email: {account.Email},\nPassword: {decryptedPassword}, Description: {account.Description}\n";
+            }
+
+            if (toPrint == "")
+            {
+                toPrint = "No accounts found";
+            }
+
+            return toPrint;
         }
 
         private void AddAccount_Click(object sender, EventArgs e)
@@ -115,7 +127,25 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void AddNewAccount_Click(object sender, EventArgs e)
         {
-            accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
+            if (UserBox.Text == "" || EmailBox.Text == "" || DescBox.Text == "" || LenBox.Text == "")
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (UserBox.Text.Contains(",") || EmailBox.Text.Contains(",") || DescBox.Text.Contains(","))
+            {
+                MessageBox.Show("Fields can't contain commas.", "Error", MessageBoxButtons.OK);
+            }
+
+            try
+            {
+                accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Password length must be between 8 and 32 characters.", "Error", MessageBoxButtons.OK);
+            }
 
             string fileContent;
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
@@ -188,6 +218,69 @@ namespace gestione_account_password
         private void Printer_Click(object sender, EventArgs e)
         {
             ActiveControl = null;
+        }
+
+        private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterAccount ma = GetCurrentMasterAccount();
+            string exportString = "DESCRIPTION,USERNAME,EMAIL,PASSWORD\n";
+
+            foreach (Account account in ma.Accounts)
+            {
+                string encrPass = account.Password.Password;
+                PasswordManager pass = new(encrPass);
+                string decryptedPassword = pass.DecryptPassword(currentUser);
+                exportString += $"{account.Description},{account.Name},{account.Email},{decryptedPassword}";
+            }
+
+            if (exportString == "DESCRIPTION,USERNAME,EMAIL,PASSWORD")
+            {
+                exportString = "No accounts found";
+            }
+
+            FileManager fm = FileManager.Instance;
+            bool result = false;
+            using (FolderBrowserDialog fbd = new())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    string path = fbd.SelectedPath;
+                    string fullPath = Path.Combine(path, "export.csv");
+                    result = fm.ExportAccountsInCSV(fullPath, exportString);
+                }
+            }
+
+            if (result)
+            {
+                MessageBox.Show("Accounts exported successfully.", "We're all good here!");
+                return;
+            }
+
+            MessageBox.Show("Accounts couldn't be exported.", "Something went wrong!");
+        }
+
+        private void ExportXMLDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string sourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gestione_account_password.xml");
+                    string destinationPath = Path.Combine(folderDialog.SelectedPath, "documentation.xml");
+
+                    File.Copy(sourcePath, destinationPath, true);
+                    MessageBox.Show("Documentation saved successfully!", "We're all good here!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    try
+                    {
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"An error occurred while saving the documentation: {ex.Message}", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

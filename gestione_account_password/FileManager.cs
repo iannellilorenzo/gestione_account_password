@@ -123,5 +123,29 @@ namespace gestione_account_password
 
             return masterAccounts;
         }
+
+        /// <summary>
+        /// Lets the user export the accounts in a CSV file
+        /// </summary>
+        /// <param name="fullPath"> Directory + file name + extension </param>
+        /// <param name="contentToExport"> All the accounts formatted correctly and ready to be exported </param>
+        /// <returns> True if it goes right, false if not </returns>
+        public bool ExportAccountsInCSV(string fullPath, string contentToExport)
+        {
+            bool result = false;
+            using (FileStream fs = new(fullPath, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                using (StreamWriter sw = new(fs, Encoding.UTF8))
+                {
+                    sw.WriteLine(contentToExport);
+                    result = true;
+                    sw.Close();
+                }
+
+                fs.Close();
+            }
+
+            return result;
+        }
     }
 }
