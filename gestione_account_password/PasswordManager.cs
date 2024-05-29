@@ -232,6 +232,7 @@ namespace gestione_account_password
         public string DecryptPassword(string username)
         {
             byte[] key = GetKey(username);
+            string plainPassword = "";
 
             // Split the encrypted password and IV
             string[] parts = Password.Split('-');
@@ -259,12 +260,14 @@ namespace gestione_account_password
                         {
                             using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                             {
-                                return srDecrypt.ReadToEnd();
+                                plainPassword = srDecrypt.ReadToEnd();
                             }
                         }
                     }
                 }
             }
+
+            return plainPassword;
         }
     }
 }

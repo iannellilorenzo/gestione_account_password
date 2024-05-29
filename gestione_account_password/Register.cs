@@ -124,7 +124,6 @@ namespace gestione_account_password
             }
 
             Home formService = new(NameMasterAccount.Text);
-            MessageBox.Show(master.Password.DecryptPassword(NameMasterAccount.Text));
             formService.Show();
             formService.Focus();
             Close();

@@ -31,7 +31,7 @@ namespace gestione_account_password
         {
             ActiveControl = null;
             CenterToScreen();
-            PrinterList.Hide();
+            Printer.Hide();
             AddAccountPanel.BringToFront();
         }
 
@@ -47,8 +47,8 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void Print_Click(object sender, EventArgs e)
         {
-            PrinterList.Items.Clear();
-            PrinterList.Visible = true;
+            Printer.Clear();
+            Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
 
@@ -58,17 +58,10 @@ namespace gestione_account_password
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
 
-            PrinterList.BringToFront();
+            Printer.BringToFront();
 
             string print = GetAccounts();
-            if (print == "")
-            {
-                PrinterList.Items.Add("No accounts found.");
-            }
-            else
-            {
-                PrinterList.Items.Add(print);
-            }
+            Printer.Text = print;
         }
 
         /// <summary>
@@ -79,39 +72,21 @@ namespace gestione_account_password
         {
             FileManager fm = FileManager.Instance;
             List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
-            List<Account> accounts = new();
-            string fileContent;
+            string toPrint = "";
+
             foreach (MasterAccount ma in masterAccounts)
             {
                 if (ma.MasterName == currentUser)
                 {
-                    string toPrint = "";
-                    using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+                    foreach (Account account in ma.Accounts)
                     {
-                        byte[] bytes = new byte[fs.Length];
-                        int bytesRead = fs.Read(bytes, 0, bytes.Length);
-                        fileContent = Encoding.UTF8.GetString(bytes);
-                        fs.Close();
+                        string encrPass = account.Password.Password;
+                        PasswordManager pass = new(encrPass);
+                        string decryptedPassword = pass.DecryptPassword(currentUser);
+                        toPrint += $"Username: {account.Name}, Email: {account.Email},\nPassword: {decryptedPassword}, Description: {account.Description}\n";
                     }
 
-                    List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(fileContent);
-
-                    foreach (JObject obj in jsonObjects)
-                    {
-                        string currentName = (string)obj["Name"];
-                        JArray accountsFromJson = (JArray)obj["Accounts"];
-                        if (accountsFromJson != null)
-                        {
-                            foreach (JObject account in accountsFromJson)
-                            {
-                                string encrPass = (string)account["Password"]["Password"];
-                                PasswordManager pass = new(encrPass);
-                                toPrint += $"Username: {account["Name"]}, Email: {account["Email"]},\nPassword: {pass.DecryptPassword(currentUser)}, Description: {account["Description"]}\n";
-                            }
-
-                            return toPrint;
-                        }
-                    }
+                    return toPrint;
                 }
             }
 
@@ -120,7 +95,7 @@ namespace gestione_account_password
 
         private void AddAccount_Click(object sender, EventArgs e)
         {
-            PrinterList.Visible = false;
+            Printer.Visible = false;
             AddAccount.BackColor = Color.LightSeaGreen;
             PrintAccounts.BackColor = Color.Silver;
 
@@ -130,7 +105,7 @@ namespace gestione_account_password
             LenBox.Visible = true;
             AddNewAccount.Visible = true;
 
-            PrinterList.Hide();
+            Printer.Hide();
         }
 
         /// <summary>
@@ -208,6 +183,11 @@ namespace gestione_account_password
             {
                 checkBox.Visible = visibility;
             }
+        }
+
+        private void Printer_Click(object sender, EventArgs e)
+        {
+            ActiveControl = null;
         }
     }
 }
