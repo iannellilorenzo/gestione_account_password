@@ -51,7 +51,7 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void Print_Click(object sender, EventArgs e)
         {
-            Printer.Clear();
+            Printer.Columns.Clear();
             Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
@@ -64,8 +64,18 @@ namespace gestione_account_password
 
             Printer.BringToFront();
 
-            string print = PrintAccountsOnDisplay();
-            Printer.Text = print;
+            List<string> print = PrintAccountsOnDisplay();
+
+            Printer.Columns.Add("Username", "Username");
+            Printer.Columns.Add("Password", "Password");
+            Printer.Columns.Add("Email", "Email");
+            Printer.Columns.Add("Description", "Description");
+
+            foreach(var item in print)
+            {
+                var splittedString = item.Split(',');
+                Printer.Rows.Add(splittedString[0], splittedString[1], splittedString[2], splittedString[3]);
+            }
         }
 
         /// <summary>
@@ -88,25 +98,25 @@ namespace gestione_account_password
             return null;
         }
 
-        private string PrintAccountsOnDisplay()
+        private List<string> PrintAccountsOnDisplay()
         {
             MasterAccount ma = GetCurrentMasterAccount();
-            string toPrint = "";
+            List<string> accountsDetails = new();
 
             foreach (Account account in ma.Accounts)
             {
                 string encrPass = account.Password.Password;
                 PasswordManager pass = new(encrPass);
                 string decryptedPassword = pass.DecryptPassword(currentUser);
-                toPrint += $"Username: {account.Name}, Email: {account.Email},\nPassword: {decryptedPassword}, Description: {account.Description}\n";
+                accountsDetails.Add($"{account.Name},{decryptedPassword},{account.Email},{account.Description}");
             }
 
-            if (toPrint == "")
+            if (accountsDetails.Count == 0)
             {
-                toPrint = "No accounts found";
+                accountsDetails.Add("No accounts found");
             }
 
-            return toPrint;
+            return accountsDetails;
         }
 
         private void AddAccount_Click(object sender, EventArgs e)

@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportInCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportInJSONFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.developerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportXMLDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,14 +55,12 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.Printer = new System.Windows.Forms.RichTextBox();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
-            this.ExportInCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExportInJSONFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Printer = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Printer)).BeginInit();
             this.SuspendLayout();
             // 
             // PrintAccounts
@@ -100,7 +102,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(935, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 30);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -111,7 +113,7 @@
             this.importAccountDetailsToolStripMenuItem,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
             this.toolStripMenuItem1.Text = "File";
             // 
             // Export
@@ -123,6 +125,26 @@
             this.Export.Size = new System.Drawing.Size(245, 26);
             this.Export.Text = "Export accounts details";
             this.Export.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
+            // 
+            // ExportInCSVToolStripMenuItem
+            // 
+            this.ExportInCSVToolStripMenuItem.Name = "ExportInCSVToolStripMenuItem";
+            this.ExportInCSVToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.ExportInCSVToolStripMenuItem.Text = "Export in CSV format";
+            this.ExportInCSVToolStripMenuItem.Click += new System.EventHandler(this.ExportInCSVToolStripMenuItem_Click);
+            // 
+            // ExportInJSONFormatToolStripMenuItem
+            // 
+            this.ExportInJSONFormatToolStripMenuItem.Name = "ExportInJSONFormatToolStripMenuItem";
+            this.ExportInJSONFormatToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.ExportInJSONFormatToolStripMenuItem.Text = "Export in JSON format";
+            this.ExportInJSONFormatToolStripMenuItem.Click += new System.EventHandler(this.ExportInJSONFormatToolStripMenuItem_Click);
+            // 
+            // importAccountDetailsToolStripMenuItem
+            // 
+            this.importAccountDetailsToolStripMenuItem.Name = "importAccountDetailsToolStripMenuItem";
+            this.importAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.importAccountDetailsToolStripMenuItem.Text = "Import account details";
             // 
             // developerOptionsToolStripMenuItem
             // 
@@ -144,7 +166,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -301,21 +323,6 @@
             this.AddAccountPanel.Size = new System.Drawing.Size(708, 473);
             this.AddAccountPanel.TabIndex = 0;
             // 
-            // Printer
-            // 
-            this.Printer.BackColor = System.Drawing.SystemColors.Control;
-            this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Printer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Printer.ForeColor = System.Drawing.Color.Black;
-            this.Printer.Location = new System.Drawing.Point(0, 0);
-            this.Printer.Name = "Printer";
-            this.Printer.ReadOnly = true;
-            this.Printer.Size = new System.Drawing.Size(708, 473);
-            this.Printer.TabIndex = 17;
-            this.Printer.TabStop = false;
-            this.Printer.Text = "";
-            this.Printer.Click += new System.EventHandler(this.Printer_Click);
-            // 
             // LenBox
             // 
             this.LenBox.Location = new System.Drawing.Point(392, 137);
@@ -324,25 +331,28 @@
             this.LenBox.Size = new System.Drawing.Size(103, 22);
             this.LenBox.TabIndex = 16;
             // 
-            // ExportInCSVToolStripMenuItem
+            // Printer
             // 
-            this.ExportInCSVToolStripMenuItem.Name = "ExportInCSVToolStripMenuItem";
-            this.ExportInCSVToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.ExportInCSVToolStripMenuItem.Text = "Export in CSV format";
-            this.ExportInCSVToolStripMenuItem.Click += new System.EventHandler(this.ExportInCSVToolStripMenuItem_Click);
-            // 
-            // ExportInJSONFormatToolStripMenuItem
-            // 
-            this.ExportInJSONFormatToolStripMenuItem.Name = "ExportInJSONFormatToolStripMenuItem";
-            this.ExportInJSONFormatToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
-            this.ExportInJSONFormatToolStripMenuItem.Text = "Export in JSON format";
-            this.ExportInJSONFormatToolStripMenuItem.Click += new System.EventHandler(this.ExportInJSONFormatToolStripMenuItem_Click);
-            // 
-            // importAccountDetailsToolStripMenuItem
-            // 
-            this.importAccountDetailsToolStripMenuItem.Name = "importAccountDetailsToolStripMenuItem";
-            this.importAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
-            this.importAccountDetailsToolStripMenuItem.Text = "Import account details";
+            this.Printer.AllowUserToAddRows = false;
+            this.Printer.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Printer.Location = new System.Drawing.Point(0, 0);
+            this.Printer.MultiSelect = false;
+            this.Printer.Name = "Printer";
+            this.Printer.ReadOnly = true;
+            this.Printer.RowHeadersWidth = 51;
+            this.Printer.RowTemplate.Height = 24;
+            this.Printer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.Printer.Size = new System.Drawing.Size(708, 473);
+            this.Printer.TabIndex = 17;
             // 
             // Home
             // 
@@ -362,6 +372,7 @@
             this.AddAccountPanel.ResumeLayout(false);
             this.AddAccountPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Printer)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,11 +401,11 @@
         private System.Windows.Forms.TextBox UserBox;
         private System.Windows.Forms.Panel AddAccountPanel;
         private System.Windows.Forms.NumericUpDown LenBox;
-        private System.Windows.Forms.RichTextBox Printer;
         private System.Windows.Forms.ToolStripMenuItem developerOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportXMLDocumentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportInCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportInJSONFormatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importAccountDetailsToolStripMenuItem;
+        private System.Windows.Forms.DataGridView Printer;
     }
 }
