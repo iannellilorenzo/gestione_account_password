@@ -15,10 +15,14 @@ namespace gestione_account_password
 {
     public partial class Home : Form
     {
-        public string currentUser;
+        private string currentUser;
         List<Account> accounts;
-        public string fileName;
+        private string fileName;
 
+        /// <summary>
+        /// Constructor that initializes the form
+        /// </summary>
+        /// <param name="user"> Current user logged in </param>
         public Home(string user)
         {
             InitializeComponent();

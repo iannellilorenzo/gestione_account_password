@@ -14,10 +14,13 @@ namespace gestione_account_password
 {
     public partial class Register : Form
     {
-        protected static readonly string namePlaceholder = "Insert master account name here";
-        protected static readonly string passPlaceholder = "Insert master account password here";
-        protected static List<MasterAccount> masterAccountsSaved;
+        private static readonly string namePlaceholder = "Insert master account name here";
+        private static readonly string passPlaceholder = "Insert master account password here";
+        private static List<MasterAccount> masterAccountsSaved;
 
+        /// <summary>
+        /// Constructor that initializes the form
+        /// </summary>
         public Register()
         {
             InitializeComponent();

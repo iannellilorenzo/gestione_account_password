@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
+    /// <summary>
+    /// Form used to let the user log in
+    /// </summary>
     public partial class Login : Form
     {
-        protected static readonly string namePlaceholder = "Insert master account name here";
-        protected static readonly string passPlaceholder = "Insert master account password here";
+        private static readonly string namePlaceholder = "Insert master account name here";
+        private static readonly string passPlaceholder = "Insert master account password here";
 
+        /// <summary>
+        /// Constructor that initializes the form
+        /// </summary>
         public Login()
         {
             InitializeComponent();

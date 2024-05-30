@@ -12,6 +12,9 @@ namespace gestione_account_password
 {
     public partial class Access : Form
     {
+        /// <summary>
+        /// Constructor that initilizes the form
+        /// </summary>
         public Access()
         {
             InitializeComponent();

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
+    /// <summary>
+    /// Manages everything involving files using a secure Singleton pattern
+    /// </summary>
     public sealed class FileManager
     {
         private static FileManager instance = null;
@@ -20,6 +23,9 @@ namespace gestione_account_password
 
         }
 
+        /// <summary>
+        /// Gets the instance of the class 
+        /// </summary>
         public static FileManager Instance
         {
             get

@@ -11,6 +11,9 @@ using System.Security.Cryptography;
 
 namespace gestione_account_password
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class PasswordManager
     {
         private static readonly char[] _lowercaseLetters =
