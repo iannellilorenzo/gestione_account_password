@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -327,6 +328,26 @@ namespace gestione_account_password
             }
         }
 
+        private void Printer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // TODO: Implement the tooltip "copy to clipboard" the correct way
 
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                string cellText = Printer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                Clipboard.SetText(cellText);
+
+                Rectangle cell = Printer.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                Point cellLocation = new(cell.X, cell.Y);
+
+                Copy.AutoPopDelay = 2000;
+                Copy.InitialDelay = 0;
+                Copy.ReshowDelay = 0;
+                Copy.ShowAlways = true;
+
+                Copy.Hide(Printer);
+                Copy.Show("Successfully copied to clipboard!", Printer, cellLocation, 2000);
+            }
+        }
     }
 }

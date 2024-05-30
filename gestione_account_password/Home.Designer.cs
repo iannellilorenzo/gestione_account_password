@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             this.AddAccountPanel = new System.Windows.Forms.Panel();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
             this.Printer = new System.Windows.Forms.DataGridView();
+            this.Copy = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
@@ -102,7 +104,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(935, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,7 +115,7 @@
             this.importAccountDetailsToolStripMenuItem,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
             // Export
@@ -166,7 +168,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -174,7 +176,7 @@
             this.masterPassowrdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetPassword});
             this.masterPassowrdToolStripMenuItem.Name = "masterPassowrdToolStripMenuItem";
-            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
+            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.masterPassowrdToolStripMenuItem.Text = "Master passowrd";
             // 
             // ResetPassword
@@ -353,6 +355,7 @@
             this.Printer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.Printer.Size = new System.Drawing.Size(708, 473);
             this.Printer.TabIndex = 17;
+            this.Printer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Printer_CellDoubleClick);
             // 
             // Home
             // 
@@ -407,5 +410,6 @@
         private System.Windows.Forms.ToolStripMenuItem ExportInJSONFormatToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importAccountDetailsToolStripMenuItem;
         private System.Windows.Forms.DataGridView Printer;
+        private System.Windows.Forms.ToolTip Copy;
     }
 }
