@@ -1,7 +1,7 @@
 # SentinelKey - Password and account manager (Project work)
 
 ## Description of the project
-SentinelKey is a software for secure password and account management. It allows users to add, remove, and modify their accounts, as well as export all saved accounts to a JSON file. It uses advanced encryption to ensure that passwords are protected. We do not seek any good usage of GitHub other than this README, so you'll find only the ```master```branch. 
+SentinelKey is a software for secure password and account management. It allows users to add, remove, and modify their accounts, as well as export all saved accounts to a JSON file. It uses advanced encryption to ensure that passwords are protected. We do not seek any good usage of GitHub other than this README, so you'll find only the ```master``` branch. 
 
 ## Requirements
 - .NET Framework 4.7.6
