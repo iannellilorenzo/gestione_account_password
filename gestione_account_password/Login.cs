@@ -101,7 +101,10 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void LoginBut_Click(object sender, EventArgs e)
         {
+            // FileManager instance to deserialize
             FileManager manager = FileManager.Instance;
+
+            // List of master accounts, will be populated from the json file
             List<MasterAccount> masters = new();
 
             try
@@ -118,6 +121,7 @@ namespace gestione_account_password
             string name = NameMasterAccount.Text;
             string password = PassMasterAccount.Text;
 
+            // Iterating through the master accounts, if the username and password are correct, then the user logs in
             foreach (MasterAccount master in masters)
             {
                 if (masters.Any(x => x.MasterName == master.MasterName && x.Password.DecryptPassword(x.MasterName) == master.Password.DecryptPassword(x.MasterName)))

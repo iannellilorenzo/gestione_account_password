@@ -102,11 +102,15 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void RegBut_Click(object sender, EventArgs e)
         {
+            // Creates a new master account and it adds it to the list, so that the serialization goes right
             MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text, NameMasterAccount.Text), DateTime.Now);
             masterAccountsSaved.Add(master);
 
+            // FileManager instance to serialize a new account registered
             FileManager manager = FileManager.Instance;
             int result = manager.RegisterSerializer("data.json", masterAccountsSaved);
+
+            // Given the result of the serialization, the user knows what to do
             if (result == -1)
             {
                 DialogResult choice = MessageBox.Show("Would you like to switch to log in page?", "Account already exists", MessageBoxButtons.YesNo);
@@ -126,6 +130,7 @@ namespace gestione_account_password
                 return;
             }
 
+            // Once everything is done right, the user can access the services
             Home formService = new(NameMasterAccount.Text);
             formService.Show();
             formService.Focus();
