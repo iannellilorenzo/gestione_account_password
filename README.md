@@ -52,5 +52,5 @@ SentinelKey is a software for secure password and account management. It allows 
 This project is licensed under me, myself and I. Contact me, myself or I for details.
 
 ## Contact
-For further questions or support, contact us at:
+For further questions, support or recovery of your mental health, contact me, myself or I at:
 - GitHub: [iannellilorenzo](https://github.com/iannellilorenzo)
