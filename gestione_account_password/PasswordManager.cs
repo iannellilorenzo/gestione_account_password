@@ -12,7 +12,7 @@ using System.Security.Cryptography;
 namespace gestione_account_password
 {
     /// <summary>
-    /// 
+    /// Manages everything that involves the passwords, such as generating, encrypting and decrypting
     /// </summary>
     public class PasswordManager
     {
@@ -38,26 +38,29 @@ namespace gestione_account_password
 
         private string _password;
 
-        public static char[] LowercaseLetters
+        private static char[] LowercaseLetters
         {
             get => _lowercaseLetters;
         }
 
-        public static char[] UppercaseLetters
+        private static char[] UppercaseLetters
         {
             get => _uppercaseLetters;
         }
 
-        public static char[] Numbers
+        private static char[] Numbers
         {
             get => _numbers;
         }
 
-        public static char[] SpecialChars
+        private static char[] SpecialChars
         {
             get => _specialChars;
         }
 
+        /// <summary>
+        /// Propertis for the passwords
+        /// </summary>
         public string Password
         {
             get => _password;
