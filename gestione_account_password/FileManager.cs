@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq.Expressions;
 
 namespace gestione_account_password
 {
@@ -144,6 +145,32 @@ namespace gestione_account_password
                 using (StreamWriter sw = new(fs, Encoding.UTF8))
                 {
                     sw.WriteLine(contentToExport);
+                    result = true;
+                    sw.Close();
+                }
+
+                fs.Close();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Lets the user export the accounts in a JSON file
+        /// </summary>
+        /// <param name="fullPath"> Directory + file name + extension </param>
+        /// <param name="masterAccountDetails"> Master account to get the accounts from </param>
+        /// <returns> True if it goes right, false if not </returns>
+        public bool ExportAccountInJson(string fullPath, MasterAccount masterAccountDetails)
+        {
+            bool result = false;
+            string exportString = JsonConvert.SerializeObject(masterAccountDetails.Accounts, Formatting.Indented);
+
+            using (FileStream fs = new(fullPath, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                using (StreamWriter sw = new(fs, Encoding.UTF8))
+                {
+                    sw.Write(exportString);
                     result = true;
                     sw.Close();
                 }

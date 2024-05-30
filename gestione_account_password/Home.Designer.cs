@@ -33,6 +33,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.developerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportXMLDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.masterPassowrdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ResetPassword = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,8 +53,9 @@
             this.AddAccountPanel = new System.Windows.Forms.Panel();
             this.Printer = new System.Windows.Forms.RichTextBox();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
-            this.developerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExportXMLDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportInCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExportInJSONFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
@@ -105,6 +108,7 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Export,
+            this.importAccountDetailsToolStripMenuItem,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
@@ -112,10 +116,28 @@
             // 
             // Export
             // 
+            this.Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportInCSVToolStripMenuItem,
+            this.ExportInJSONFormatToolStripMenuItem});
             this.Export.Name = "Export";
             this.Export.Size = new System.Drawing.Size(245, 26);
             this.Export.Text = "Export accounts details";
             this.Export.Click += new System.EventHandler(this.ExportToolStripMenuItem_Click);
+            // 
+            // developerOptionsToolStripMenuItem
+            // 
+            this.developerOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportXMLDocumentationToolStripMenuItem});
+            this.developerOptionsToolStripMenuItem.Name = "developerOptionsToolStripMenuItem";
+            this.developerOptionsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.developerOptionsToolStripMenuItem.Text = "Developer options";
+            // 
+            // ExportXMLDocumentationToolStripMenuItem
+            // 
+            this.ExportXMLDocumentationToolStripMenuItem.Name = "ExportXMLDocumentationToolStripMenuItem";
+            this.ExportXMLDocumentationToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
+            this.ExportXMLDocumentationToolStripMenuItem.Text = "Export XML documentation";
+            this.ExportXMLDocumentationToolStripMenuItem.Click += new System.EventHandler(this.ExportXMLDocumentationToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -302,20 +324,25 @@
             this.LenBox.Size = new System.Drawing.Size(103, 22);
             this.LenBox.TabIndex = 16;
             // 
-            // developerOptionsToolStripMenuItem
+            // ExportInCSVToolStripMenuItem
             // 
-            this.developerOptionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExportXMLDocumentationToolStripMenuItem});
-            this.developerOptionsToolStripMenuItem.Name = "developerOptionsToolStripMenuItem";
-            this.developerOptionsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
-            this.developerOptionsToolStripMenuItem.Text = "Developer options";
+            this.ExportInCSVToolStripMenuItem.Name = "ExportInCSVToolStripMenuItem";
+            this.ExportInCSVToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.ExportInCSVToolStripMenuItem.Text = "Export in CSV format";
+            this.ExportInCSVToolStripMenuItem.Click += new System.EventHandler(this.ExportInCSVToolStripMenuItem_Click);
             // 
-            // ExportXMLDocumentationToolStripMenuItem
+            // ExportInJSONFormatToolStripMenuItem
             // 
-            this.ExportXMLDocumentationToolStripMenuItem.Name = "ExportXMLDocumentationToolStripMenuItem";
-            this.ExportXMLDocumentationToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
-            this.ExportXMLDocumentationToolStripMenuItem.Text = "Export XML documentation";
-            this.ExportXMLDocumentationToolStripMenuItem.Click += new System.EventHandler(this.ExportXMLDocumentationToolStripMenuItem_Click);
+            this.ExportInJSONFormatToolStripMenuItem.Name = "ExportInJSONFormatToolStripMenuItem";
+            this.ExportInJSONFormatToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
+            this.ExportInJSONFormatToolStripMenuItem.Text = "Export in JSON format";
+            this.ExportInJSONFormatToolStripMenuItem.Click += new System.EventHandler(this.ExportInJSONFormatToolStripMenuItem_Click);
+            // 
+            // importAccountDetailsToolStripMenuItem
+            // 
+            this.importAccountDetailsToolStripMenuItem.Name = "importAccountDetailsToolStripMenuItem";
+            this.importAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
+            this.importAccountDetailsToolStripMenuItem.Text = "Import account details";
             // 
             // Home
             // 
@@ -366,5 +393,8 @@
         private System.Windows.Forms.RichTextBox Printer;
         private System.Windows.Forms.ToolStripMenuItem developerOptionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportXMLDocumentationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExportInCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExportInJSONFormatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importAccountDetailsToolStripMenuItem;
     }
 }

@@ -226,6 +226,11 @@ namespace gestione_account_password
 
         private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void ExportInCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             MasterAccount ma = GetCurrentMasterAccount();
             string exportString = "DESCRIPTION,USERNAME,EMAIL,PASSWORD\n";
 
@@ -263,6 +268,31 @@ namespace gestione_account_password
             MessageBox.Show("Accounts couldn't be exported.", "Something went wrong!");
         }
 
+        private void ExportInJSONFormatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterAccount ma = GetCurrentMasterAccount();
+            FileManager fm = FileManager.Instance;
+            bool result = false;
+
+            using (FolderBrowserDialog folderDialog = new())
+            {
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string path = folderDialog.SelectedPath;
+                    string fullPath = Path.Combine(path, "export.json");
+                    result = fm.ExportAccountInJson(fullPath, ma);
+                }
+            }
+
+            if (result)
+            {
+                MessageBox.Show("Accounts exported successfully.", "We're all good here!");
+                return;
+            }
+
+            MessageBox.Show("Accounts couldn't be exported.", "Something went wrong!");
+        }
+
         private void ExportXMLDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
@@ -277,7 +307,7 @@ namespace gestione_account_password
 
                     try
                     {
-                        
+
                     }
                     catch (Exception ex)
                     {
@@ -286,5 +316,7 @@ namespace gestione_account_password
                 }
             }
         }
+
+
     }
 }
