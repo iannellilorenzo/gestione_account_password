@@ -12,6 +12,9 @@ using System.IO;
 
 namespace gestione_account_password
 {
+    /// <summary>
+    /// Manages everything that has to do with the registration of a new master account
+    /// </summary>
     public partial class Register : Form
     {
         private static readonly string namePlaceholder = "Insert master account name here";
@@ -113,6 +116,7 @@ namespace gestione_account_password
             // Given the result of the serialization, the user knows what to do
             if (result == -1)
             {
+                // If the account already exists, the user can switch to the log in page
                 DialogResult choice = MessageBox.Show("Would you like to switch to log in page?", "Account already exists", MessageBoxButtons.YesNo);
                 if (choice == DialogResult.Yes)
                 {
@@ -120,7 +124,8 @@ namespace gestione_account_password
                     formLogin.Show();
                     Close();
                 }
-                
+
+                // If the user chooses not to switch to the log in page, the textboxes are cleared and the placeholders are set
                 NameMasterAccount.Text = "";
                 PassMasterAccount.Text = "";
                 PassMasterAccount.UseSystemPasswordChar = false;

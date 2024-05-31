@@ -14,6 +14,9 @@ using System.Windows.Forms;
 
 namespace gestione_account_password
 {
+    /// <summary>
+    /// Actual home of the application, where the user can access all the functionalities
+    /// </summary>
     public partial class Home : Form
     {
         private string currentUser;
@@ -52,6 +55,7 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void Print_Click(object sender, EventArgs e)
         {
+            // Just UI stuff
             Printer.Columns.Clear();
             Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
@@ -65,7 +69,15 @@ namespace gestione_account_password
 
             Printer.BringToFront();
 
+            // Printing the accounts
             List<string> print = PrintAccountsOnDisplay();
+
+            if (print[0] == "No accounts found")
+            {
+                MessageBox.Show("No accounts found.", "Error", MessageBoxButtons.OK);
+                AddAccount_Click(sender, e);
+                return;
+            }
 
             Printer.Columns.Add("Username", "Username");
             Printer.Columns.Add("Password", "Password");
@@ -85,11 +97,13 @@ namespace gestione_account_password
         /// <returns> Master account logged in </returns>
         private MasterAccount GetCurrentMasterAccount()
         {
+            // FileManager instance to deserialize
             FileManager fm = FileManager.Instance;
             List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
 
             foreach (MasterAccount ma in masterAccounts)
             {
+                // If the master account is the one logged in, then it returns it
                 if (ma.MasterName == currentUser)
                 {
                     return ma;
@@ -99,11 +113,16 @@ namespace gestione_account_password
             return null;
         }
 
+        /// <summary>
+        /// Gets a list of all the accounts of the current master account logged in
+        /// </summary>
+        /// <returns> All the accoutns of the current master account logged in using a list. Every account is a string ready to be printed in a CSV format </returns>
         private List<string> PrintAccountsOnDisplay()
         {
             MasterAccount ma = GetCurrentMasterAccount();
             List<string> accountsDetails = new();
 
+            // Iterating through the accounts of the master account
             foreach (Account account in ma.Accounts)
             {
                 string encrPass = account.Password.Password;
@@ -112,6 +131,7 @@ namespace gestione_account_password
                 accountsDetails.Add($"{account.Name},{decryptedPassword},{account.Email},{account.Description}");
             }
 
+            // If the master account is null, then it returns an empty list
             if (accountsDetails.Count == 0)
             {
                 accountsDetails.Add("No accounts found");
@@ -162,14 +182,8 @@ namespace gestione_account_password
                 MessageBox.Show("Password length must be between 8 and 32 characters.", "Error", MessageBoxButtons.OK);
             }
 
-            string fileContent;
-            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
-            {
-                byte[] bytes = new byte[fs.Length];
-                int bytesRead = fs.Read(bytes, 0, bytes.Length);
-                fileContent = Encoding.UTF8.GetString(bytes);
-                fs.Close();
-            }
+            FileManager fm = FileManager.Instance;
+            string fileContent = fm.DefaultDeserializer(fileName);
 
             List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(fileContent);
 
@@ -178,17 +192,14 @@ namespace gestione_account_password
                 string currentName = (string)obj["MasterName"];
                 if (currentName == currentUser)
                 {
-                    obj["Accounts"] = JArray.FromObject(accounts);
+                    JArray accountsArray = (JArray)obj["Accounts"];
+                    accountsArray.Add(JObject.FromObject(accounts[accounts.Count - 1]));
+                    break;
                 }
             }
 
             string updatedJson = JsonConvert.SerializeObject(jsonObjects, Formatting.Indented);
-            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
-            {
-                byte[] data = new UTF8Encoding(true).GetBytes(updatedJson);
-                fs.Write(data, 0, data.Length);
-                fs.Close();
-            }
+            fm.DefaultSerializer(fileName, updatedJson);
         }
 
         /// <summary>

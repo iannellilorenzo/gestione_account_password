@@ -39,19 +39,18 @@
             // 
             this.RegNow.AutoSize = true;
             this.RegNow.Font = new System.Drawing.Font("Verdana", 11F);
-            this.RegNow.Location = new System.Drawing.Point(29, 37);
-            this.RegNow.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.RegNow.Location = new System.Drawing.Point(39, 46);
             this.RegNow.Name = "RegNow";
-            this.RegNow.Size = new System.Drawing.Size(111, 18);
+            this.RegNow.Size = new System.Drawing.Size(142, 23);
             this.RegNow.TabIndex = 0;
             this.RegNow.Text = "Register now!";
             // 
             // NameMasterAccount
             // 
-            this.NameMasterAccount.Location = new System.Drawing.Point(61, 118);
-            this.NameMasterAccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.NameMasterAccount.Location = new System.Drawing.Point(81, 145);
+            this.NameMasterAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NameMasterAccount.Name = "NameMasterAccount";
-            this.NameMasterAccount.Size = new System.Drawing.Size(221, 20);
+            this.NameMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.NameMasterAccount.TabIndex = 1;
             this.NameMasterAccount.Tag = "Insert master account name here";
             this.NameMasterAccount.Enter += new System.EventHandler(this.NameMasterAccount_Enter);
@@ -60,10 +59,10 @@
             // PassMasterAccount
             // 
             this.PassMasterAccount.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.PassMasterAccount.Location = new System.Drawing.Point(61, 148);
-            this.PassMasterAccount.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PassMasterAccount.Location = new System.Drawing.Point(81, 182);
+            this.PassMasterAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PassMasterAccount.Name = "PassMasterAccount";
-            this.PassMasterAccount.Size = new System.Drawing.Size(221, 20);
+            this.PassMasterAccount.Size = new System.Drawing.Size(293, 22);
             this.PassMasterAccount.TabIndex = 2;
             this.PassMasterAccount.Tag = "Insert master account password here";
             this.PassMasterAccount.Enter += new System.EventHandler(this.PassMasterAccount_Enter);
@@ -72,10 +71,9 @@
             // RegToLog
             // 
             this.RegToLog.AutoSize = true;
-            this.RegToLog.Location = new System.Drawing.Point(74, 176);
-            this.RegToLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.RegToLog.Location = new System.Drawing.Point(99, 217);
             this.RegToLog.Name = "RegToLog";
-            this.RegToLog.Size = new System.Drawing.Size(204, 13);
+            this.RegToLog.Size = new System.Drawing.Size(249, 16);
             this.RegToLog.TabIndex = 8;
             this.RegToLog.TabStop = true;
             this.RegToLog.Text = "Already have an account yet? Login now!";
@@ -87,10 +85,10 @@
             this.RegBut.FlatAppearance.BorderSize = 0;
             this.RegBut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.RegBut.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RegBut.Location = new System.Drawing.Point(302, 118);
-            this.RegBut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RegBut.Location = new System.Drawing.Point(403, 145);
+            this.RegBut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RegBut.Name = "RegBut";
-            this.RegBut.Size = new System.Drawing.Size(103, 48);
+            this.RegBut.Size = new System.Drawing.Size(137, 59);
             this.RegBut.TabIndex = 9;
             this.RegBut.Text = "Register";
             this.RegBut.UseVisualStyleBackColor = false;
@@ -98,15 +96,17 @@
             // 
             // Register
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.RegBut);
             this.Controls.Add(this.RegToLog);
             this.Controls.Add(this.PassMasterAccount);
             this.Controls.Add(this.NameMasterAccount);
             this.Controls.Add(this.RegNow);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "Register";
             this.Text = "SentinelKey - Register";
             this.Load += new System.EventHandler(this.Register_Load);

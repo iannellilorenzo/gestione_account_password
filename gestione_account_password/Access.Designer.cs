@@ -41,10 +41,10 @@
             this.Register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Register.Font = new System.Drawing.Font("Verdana", 12F);
             this.Register.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Register.Location = new System.Drawing.Point(121, 86);
-            this.Register.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Register.Location = new System.Drawing.Point(161, 106);
+            this.Register.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Register.Name = "Register";
-            this.Register.Size = new System.Drawing.Size(122, 63);
+            this.Register.Size = new System.Drawing.Size(163, 78);
             this.Register.TabIndex = 0;
             this.Register.Text = "Register";
             this.Register.UseVisualStyleBackColor = false;
@@ -57,10 +57,10 @@
             this.LogIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LogIn.Font = new System.Drawing.Font("Verdana", 12F);
             this.LogIn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.LogIn.Location = new System.Drawing.Point(121, 164);
-            this.LogIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.LogIn.Location = new System.Drawing.Point(161, 202);
+            this.LogIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LogIn.Name = "LogIn";
-            this.LogIn.Size = new System.Drawing.Size(122, 63);
+            this.LogIn.Size = new System.Drawing.Size(163, 78);
             this.LogIn.TabIndex = 1;
             this.LogIn.Text = "Log in";
             this.LogIn.UseVisualStyleBackColor = false;
@@ -70,10 +70,9 @@
             // 
             this.RightsReserved.AutoSize = true;
             this.RightsReserved.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RightsReserved.Location = new System.Drawing.Point(71, 314);
-            this.RightsReserved.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.RightsReserved.Location = new System.Drawing.Point(95, 386);
             this.RightsReserved.Name = "RightsReserved";
-            this.RightsReserved.Size = new System.Drawing.Size(241, 13);
+            this.RightsReserved.Size = new System.Drawing.Size(272, 16);
             this.RightsReserved.TabIndex = 3;
             this.RightsReserved.Text = "All rights reserved. ©2024 Iannelli Corp.";
             // 
@@ -81,23 +80,25 @@
             // 
             this.Welcome.AutoSize = true;
             this.Welcome.Font = new System.Drawing.Font("Verdana", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Welcome.Location = new System.Drawing.Point(69, 34);
-            this.Welcome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.Welcome.Location = new System.Drawing.Point(92, 42);
             this.Welcome.Name = "Welcome";
-            this.Welcome.Size = new System.Drawing.Size(257, 25);
+            this.Welcome.Size = new System.Drawing.Size(316, 31);
             this.Welcome.TabIndex = 4;
             this.Welcome.Text = "Welcome to SentinelKey";
             // 
-            // Home
+            // Access
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 335);
+            this.ClientSize = new System.Drawing.Size(495, 412);
             this.Controls.Add(this.Welcome);
             this.Controls.Add(this.RightsReserved);
             this.Controls.Add(this.LogIn);
             this.Controls.Add(this.Register);
-            this.Name = "Home";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
+            this.Name = "Access";
             this.Text = "SentinelKey";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

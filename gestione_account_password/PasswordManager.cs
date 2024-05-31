@@ -33,7 +33,7 @@ namespace gestione_account_password
 
         private static readonly char[] _specialChars =
         {
-            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/'
+            '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', '.', '?', '/'
         };
 
         private string _password;
@@ -119,11 +119,13 @@ namespace gestione_account_password
         /// <exception cref="ArgumentOutOfRangeException"> Length of the password must be between 8 and 30 chars for security reasons </exception>
         public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars, string username)
         {
+            // Password must be between 8 and 32 characters for security reasons
             if (length < 8 || length > 32)
             {
                 throw new ArgumentOutOfRangeException();
             }
 
+            // Allowed characters for the password
             Random rng = new();
             StringBuilder pw = new();
             char[] allowedChars = LowercaseLetters;
@@ -135,11 +137,13 @@ namespace gestione_account_password
             if (specialChars)
                 allowedChars = ConcatArrays(allowedChars, SpecialChars);
 
+            // Generate the password
             for (int i = 0; i < length; i++)
             {
                 pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
             }
 
+            // Encrypt the password
             string encryptedPassword = EncryptPassword(pw.ToString(), username);
             return encryptedPassword;
         }
@@ -175,13 +179,16 @@ namespace gestione_account_password
         /// <returns> Key used for encryption and decryption as an array of bytes </returns>
         private byte[] GetKey(string username)
         {
+            // Key must be 32 bytes long
             byte[] key = Encoding.UTF8.GetBytes(username);
 
+            // If the key is shorter than 32 bytes, it will be concatenated with the username
             while (key.Length < 32)
             {
                 key = key.Concat(Encoding.UTF8.GetBytes(username)).ToArray();
             }
 
+            // If the key is longer than 32 bytes, it will be truncated
             if (key.Length > 32)
             {
                 key = key.Take(32).ToArray();
@@ -198,15 +205,18 @@ namespace gestione_account_password
         /// <returns> Encrypted password and IV to decrypt separated from a dash </returns>
         public string EncryptPassword(string password, string username)
         {
+            // Get the key for encryption
             byte[] key = GetKey(username);
 
+            // Encrypt the password
             using (Aes aesAlg = Aes.Create())
             {
+                // Generate the IV
                 aesAlg.Key = key;
                 aesAlg.GenerateIV();
-
                 byte[] iv = aesAlg.IV;
 
+                // Encrypt the password with the key and IV
                 using (ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV))
                 {
                     using (MemoryStream msEncrypt = new MemoryStream())
@@ -215,10 +225,12 @@ namespace gestione_account_password
                         {
                             using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
                             {
+                                // Write all data to the stream
                                 swEncrypt.Write(password);
                             }
                         }
 
+                        // Get the encrypted bytes and IV, then convert them to base64 strings for storage
                         byte[] encrypted = msEncrypt.ToArray();
                         string encryptedPassword = Convert.ToBase64String(encrypted);
                         string ivString = Convert.ToBase64String(iv);
@@ -237,6 +249,7 @@ namespace gestione_account_password
         /// <exception cref="ArgumentException"> Thrown if plain password is not in a correct format </exception>
         public string DecryptPassword(string username)
         {
+            // Get the key for decryption
             byte[] key = GetKey(username);
             string plainPassword = "";
 
@@ -247,12 +260,15 @@ namespace gestione_account_password
                 throw new ArgumentException("The input string is not in the correct format.");
             }
 
+            // Get the encrypted password and IV
             string encryptedPassword = parts[0];
             string ivString = parts[1];
 
+            // Convert the IV and encrypted password to byte arrays
             byte[] iv = Convert.FromBase64String(ivString);
             byte[] cipherText = Convert.FromBase64String(encryptedPassword);
 
+            // Decrypt the password
             using (Aes aesAlg = Aes.Create())
             {
                 aesAlg.Key = key;
@@ -266,6 +282,7 @@ namespace gestione_account_password
                         {
                             using (StreamReader srDecrypt = new StreamReader(csDecrypt))
                             {
+                                // Read the decrypted bytes from the decrypting stream and place them in a string
                                 plainPassword = srDecrypt.ReadToEnd();
                             }
                         }

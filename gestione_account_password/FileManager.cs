@@ -25,7 +25,7 @@ namespace gestione_account_password
         }
 
         /// <summary>
-        /// Gets the instance of the class 
+        /// Gets the instance of the class with a simple thread-safe implementation of the Singleton pattern
         /// </summary>
         public static FileManager Instance
         {
@@ -35,11 +35,52 @@ namespace gestione_account_password
                 {
                     lock (padlock)
                     {
+                        // If the instance is null, it creates a new one
                         instance ??= new FileManager();
                     }
                 }
 
                 return instance;
+            }
+        }
+
+        /// <summary>
+        /// Default deserializer to get the content of a file
+        /// </summary>
+        /// <param name="fileName"> File name + extension </param>
+        /// <returns> File content saved as string </returns>
+        /// <exception cref="InvalidOperationException"> Thrown if the file doesn't exits, because it can't deserialized </exception>
+        public string DefaultDeserializer(string fileName)
+        {
+            string fileContent = "";
+            if (!File.Exists(fileName))
+            {
+                throw new InvalidOperationException();
+            }
+
+            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
+            {
+                byte[] bytes = new byte[fs.Length];
+                int bytesRead = fs.Read(bytes, 0, bytes.Length);
+                fileContent = Encoding.UTF8.GetString(bytes);
+                fs.Close();
+            }
+
+            return fileContent;
+        }
+
+        /// <summary>
+        /// Default serializer to save content in a file
+        /// </summary>
+        /// <param name="fileName"> File name + extension </param>
+        /// <param name="content"> Content to write already serialized </param>
+        public void DefaultSerializer(string fileName, string content)
+        {
+            using (FileStream fs = new(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                byte[] data = new UTF8Encoding(true).GetBytes(content);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
             }
         }
 
@@ -51,6 +92,7 @@ namespace gestione_account_password
         /// <returns> Int code to determine if the operation was successful or not </returns>
         public int RegisterSerializer(string fileName, List<MasterAccount> masterAccounts)
         {
+            // If the file doesn't exist, the master account surely can be serialized right away
             if (!File.Exists(fileName))
             {
                 string toSerialize = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
@@ -65,16 +107,10 @@ namespace gestione_account_password
             }
 
             List<MasterAccount> masters;
+            string fileContent = DefaultDeserializer(fileName);
+            masters = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
 
-            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
-            {
-                byte[] bytes = new byte[fs.Length];
-                int bytesRead = fs.Read(bytes, 0, bytes.Length);
-                string fileContent = Encoding.UTF8.GetString(bytes);
-                masters = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
-                fs.Close();
-            }
-
+            // If the master account is already registered, the operation can't be done
             foreach (var item in masters)
             {
                 if (masterAccounts.Any(x => x.MasterName == item.MasterName && x.Password.DecryptPassword(x.MasterName) == item.Password.DecryptPassword(x.MasterName)))
@@ -83,6 +119,7 @@ namespace gestione_account_password
                 }
             }
 
+            // If the master account is not registered, it can be serialized
             masters.Add(masterAccounts[0]);
             string updatedJson = JsonConvert.SerializeObject(masters, Formatting.Indented);
 
@@ -101,22 +138,24 @@ namespace gestione_account_password
         /// </summary>
         /// <param name="fileName"> File name to get information from </param>
         /// <returns> Every master account saved on the file </returns>
-        /// <exception cref="InvalidOperationException"> If the file doesn't exits, it can deserialize from it </exception>
+        /// <exception cref="InvalidOperationException"> Thrown if the file doesn't exits, because it can't deserialized </exception>
         public List<MasterAccount> Deserializer(string fileName)
         {
+            // If the file doesn't exist, the program can't deserialize from it
             if (!File.Exists(fileName))
             {
                 throw new InvalidOperationException();
             }
 
+            // If the file exists, the program can deserialize from it, saving the master accounts in memory
             List<MasterAccount> masterAccounts;
-
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
             {
                 using (StreamReader sr = new(fs, Encoding.UTF8))
                 {
                     using (JsonTextReader jsonReader = new(sr))
                     {
+                        // Deserializing the file
                         JsonSerializer ser = new();
                         masterAccounts = ser.Deserialize<List<MasterAccount>>(jsonReader);
                         jsonReader.Close();
@@ -144,6 +183,7 @@ namespace gestione_account_password
             {
                 using (StreamWriter sw = new(fs, Encoding.UTF8))
                 {
+                    // Writing the content to the file
                     sw.WriteLine(contentToExport);
                     result = true;
                     sw.Close();
@@ -170,6 +210,7 @@ namespace gestione_account_password
             {
                 using (StreamWriter sw = new(fs, Encoding.UTF8))
                 {
+                    // Writing the content to the file
                     sw.Write(exportString);
                     result = true;
                     sw.Close();
