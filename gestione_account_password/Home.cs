@@ -147,11 +147,22 @@ namespace gestione_account_password
         private void FindAccount_Click(object sender, EventArgs e)
         {
             // TODO: search in all the accounts linked to the master one and if the target account is found then lines below are exectued, otherwise error message.
+            Account targetAccount = new(UserFindBox.Text, EmailFindBox.Text, new(), "");
+            MasterAccount ma = GetCurrentMasterAccount();
 
-            TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
-            LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
-            CheckBoxesVisiblityChange(true, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
-            PassLenModBox.Visible = true;
+            foreach (Account item in ma.Accounts)
+            {
+                if (item.Name == targetAccount.Name && item.Email == targetAccount.Email)
+                {
+                    TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
+                    LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
+                    CheckBoxesVisiblityChange(true, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
+                    PassLenModBox.Visible = true;
+                    return;
+                }
+            }
+
+            MessageBox.Show("Account not found, try again.", "Error", MessageBoxButtons.OK);
         }
 
         /// <summary>
