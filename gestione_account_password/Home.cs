@@ -20,7 +20,7 @@ namespace gestione_account_password
     public partial class Home : Form
     {
         private string currentUser;
-        List<Account> accounts;
+        private List<Account> accounts;
         private string fileName;
 
         /// <summary>
@@ -59,11 +59,16 @@ namespace gestione_account_password
             Printer.Columns.Clear();
             Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
+            ModifyAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
 
             TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
+            TextBoxesVisiblityChange(false, UserModBox, EmailModBox);
+            LabelsVisiblityChange(false, EmailModLab, UserModLab);
+
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
 
@@ -84,11 +89,53 @@ namespace gestione_account_password
             Printer.Columns.Add("Email", "Email");
             Printer.Columns.Add("Description", "Description");
 
-            foreach(var item in print)
+            foreach (var item in print)
             {
                 var splittedString = item.Split(',');
                 Printer.Rows.Add(splittedString[0], splittedString[1], splittedString[2], splittedString[3]);
             }
+        }
+
+        private void AddAccount_Click(object sender, EventArgs e)
+        {
+            Printer.Visible = false;
+            AddAccount.BackColor = Color.LightSeaGreen;
+            PrintAccounts.BackColor = Color.Silver;
+            ModifyAccount.BackColor = Color.Silver;
+
+            TextBoxesVisiblityChange(true, UserBox, EmailBox, DescBox);
+            LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
+            CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
+            TextBoxesVisiblityChange(false, EmailModBox);
+            TextBoxesVisiblityChange(false, UserModBox);
+            LabelsVisiblityChange(false, EmailModLab);
+            LabelsVisiblityChange(false, UserModLab);
+
+            LenBox.Visible = true;
+            AddNewAccount.Visible = true;
+            FindAccount.Visible = false;
+        }
+
+        private void ModifyAccount_Click(object sender, EventArgs e)
+        {
+            Printer.Visible = false;
+            AddAccount.BackColor = Color.Silver;
+            PrintAccounts.BackColor = Color.Silver;
+            ModifyAccount.BackColor = Color.LightSeaGreen;
+
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, );
+            LabelsVisiblityChange(false, DescLabel, ClarifyLabel, PassLenLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
+            TextBoxesVisiblityChange(true, UserBox, EmailBox);
+            LabelsVisiblityChange(true, UserLabel, EmailLabel);
+
+            LenBox.Visible = false;
+            AddNewAccount.Visible = false;
+            ModifyAccount.Visible = true;
+
+
         }
 
         /// <summary>
@@ -140,20 +187,7 @@ namespace gestione_account_password
             return accountsDetails;
         }
 
-        private void AddAccount_Click(object sender, EventArgs e)
-        {
-            Printer.Visible = false;
-            AddAccount.BackColor = Color.LightSeaGreen;
-            PrintAccounts.BackColor = Color.Silver;
 
-            TextBoxesVisiblityChange(true, UserBox, EmailBox, DescBox);
-            LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
-            CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
-            LenBox.Visible = true;
-            AddNewAccount.Visible = true;
-
-            Printer.Hide();
-        }
 
         /// <summary>
         /// Lets the user save a new account, saving username, email, password and a description of what the account is for
@@ -358,5 +392,7 @@ namespace gestione_account_password
                 Copy.Show("Successfully copied to clipboard!", Printer, cellLocation, 2000);
             }
         }
+
+
     }
 }

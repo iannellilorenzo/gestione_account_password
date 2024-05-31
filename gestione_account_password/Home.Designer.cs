@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -59,6 +59,12 @@
             this.Printer = new System.Windows.Forms.DataGridView();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
             this.Copy = new System.Windows.Forms.ToolTip(this.components);
+            this.ModifyAccount = new System.Windows.Forms.Button();
+            this.FindAccount = new System.Windows.Forms.Button();
+            this.UserModBox = new System.Windows.Forms.TextBox();
+            this.UserModLab = new System.Windows.Forms.Label();
+            this.EmailModBox = new System.Windows.Forms.TextBox();
+            this.EmailModLab = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Printer)).BeginInit();
@@ -71,7 +77,7 @@
             this.PrintAccounts.FlatAppearance.BorderSize = 0;
             this.PrintAccounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PrintAccounts.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PrintAccounts.Location = new System.Drawing.Point(-3, 190);
+            this.PrintAccounts.Location = new System.Drawing.Point(-3, 240);
             this.PrintAccounts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PrintAccounts.Name = "PrintAccounts";
             this.PrintAccounts.Size = new System.Drawing.Size(229, 38);
@@ -298,6 +304,11 @@
             // 
             // AddAccountPanel
             // 
+            this.AddAccountPanel.Controls.Add(this.EmailModBox);
+            this.AddAccountPanel.Controls.Add(this.EmailModLab);
+            this.AddAccountPanel.Controls.Add(this.UserModBox);
+            this.AddAccountPanel.Controls.Add(this.UserModLab);
+            this.AddAccountPanel.Controls.Add(this.FindAccount);
             this.AddAccountPanel.Controls.Add(this.LenBox);
             this.AddAccountPanel.Controls.Add(this.UserBox);
             this.AddAccountPanel.Controls.Add(this.PassLenLabel);
@@ -322,22 +333,22 @@
             // 
             this.Printer.AllowUserToAddRows = false;
             this.Printer.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Printer.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Printer.DefaultCellStyle = dataGridViewCellStyle2;
             this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Printer.Location = new System.Drawing.Point(0, 0);
             this.Printer.MultiSelect = false;
@@ -364,11 +375,76 @@
             0,
             0});
             // 
+            // ModifyAccount
+            // 
+            this.ModifyAccount.BackColor = System.Drawing.Color.Silver;
+            this.ModifyAccount.FlatAppearance.BorderSize = 0;
+            this.ModifyAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ModifyAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ModifyAccount.Location = new System.Drawing.Point(-3, 189);
+            this.ModifyAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ModifyAccount.Name = "ModifyAccount";
+            this.ModifyAccount.Size = new System.Drawing.Size(229, 38);
+            this.ModifyAccount.TabIndex = 13;
+            this.ModifyAccount.Text = "Modify account";
+            this.ModifyAccount.UseVisualStyleBackColor = false;
+            this.ModifyAccount.Click += new System.EventHandler(this.ModifyAccount_Click);
+            // 
+            // FindAccount
+            // 
+            this.FindAccount.BackColor = System.Drawing.Color.Silver;
+            this.FindAccount.FlatAppearance.BorderSize = 0;
+            this.FindAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FindAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindAccount.Location = new System.Drawing.Point(225, 100);
+            this.FindAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FindAccount.Name = "FindAccount";
+            this.FindAccount.Size = new System.Drawing.Size(229, 38);
+            this.FindAccount.TabIndex = 18;
+            this.FindAccount.Text = "Find account";
+            this.FindAccount.UseVisualStyleBackColor = false;
+            this.FindAccount.Visible = false;
+            // 
+            // UserModBox
+            // 
+            this.UserModBox.Location = new System.Drawing.Point(191, 39);
+            this.UserModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UserModBox.Name = "UserModBox";
+            this.UserModBox.Size = new System.Drawing.Size(100, 22);
+            this.UserModBox.TabIndex = 19;
+            // 
+            // UserModLab
+            // 
+            this.UserModLab.AutoSize = true;
+            this.UserModLab.Location = new System.Drawing.Point(191, 18);
+            this.UserModLab.Name = "UserModLab";
+            this.UserModLab.Size = new System.Drawing.Size(70, 16);
+            this.UserModLab.TabIndex = 20;
+            this.UserModLab.Text = "Username";
+            // 
+            // EmailModBox
+            // 
+            this.EmailModBox.Location = new System.Drawing.Point(400, 39);
+            this.EmailModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EmailModBox.Name = "EmailModBox";
+            this.EmailModBox.Size = new System.Drawing.Size(100, 22);
+            this.EmailModBox.TabIndex = 22;
+            // 
+            // EmailModLab
+            // 
+            this.EmailModLab.AutoSize = true;
+            this.EmailModLab.Location = new System.Drawing.Point(396, 18);
+            this.EmailModLab.Name = "EmailModLab";
+            this.EmailModLab.Size = new System.Drawing.Size(41, 16);
+            this.EmailModLab.TabIndex = 21;
+            this.EmailModLab.Text = "Email";
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(935, 502);
+            this.Controls.Add(this.ModifyAccount);
             this.Controls.Add(this.AddAccount);
             this.Controls.Add(this.PrintAccounts);
             this.Controls.Add(this.AddAccountPanel);
@@ -419,5 +495,11 @@
         private System.Windows.Forms.ToolStripMenuItem ExportInJSONFormatToolStripMenuItem;
         private System.Windows.Forms.DataGridView Printer;
         private System.Windows.Forms.ToolTip Copy;
+        private System.Windows.Forms.Button ModifyAccount;
+        private System.Windows.Forms.Button FindAccount;
+        private System.Windows.Forms.TextBox EmailModBox;
+        private System.Windows.Forms.Label EmailModLab;
+        private System.Windows.Forms.TextBox UserModBox;
+        private System.Windows.Forms.Label UserModLab;
     }
 }
