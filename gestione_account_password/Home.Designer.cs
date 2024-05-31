@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -38,7 +38,6 @@
             this.Export = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportInCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportInJSONFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importAccountDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.developerOptionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExportXMLDocumentationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,7 +112,6 @@
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Export,
-            this.importAccountDetailsToolStripMenuItem,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
@@ -142,12 +140,6 @@
             this.ExportInJSONFormatToolStripMenuItem.Size = new System.Drawing.Size(239, 26);
             this.ExportInJSONFormatToolStripMenuItem.Text = "Export in JSON format";
             this.ExportInJSONFormatToolStripMenuItem.Click += new System.EventHandler(this.ExportInJSONFormatToolStripMenuItem_Click);
-            // 
-            // importAccountDetailsToolStripMenuItem
-            // 
-            this.importAccountDetailsToolStripMenuItem.Name = "importAccountDetailsToolStripMenuItem";
-            this.importAccountDetailsToolStripMenuItem.Size = new System.Drawing.Size(245, 26);
-            this.importAccountDetailsToolStripMenuItem.Text = "Import account details";
             // 
             // developerOptionsToolStripMenuItem
             // 
@@ -306,7 +298,6 @@
             // 
             // AddAccountPanel
             // 
-            this.AddAccountPanel.Controls.Add(this.Printer);
             this.AddAccountPanel.Controls.Add(this.LenBox);
             this.AddAccountPanel.Controls.Add(this.UserBox);
             this.AddAccountPanel.Controls.Add(this.PassLenLabel);
@@ -320,6 +311,7 @@
             this.AddAccountPanel.Controls.Add(this.ClarifyLabel);
             this.AddAccountPanel.Controls.Add(this.EmailLabel);
             this.AddAccountPanel.Controls.Add(this.UserLabel);
+            this.AddAccountPanel.Controls.Add(this.Printer);
             this.AddAccountPanel.Location = new System.Drawing.Point(227, 31);
             this.AddAccountPanel.Margin = new System.Windows.Forms.Padding(4);
             this.AddAccountPanel.Name = "AddAccountPanel";
@@ -330,22 +322,22 @@
             // 
             this.Printer.AllowUserToAddRows = false;
             this.Printer.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Printer.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Printer.DefaultCellStyle = dataGridViewCellStyle4;
             this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Printer.Location = new System.Drawing.Point(0, 0);
             this.Printer.MultiSelect = false;
@@ -366,6 +358,11 @@
             this.LenBox.Name = "LenBox";
             this.LenBox.Size = new System.Drawing.Size(103, 22);
             this.LenBox.TabIndex = 16;
+            this.LenBox.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
             // 
             // Home
             // 
@@ -420,7 +417,6 @@
         private System.Windows.Forms.ToolStripMenuItem ExportXMLDocumentationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportInCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ExportInJSONFormatToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importAccountDetailsToolStripMenuItem;
         private System.Windows.Forms.DataGridView Printer;
         private System.Windows.Forms.ToolTip Copy;
     }
