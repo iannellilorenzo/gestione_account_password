@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -56,19 +56,33 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.Printer = new System.Windows.Forms.DataGridView();
+            this.EmailFindBox = new System.Windows.Forms.TextBox();
+            this.EmailFindLabel = new System.Windows.Forms.Label();
+            this.UserFindBox = new System.Windows.Forms.TextBox();
+            this.UserFindLabel = new System.Windows.Forms.Label();
+            this.FindAccount = new System.Windows.Forms.Button();
             this.LenBox = new System.Windows.Forms.NumericUpDown();
+            this.Printer = new System.Windows.Forms.DataGridView();
             this.Copy = new System.Windows.Forms.ToolTip(this.components);
             this.ModifyAccount = new System.Windows.Forms.Button();
-            this.FindAccount = new System.Windows.Forms.Button();
-            this.UserModBox = new System.Windows.Forms.TextBox();
-            this.UserModLab = new System.Windows.Forms.Label();
+            this.ClarifyModLabel = new System.Windows.Forms.Label();
             this.EmailModBox = new System.Windows.Forms.TextBox();
-            this.EmailModLab = new System.Windows.Forms.Label();
+            this.EmailModLabel = new System.Windows.Forms.Label();
+            this.UserModBox = new System.Windows.Forms.TextBox();
+            this.UserModLabel = new System.Windows.Forms.Label();
+            this.DescModBox = new System.Windows.Forms.TextBox();
+            this.DescModLabel = new System.Windows.Forms.Label();
+            this.PassModLabel = new System.Windows.Forms.Label();
+            this.SpecialCharsModBox = new System.Windows.Forms.CheckBox();
+            this.NumbersModBox = new System.Windows.Forms.CheckBox();
+            this.UpperCaseModBox = new System.Windows.Forms.CheckBox();
+            this.PassLenModBox = new System.Windows.Forms.NumericUpDown();
+            this.PassLenModLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Printer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Printer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PassLenModBox)).BeginInit();
             this.SuspendLayout();
             // 
             // PrintAccounts
@@ -110,7 +124,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(935, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 30);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,7 +134,7 @@
             this.Export,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
             this.toolStripMenuItem1.Text = "File";
             // 
             // Export
@@ -167,7 +181,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -304,10 +318,23 @@
             // 
             // AddAccountPanel
             // 
+            this.AddAccountPanel.Controls.Add(this.PassLenModBox);
+            this.AddAccountPanel.Controls.Add(this.PassLenModLabel);
+            this.AddAccountPanel.Controls.Add(this.SpecialCharsModBox);
+            this.AddAccountPanel.Controls.Add(this.NumbersModBox);
+            this.AddAccountPanel.Controls.Add(this.UpperCaseModBox);
+            this.AddAccountPanel.Controls.Add(this.PassModLabel);
+            this.AddAccountPanel.Controls.Add(this.DescModBox);
+            this.AddAccountPanel.Controls.Add(this.DescModLabel);
             this.AddAccountPanel.Controls.Add(this.EmailModBox);
-            this.AddAccountPanel.Controls.Add(this.EmailModLab);
+            this.AddAccountPanel.Controls.Add(this.EmailModLabel);
             this.AddAccountPanel.Controls.Add(this.UserModBox);
-            this.AddAccountPanel.Controls.Add(this.UserModLab);
+            this.AddAccountPanel.Controls.Add(this.UserModLabel);
+            this.AddAccountPanel.Controls.Add(this.ClarifyModLabel);
+            this.AddAccountPanel.Controls.Add(this.EmailFindBox);
+            this.AddAccountPanel.Controls.Add(this.EmailFindLabel);
+            this.AddAccountPanel.Controls.Add(this.UserFindBox);
+            this.AddAccountPanel.Controls.Add(this.UserFindLabel);
             this.AddAccountPanel.Controls.Add(this.FindAccount);
             this.AddAccountPanel.Controls.Add(this.LenBox);
             this.AddAccountPanel.Controls.Add(this.UserBox);
@@ -329,38 +356,59 @@
             this.AddAccountPanel.Size = new System.Drawing.Size(708, 473);
             this.AddAccountPanel.TabIndex = 0;
             // 
-            // Printer
+            // EmailFindBox
             // 
-            this.Printer.AllowUserToAddRows = false;
-            this.Printer.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Printer.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Printer.Location = new System.Drawing.Point(0, 0);
-            this.Printer.MultiSelect = false;
-            this.Printer.Name = "Printer";
-            this.Printer.ReadOnly = true;
-            this.Printer.RowHeadersWidth = 51;
-            this.Printer.RowTemplate.Height = 24;
-            this.Printer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.Printer.ShowCellToolTips = false;
-            this.Printer.Size = new System.Drawing.Size(708, 473);
-            this.Printer.TabIndex = 17;
-            this.Printer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Printer_CellDoubleClick);
+            this.EmailFindBox.Location = new System.Drawing.Point(400, 39);
+            this.EmailFindBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EmailFindBox.Name = "EmailFindBox";
+            this.EmailFindBox.Size = new System.Drawing.Size(100, 22);
+            this.EmailFindBox.TabIndex = 22;
+            this.EmailFindBox.Visible = false;
+            // 
+            // EmailFindLabel
+            // 
+            this.EmailFindLabel.AutoSize = true;
+            this.EmailFindLabel.Location = new System.Drawing.Point(396, 18);
+            this.EmailFindLabel.Name = "EmailFindLabel";
+            this.EmailFindLabel.Size = new System.Drawing.Size(41, 16);
+            this.EmailFindLabel.TabIndex = 21;
+            this.EmailFindLabel.Text = "Email";
+            this.EmailFindLabel.Visible = false;
+            // 
+            // UserFindBox
+            // 
+            this.UserFindBox.Location = new System.Drawing.Point(191, 39);
+            this.UserFindBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UserFindBox.Name = "UserFindBox";
+            this.UserFindBox.Size = new System.Drawing.Size(100, 22);
+            this.UserFindBox.TabIndex = 19;
+            this.UserFindBox.Visible = false;
+            // 
+            // UserFindLabel
+            // 
+            this.UserFindLabel.AutoSize = true;
+            this.UserFindLabel.Location = new System.Drawing.Point(191, 18);
+            this.UserFindLabel.Name = "UserFindLabel";
+            this.UserFindLabel.Size = new System.Drawing.Size(70, 16);
+            this.UserFindLabel.TabIndex = 20;
+            this.UserFindLabel.Text = "Username";
+            this.UserFindLabel.Visible = false;
+            // 
+            // FindAccount
+            // 
+            this.FindAccount.BackColor = System.Drawing.Color.Silver;
+            this.FindAccount.FlatAppearance.BorderSize = 0;
+            this.FindAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FindAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindAccount.Location = new System.Drawing.Point(225, 100);
+            this.FindAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FindAccount.Name = "FindAccount";
+            this.FindAccount.Size = new System.Drawing.Size(229, 38);
+            this.FindAccount.TabIndex = 18;
+            this.FindAccount.Text = "Find account";
+            this.FindAccount.UseVisualStyleBackColor = false;
+            this.FindAccount.Visible = false;
+            this.FindAccount.Click += new System.EventHandler(this.FindAccount_Click);
             // 
             // LenBox
             // 
@@ -374,6 +422,39 @@
             0,
             0,
             0});
+            // 
+            // Printer
+            // 
+            this.Printer.AllowUserToAddRows = false;
+            this.Printer.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Printer.DefaultCellStyle = dataGridViewCellStyle4;
+            this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Printer.Location = new System.Drawing.Point(0, 0);
+            this.Printer.MultiSelect = false;
+            this.Printer.Name = "Printer";
+            this.Printer.ReadOnly = true;
+            this.Printer.RowHeadersWidth = 51;
+            this.Printer.RowTemplate.Height = 24;
+            this.Printer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.Printer.ShowCellToolTips = false;
+            this.Printer.Size = new System.Drawing.Size(708, 473);
+            this.Printer.TabIndex = 17;
+            this.Printer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Printer_CellDoubleClick);
             // 
             // ModifyAccount
             // 
@@ -390,54 +471,143 @@
             this.ModifyAccount.UseVisualStyleBackColor = false;
             this.ModifyAccount.Click += new System.EventHandler(this.ModifyAccount_Click);
             // 
-            // FindAccount
+            // ClarifyModLabel
             // 
-            this.FindAccount.BackColor = System.Drawing.Color.Silver;
-            this.FindAccount.FlatAppearance.BorderSize = 0;
-            this.FindAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.FindAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindAccount.Location = new System.Drawing.Point(225, 100);
-            this.FindAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.FindAccount.Name = "FindAccount";
-            this.FindAccount.Size = new System.Drawing.Size(229, 38);
-            this.FindAccount.TabIndex = 18;
-            this.FindAccount.Text = "Find account";
-            this.FindAccount.UseVisualStyleBackColor = false;
-            this.FindAccount.Visible = false;
-            // 
-            // UserModBox
-            // 
-            this.UserModBox.Location = new System.Drawing.Point(191, 39);
-            this.UserModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.UserModBox.Name = "UserModBox";
-            this.UserModBox.Size = new System.Drawing.Size(100, 22);
-            this.UserModBox.TabIndex = 19;
-            // 
-            // UserModLab
-            // 
-            this.UserModLab.AutoSize = true;
-            this.UserModLab.Location = new System.Drawing.Point(191, 18);
-            this.UserModLab.Name = "UserModLab";
-            this.UserModLab.Size = new System.Drawing.Size(70, 16);
-            this.UserModLab.TabIndex = 20;
-            this.UserModLab.Text = "Username";
+            this.ClarifyModLabel.AutoSize = true;
+            this.ClarifyModLabel.Location = new System.Drawing.Point(224, 157);
+            this.ClarifyModLabel.Name = "ClarifyModLabel";
+            this.ClarifyModLabel.Size = new System.Drawing.Size(224, 32);
+            this.ClarifyModLabel.TabIndex = 23;
+            this.ClarifyModLabel.Text = "If those are left blank,\r\nthere won\'t be any credential change";
+            this.ClarifyModLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ClarifyModLabel.Visible = false;
             // 
             // EmailModBox
             // 
-            this.EmailModBox.Location = new System.Drawing.Point(400, 39);
+            this.EmailModBox.Location = new System.Drawing.Point(296, 230);
             this.EmailModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.EmailModBox.Name = "EmailModBox";
             this.EmailModBox.Size = new System.Drawing.Size(100, 22);
-            this.EmailModBox.TabIndex = 22;
+            this.EmailModBox.TabIndex = 27;
+            this.EmailModBox.Visible = false;
             // 
-            // EmailModLab
+            // EmailModLabel
             // 
-            this.EmailModLab.AutoSize = true;
-            this.EmailModLab.Location = new System.Drawing.Point(396, 18);
-            this.EmailModLab.Name = "EmailModLab";
-            this.EmailModLab.Size = new System.Drawing.Size(41, 16);
-            this.EmailModLab.TabIndex = 21;
-            this.EmailModLab.Text = "Email";
+            this.EmailModLabel.AutoSize = true;
+            this.EmailModLabel.Location = new System.Drawing.Point(292, 209);
+            this.EmailModLabel.Name = "EmailModLabel";
+            this.EmailModLabel.Size = new System.Drawing.Size(70, 16);
+            this.EmailModLabel.TabIndex = 26;
+            this.EmailModLabel.Text = "New email";
+            this.EmailModLabel.Visible = false;
+            // 
+            // UserModBox
+            // 
+            this.UserModBox.Location = new System.Drawing.Point(85, 230);
+            this.UserModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UserModBox.Name = "UserModBox";
+            this.UserModBox.Size = new System.Drawing.Size(100, 22);
+            this.UserModBox.TabIndex = 24;
+            this.UserModBox.Visible = false;
+            // 
+            // UserModLabel
+            // 
+            this.UserModLabel.AutoSize = true;
+            this.UserModLabel.Location = new System.Drawing.Point(85, 209);
+            this.UserModLabel.Name = "UserModLabel";
+            this.UserModLabel.Size = new System.Drawing.Size(97, 16);
+            this.UserModLabel.TabIndex = 25;
+            this.UserModLabel.Text = "New username";
+            this.UserModLabel.Visible = false;
+            // 
+            // DescModBox
+            // 
+            this.DescModBox.Location = new System.Drawing.Point(504, 230);
+            this.DescModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DescModBox.Name = "DescModBox";
+            this.DescModBox.Size = new System.Drawing.Size(100, 22);
+            this.DescModBox.TabIndex = 29;
+            this.DescModBox.Visible = false;
+            // 
+            // DescModLabel
+            // 
+            this.DescModLabel.AutoSize = true;
+            this.DescModLabel.Location = new System.Drawing.Point(501, 209);
+            this.DescModLabel.Name = "DescModLabel";
+            this.DescModLabel.Size = new System.Drawing.Size(103, 16);
+            this.DescModLabel.TabIndex = 28;
+            this.DescModLabel.Text = "New description";
+            this.DescModLabel.Visible = false;
+            // 
+            // PassModLabel
+            // 
+            this.PassModLabel.AutoSize = true;
+            this.PassModLabel.Location = new System.Drawing.Point(82, 280);
+            this.PassModLabel.Name = "PassModLabel";
+            this.PassModLabel.Size = new System.Drawing.Size(163, 16);
+            this.PassModLabel.TabIndex = 30;
+            this.PassModLabel.Text = "Generate a new password";
+            this.PassModLabel.Visible = false;
+            // 
+            // SpecialCharsModBox
+            // 
+            this.SpecialCharsModBox.AutoSize = true;
+            this.SpecialCharsModBox.Location = new System.Drawing.Point(85, 355);
+            this.SpecialCharsModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.SpecialCharsModBox.Name = "SpecialCharsModBox";
+            this.SpecialCharsModBox.Size = new System.Drawing.Size(141, 20);
+            this.SpecialCharsModBox.TabIndex = 33;
+            this.SpecialCharsModBox.Text = "Special characters";
+            this.SpecialCharsModBox.UseVisualStyleBackColor = true;
+            this.SpecialCharsModBox.Visible = false;
+            // 
+            // NumbersModBox
+            // 
+            this.NumbersModBox.AutoSize = true;
+            this.NumbersModBox.Location = new System.Drawing.Point(85, 329);
+            this.NumbersModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.NumbersModBox.Name = "NumbersModBox";
+            this.NumbersModBox.Size = new System.Drawing.Size(84, 20);
+            this.NumbersModBox.TabIndex = 32;
+            this.NumbersModBox.Text = "Numbers";
+            this.NumbersModBox.UseVisualStyleBackColor = true;
+            this.NumbersModBox.Visible = false;
+            // 
+            // UpperCaseModBox
+            // 
+            this.UpperCaseModBox.AutoSize = true;
+            this.UpperCaseModBox.Location = new System.Drawing.Point(85, 303);
+            this.UpperCaseModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.UpperCaseModBox.Name = "UpperCaseModBox";
+            this.UpperCaseModBox.Size = new System.Drawing.Size(139, 20);
+            this.UpperCaseModBox.TabIndex = 31;
+            this.UpperCaseModBox.Text = "Upper case letters";
+            this.UpperCaseModBox.UseVisualStyleBackColor = true;
+            this.UpperCaseModBox.Visible = false;
+            // 
+            // PassLenModBox
+            // 
+            this.PassLenModBox.Location = new System.Drawing.Point(345, 329);
+            this.PassLenModBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PassLenModBox.Name = "PassLenModBox";
+            this.PassLenModBox.Size = new System.Drawing.Size(103, 22);
+            this.PassLenModBox.TabIndex = 35;
+            this.PassLenModBox.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.PassLenModBox.Visible = false;
+            // 
+            // PassLenModLabel
+            // 
+            this.PassLenModLabel.AutoSize = true;
+            this.PassLenModLabel.Location = new System.Drawing.Point(342, 310);
+            this.PassLenModLabel.Name = "PassLenModLabel";
+            this.PassLenModLabel.Size = new System.Drawing.Size(106, 16);
+            this.PassLenModLabel.TabIndex = 34;
+            this.PassLenModLabel.Text = "Password length";
+            this.PassLenModLabel.Visible = false;
             // 
             // Home
             // 
@@ -459,8 +629,9 @@
             this.menuStrip1.PerformLayout();
             this.AddAccountPanel.ResumeLayout(false);
             this.AddAccountPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Printer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LenBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Printer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PassLenModBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -497,9 +668,22 @@
         private System.Windows.Forms.ToolTip Copy;
         private System.Windows.Forms.Button ModifyAccount;
         private System.Windows.Forms.Button FindAccount;
+        private System.Windows.Forms.TextBox EmailFindBox;
+        private System.Windows.Forms.Label EmailFindLabel;
+        private System.Windows.Forms.TextBox UserFindBox;
+        private System.Windows.Forms.Label UserFindLabel;
+        private System.Windows.Forms.Label ClarifyModLabel;
+        private System.Windows.Forms.TextBox DescModBox;
+        private System.Windows.Forms.Label DescModLabel;
         private System.Windows.Forms.TextBox EmailModBox;
-        private System.Windows.Forms.Label EmailModLab;
+        private System.Windows.Forms.Label EmailModLabel;
         private System.Windows.Forms.TextBox UserModBox;
-        private System.Windows.Forms.Label UserModLab;
+        private System.Windows.Forms.Label UserModLabel;
+        private System.Windows.Forms.NumericUpDown PassLenModBox;
+        private System.Windows.Forms.Label PassLenModLabel;
+        private System.Windows.Forms.CheckBox SpecialCharsModBox;
+        private System.Windows.Forms.CheckBox NumbersModBox;
+        private System.Windows.Forms.CheckBox UpperCaseModBox;
+        private System.Windows.Forms.Label PassModLabel;
     }
 }

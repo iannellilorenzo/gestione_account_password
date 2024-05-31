@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,8 +67,12 @@ namespace gestione_account_password
             LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
-            TextBoxesVisiblityChange(false, UserModBox, EmailModBox);
-            LabelsVisiblityChange(false, EmailModLab, UserModLab);
+            TextBoxesVisiblityChange(false, UserFindBox, EmailFindBox);
+            LabelsVisiblityChange(false, EmailFindLabel, UserFindLabel);
+
+            TextBoxesVisiblityChange(false, UserModBox, EmailModBox, DescModBox);
+            LabelsVisiblityChange(false, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
 
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
@@ -107,10 +112,13 @@ namespace gestione_account_password
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
-            TextBoxesVisiblityChange(false, EmailModBox);
-            TextBoxesVisiblityChange(false, UserModBox);
-            LabelsVisiblityChange(false, EmailModLab);
-            LabelsVisiblityChange(false, UserModLab);
+            TextBoxesVisiblityChange(false, UserFindBox, EmailFindBox);
+            LabelsVisiblityChange(false, UserFindLabel, EmailFindLabel);
+
+            TextBoxesVisiblityChange(false, UserModBox, EmailModBox, DescModBox);
+            LabelsVisiblityChange(false, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
+            PassLenModBox.Visible = false;
 
             LenBox.Visible = true;
             AddNewAccount.Visible = true;
@@ -124,18 +132,26 @@ namespace gestione_account_password
             PrintAccounts.BackColor = Color.Silver;
             ModifyAccount.BackColor = Color.LightSeaGreen;
 
-            TextBoxesVisiblityChange(false, UserBox, EmailBox, );
-            LabelsVisiblityChange(false, DescLabel, ClarifyLabel, PassLenLabel);
-            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
-
-            TextBoxesVisiblityChange(true, UserBox, EmailBox);
-            LabelsVisiblityChange(true, UserLabel, EmailLabel);
-
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
-            ModifyAccount.Visible = true;
+            FindAccount.Visible = true;
 
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
+            LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
+            TextBoxesVisiblityChange(true, UserFindBox, EmailFindBox);
+            LabelsVisiblityChange(true, UserFindLabel, EmailFindLabel);
+        }
+
+        private void FindAccount_Click(object sender, EventArgs e)
+        {
+            // TODO: search in all the accounts linked to the master one and if the target account is found then lines below are exectued, otherwise error message.
+
+            TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
+            LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
+            CheckBoxesVisiblityChange(true, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
+            PassLenModBox.Visible = true;
         }
 
         /// <summary>
