@@ -330,8 +330,6 @@ namespace gestione_account_password
 
         private void Printer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // TODO: Implement the tooltip "copy to clipboard" the correct way
-
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 string cellText = Printer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();

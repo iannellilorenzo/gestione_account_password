@@ -56,13 +56,13 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
-            this.LenBox = new System.Windows.Forms.NumericUpDown();
             this.Printer = new System.Windows.Forms.DataGridView();
+            this.LenBox = new System.Windows.Forms.NumericUpDown();
             this.Copy = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Printer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LenBox)).BeginInit();
             this.SuspendLayout();
             // 
             // PrintAccounts
@@ -176,7 +176,7 @@
             this.masterPassowrdToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ResetPassword});
             this.masterPassowrdToolStripMenuItem.Name = "masterPassowrdToolStripMenuItem";
-            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.masterPassowrdToolStripMenuItem.Size = new System.Drawing.Size(204, 26);
             this.masterPassowrdToolStripMenuItem.Text = "Master passowrd";
             // 
             // ResetPassword
@@ -325,14 +325,6 @@
             this.AddAccountPanel.Size = new System.Drawing.Size(708, 473);
             this.AddAccountPanel.TabIndex = 0;
             // 
-            // LenBox
-            // 
-            this.LenBox.Location = new System.Drawing.Point(392, 137);
-            this.LenBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.LenBox.Name = "LenBox";
-            this.LenBox.Size = new System.Drawing.Size(103, 22);
-            this.LenBox.TabIndex = 16;
-            // 
             // Printer
             // 
             this.Printer.AllowUserToAddRows = false;
@@ -353,9 +345,18 @@
             this.Printer.RowHeadersWidth = 51;
             this.Printer.RowTemplate.Height = 24;
             this.Printer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.Printer.ShowCellToolTips = false;
             this.Printer.Size = new System.Drawing.Size(708, 473);
             this.Printer.TabIndex = 17;
             this.Printer.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Printer_CellDoubleClick);
+            // 
+            // LenBox
+            // 
+            this.LenBox.Location = new System.Drawing.Point(392, 137);
+            this.LenBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.LenBox.Name = "LenBox";
+            this.LenBox.Size = new System.Drawing.Size(103, 22);
+            this.LenBox.TabIndex = 16;
             // 
             // Home
             // 
@@ -374,8 +375,8 @@
             this.menuStrip1.PerformLayout();
             this.AddAccountPanel.ResumeLayout(false);
             this.AddAccountPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.LenBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Printer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LenBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
