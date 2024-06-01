@@ -63,6 +63,7 @@ namespace gestione_account_password
             Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
             ModifyAccount.BackColor = Color.Silver;
+            RemoveAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.LightSeaGreen;
 
             TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
@@ -115,6 +116,7 @@ namespace gestione_account_password
             AddAccount.BackColor = Color.LightSeaGreen;
             PrintAccounts.BackColor = Color.Silver;
             ModifyAccount.BackColor = Color.Silver;
+            RemoveAccount.BackColor = Color.Silver;
 
             TextBoxesVisiblityChange(true, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
@@ -132,6 +134,7 @@ namespace gestione_account_password
             AddNewAccount.Visible = true;
             FindAccount.Visible = false;
             ActualModifyAccount.Visible = false;
+            ActualRemoveAccount.Visible = false;
         }
 
         /// <summary>
@@ -144,6 +147,7 @@ namespace gestione_account_password
             Printer.Visible = false;
             AddAccount.BackColor = Color.Silver;
             PrintAccounts.BackColor = Color.Silver;
+            RemoveAccount.BackColor = Color.Silver;
             ModifyAccount.BackColor = Color.LightSeaGreen;
 
             LenBox.Visible = false;
@@ -152,6 +156,7 @@ namespace gestione_account_password
             ClarifyModLabel.Visible = false;
 
             FindAccount.Visible = true;
+            ActualRemoveAccount.Visible = false;
 
             TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
@@ -313,8 +318,6 @@ namespace gestione_account_password
             return accountsDetails;
         }
 
-
-
         /// <summary>
         /// Lets the user save a new account, saving username, email, password and a description of what the account is for
         /// </summary>
@@ -344,21 +347,17 @@ namespace gestione_account_password
 
             FileManager fm = FileManager.Instance;
             string fileContent = fm.DefaultDeserializer(fileName);
+            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
 
-            List<JObject> jsonObjects = JsonConvert.DeserializeObject<List<JObject>>(fileContent);
-
-            foreach (JObject obj in jsonObjects)
+            foreach(var ma in masterAccounts)
             {
-                string currentName = (string)obj["MasterName"];
-                if (currentName == currentUser)
+                if (ma.MasterName == currentUser)
                 {
-                    JArray accountsArray = (JArray)obj["Accounts"];
-                    accountsArray.Add(JObject.FromObject(accounts[accounts.Count - 1]));
-                    break;
+                    ma.Accounts.AddRange(accounts);
                 }
             }
 
-            string updatedJson = JsonConvert.SerializeObject(jsonObjects, Formatting.Indented);
+            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
             fm.DefaultSerializer(fileName, updatedJson);
         }
 
@@ -406,9 +405,28 @@ namespace gestione_account_password
             ActiveControl = null;
         }
 
-        private void ExportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveAccount_Click(object sender, EventArgs e)
         {
+            Printer.Visible = false;
+            AddAccount.BackColor = Color.Silver;
+            PrintAccounts.BackColor = Color.Silver;
+            ModifyAccount.BackColor = Color.Silver;
+            RemoveAccount.BackColor = Color.LightSeaGreen;
 
+            LenBox.Visible = false;
+            AddNewAccount.Visible = false;
+            PassLenModBox.Visible = false;
+            ClarifyModLabel.Visible = false;
+            FindAccount.Visible = false;
+
+            ActualRemoveAccount.Visible = true;
+
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
+            LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
+            TextBoxesVisiblityChange(true, UserFindBox, PassFindBox);
+            LabelsVisiblityChange(true, UserFindLabel, PassFindLabel);
         }
 
         private void ExportInCSVToolStripMenuItem_Click(object sender, EventArgs e)
@@ -509,7 +527,7 @@ namespace gestione_account_password
                 Rectangle cell = Printer.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
                 Point cellLocation = new(cell.X, cell.Y);
 
-                Copy.AutoPopDelay = 2000;
+                Copy.AutoPopDelay = 1000;
                 Copy.InitialDelay = 0;
                 Copy.ReshowDelay = 0;
                 Copy.ShowAlways = true;
@@ -519,6 +537,54 @@ namespace gestione_account_password
             }
         }
 
+        private void ActualRemoveAccount_Click(object sender, EventArgs e)
+        {
+            // Checks if the user filled in all the fields
+            if (UserFindBox.Text == "" || PassFindBox.Text == "")
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
+                return;
+            }
 
+            // Creating a real Account object to compare with the ones in the file
+            targetAccount = new(UserFindBox.Text, "", new(PassFindBox.Text, currentUser), "");
+
+            // Getting the master accounts
+            FileManager fm = FileManager.Instance;
+            string fileContent = fm.DefaultDeserializer(fileName);
+            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+
+            bool result = false;
+
+            // Iterating through the master accounts
+            foreach (MasterAccount ma in masterAccounts)
+            {
+                if (ma.MasterName == currentUser)
+                {
+                    foreach (Account acct in ma.Accounts)
+                    {
+                        // If the account is the one to remove, then it gets removed
+                        if (acct.Name == targetAccount.Name)
+                        {
+                            result = true;
+                            ma.Accounts.Remove(acct);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // Serializing the new account details
+            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
+            fm.DefaultSerializer(fileName, updatedJson);
+
+            if (result)
+            {
+                MessageBox.Show("Account removed successfully.", "We're all good here!", MessageBoxButtons.OK);
+                return;
+            }
+
+            MessageBox.Show("Account couldn't be removed.", "Something went wrong!", MessageBoxButtons.OK);
+        }
     }
 }
