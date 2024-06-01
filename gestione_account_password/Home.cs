@@ -23,6 +23,8 @@ namespace gestione_account_password
         private string currentUser;
         private List<Account> accounts;
         private string fileName;
+        private Account targetAccount;
+        private Account accountToModify;
 
         /// <summary>
         /// Constructor that initializes the form
@@ -76,6 +78,7 @@ namespace gestione_account_password
 
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
+            ActualModifyAccount.Visible = false;
 
             Printer.BringToFront();
 
@@ -123,6 +126,7 @@ namespace gestione_account_password
             LenBox.Visible = true;
             AddNewAccount.Visible = true;
             FindAccount.Visible = false;
+            ActualModifyAccount.Visible = false;
         }
 
         private void ModifyAccount_Click(object sender, EventArgs e)
@@ -134,6 +138,9 @@ namespace gestione_account_password
 
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
+            PassLenModBox.Visible = false;
+            ClarifyModLabel.Visible = false;
+
             FindAccount.Visible = true;
 
             TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
@@ -146,23 +153,71 @@ namespace gestione_account_password
 
         private void FindAccount_Click(object sender, EventArgs e)
         {
-            // TODO: search in all the accounts linked to the master one and if the target account is found then lines below are exectued, otherwise error message.
-            Account targetAccount = new(UserFindBox.Text, EmailFindBox.Text, new(), "");
-            MasterAccount ma = GetCurrentMasterAccount();
+            targetAccount = new(UserFindBox.Text, EmailFindBox.Text, new(), "");
 
-            foreach (Account item in ma.Accounts)
+            MasterAccount ma = GetCurrentMasterAccount();
+            Account account = null;
+
+            foreach (Account acct in ma.Accounts)
             {
-                if (item.Name == targetAccount.Name && item.Email == targetAccount.Email)
+                if (acct.Name == targetAccount.Name)
                 {
-                    TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
-                    LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
-                    CheckBoxesVisiblityChange(true, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
-                    PassLenModBox.Visible = true;
-                    return;
+                    account = acct;
+                    break;
                 }
             }
 
+            if (account != null)
+            {
+                TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
+                LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
+                CheckBoxesVisiblityChange(true, UpperCaseModBox, NumbersModBox, SpecialCharsModBox);
+                PassLenModBox.Visible = true;
+                ActualModifyAccount.Visible = true;
+                return;
+            }
+
             MessageBox.Show("Account not found, try again.", "Error", MessageBoxButtons.OK);
+        }
+        private void ActualModifyAccount_Click(object sender, EventArgs e)
+        {
+            MasterAccount ma = GetCurrentMasterAccount();
+            Account account = null;
+
+            foreach (Account acct in ma.Accounts)
+            {
+                if (acct.Name == targetAccount.Name)
+                {
+                    account = acct;
+                    break;
+                }
+            }
+
+            if (UserModBox.Text != "")
+            {
+                account.Name = UserModBox.Text;
+            }
+
+            if (EmailModBox.Text != "")
+            {
+                account.Email = EmailModBox.Text;
+            }
+
+            if (DescModBox.Text != "")
+            {
+                account.Description = DescModBox.Text;
+            }
+
+            if (PassLenModBox.Value != 7)
+            {
+                account.Password = new(int.Parse(PassLenModBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser);
+            }
+
+            FileManager fm = FileManager.Instance;
+
+            string updatedJson = JsonConvert.SerializeObject(ma, Formatting.Indented);
+            fm.DefaultSerializer(fileName, updatedJson);
+
         }
 
         /// <summary>
