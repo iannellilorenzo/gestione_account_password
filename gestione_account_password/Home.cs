@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,6 @@ namespace gestione_account_password
         private List<Account> accounts;
         private string fileName;
         private Account targetAccount;
-        private Account accountToModify;
 
         /// <summary>
         /// Constructor that initializes the form
@@ -69,8 +69,8 @@ namespace gestione_account_password
             LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
-            TextBoxesVisiblityChange(false, UserFindBox, EmailFindBox);
-            LabelsVisiblityChange(false, EmailFindLabel, UserFindLabel);
+            TextBoxesVisiblityChange(false, UserFindBox, PassFindBox);
+            LabelsVisiblityChange(false, PassFindLabel, UserFindLabel);
 
             TextBoxesVisiblityChange(false, UserModBox, EmailModBox, DescModBox);
             LabelsVisiblityChange(false, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel);
@@ -104,6 +104,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Just UI stuff
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddAccount_Click(object sender, EventArgs e)
         {
             Printer.Visible = false;
@@ -115,8 +120,8 @@ namespace gestione_account_password
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
             CheckBoxesVisiblityChange(true, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
-            TextBoxesVisiblityChange(false, UserFindBox, EmailFindBox);
-            LabelsVisiblityChange(false, UserFindLabel, EmailFindLabel);
+            TextBoxesVisiblityChange(false, UserFindBox, PassFindBox);
+            LabelsVisiblityChange(false, UserFindLabel, PassFindLabel);
 
             TextBoxesVisiblityChange(false, UserModBox, EmailModBox, DescModBox);
             LabelsVisiblityChange(false, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
@@ -129,6 +134,11 @@ namespace gestione_account_password
             ActualModifyAccount.Visible = false;
         }
 
+        /// <summary>
+        /// Just UI stuff
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ModifyAccount_Click(object sender, EventArgs e)
         {
             Printer.Visible = false;
@@ -147,27 +157,44 @@ namespace gestione_account_password
             LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
             CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
 
-            TextBoxesVisiblityChange(true, UserFindBox, EmailFindBox);
-            LabelsVisiblityChange(true, UserFindLabel, EmailFindLabel);
+            TextBoxesVisiblityChange(true, UserFindBox, PassFindBox);
+            LabelsVisiblityChange(true, UserFindLabel, PassFindLabel);
         }
 
+        /// <summary>
+        /// Checks if the account the user wants to modify exists, if so does some UI stuff to let the user modify it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FindAccount_Click(object sender, EventArgs e)
         {
-            targetAccount = new(UserFindBox.Text, EmailFindBox.Text, new(), "");
+            // Checks if the user filled in all the fields
+            if (UserFindBox.Text == "" || PassFindBox.Text == "")
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
+                return;
+            }
 
+            // Creates a real Account object to compare with the ones in the file
+            targetAccount = new(UserFindBox.Text, "", new(PassFindBox.Text, currentUser), "");
+
+            // Gets the master account logged in
             MasterAccount ma = GetCurrentMasterAccount();
-            Account account = null;
+            Account accountToModify = null;
 
+            // Iterating through the accounts of the master account
             foreach (Account acct in ma.Accounts)
             {
+                // If the account is the one to modify, then it gets modified
                 if (acct.Name == targetAccount.Name)
                 {
-                    account = acct;
+                    accountToModify = acct;
                     break;
                 }
             }
 
-            if (account != null)
+            // UI stuff to let the user modify the account
+            if (accountToModify != null)
             {
                 TextBoxesVisiblityChange(true, UserModBox, EmailModBox, DescModBox);
                 LabelsVisiblityChange(true, UserModLabel, EmailModLabel, DescModLabel, PassModLabel, PassLenModLabel, ClarifyModLabel);
@@ -192,8 +219,7 @@ namespace gestione_account_password
             string fileContent = fm.DefaultDeserializer(fileName);
             List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
 
-            MasterAccount ma = new("", new(""), DateTime.Now);
-            Account account = null;
+            Account accountToModify = null;
 
             // Iterating through the master accounts
             foreach (var item in masterAccounts)
@@ -205,7 +231,7 @@ namespace gestione_account_password
                         // If the account is the one to modify, then it gets modified
                         if (acct.Name == targetAccount.Name)
                         {
-                            account = acct;
+                            accountToModify = acct;
                             break;
                         }
                     }
@@ -215,22 +241,22 @@ namespace gestione_account_password
             // Checks to see what the user wants to modify
             if (UserModBox.Text != "")
             {
-                account.Name = UserModBox.Text;
+                accountToModify.Name = UserModBox.Text;
             }
 
             if (EmailModBox.Text != "")
             {
-                account.Email = EmailModBox.Text;
+                accountToModify.Email = EmailModBox.Text;
             }
 
             if (DescModBox.Text != "")
             {
-                account.Description = DescModBox.Text;
+                accountToModify.Description = DescModBox.Text;
             }
 
             if (PassLenModBox.Value != 7)
             {
-                account.Password = new(int.Parse(PassLenModBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser);
+                accountToModify.Password = new(int.Parse(PassLenModBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser);
             }
 
             // Serializing the new account details
