@@ -21,10 +21,16 @@ namespace gestione_account_password
     /// </summary>
     public partial class Home : Form
     {
+        #region Global variables
+
         private string currentUser;
         private List<Account> accounts;
         private string fileName;
         private Account targetAccount;
+
+        #endregion
+
+        #region Default form code
 
         /// <summary>
         /// Constructor that initializes the form
@@ -46,26 +52,107 @@ namespace gestione_account_password
             AddAccountPanel.BringToFront();
         }
 
-        private void ResetPassword_Click(object sender, EventArgs e)
+        #endregion
+
+        #region UI methods
+
+        /// <summary>
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="textBoxes"> Every textbox that needs to change it's visibility </param>
+        private void TextBoxesVisiblityChange(bool visibility, params TextBox[] textBoxes)
         {
-            MessageBox.Show("Reset password");
+            foreach (TextBox textBox in textBoxes)
+            {
+                textBox.Visible = visibility;
+            }
         }
 
         /// <summary>
-        /// Prints every saved account details
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="labels"> Every label that needs to change it's visibility </param>
+        private void LabelsVisiblityChange(bool visibility, params Label[] labels)
+        {
+            foreach (Label label in labels)
+            {
+                label.Visible = visibility;
+            }
+        }
+
+        /// <summary>
+        /// Changes visibility of the winform controls
+        /// </summary>
+        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
+        /// <param name="checkBoxes"> Every textbox that needs to change it's visibility </param>
+        private void CheckBoxesVisiblityChange(bool visibility, params CheckBox[] checkBoxes)
+        {
+            foreach (CheckBox checkBox in checkBoxes)
+            {
+                checkBox.Visible = visibility;
+            }
+        }
+
+        /// <summary>
+        /// Changes the color of the buttons
+        /// </summary>
+        /// <param name="buttonWithActiveColor"> The button which indicates the active tab </param>
+        /// <param name="activeColor"> The color the active tab button needs to be </param>
+        /// <param name="inactiveColor"> The color the inactive tabs buttons needs to be </param>
+        /// <param name="buttons"> All the inactive tabs buttons </param>
+        private void ButtonColorChange(Button buttonWithActiveColor, Color activeColor, Color inactiveColor, params Button[] buttons)
+        {
+            buttonWithActiveColor.BackColor = activeColor;
+
+            foreach (Button button in buttons)
+            {
+                button.BackColor = inactiveColor;
+            }
+        }
+
+        /// <summary>
+        /// Just UI stuff
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemoveAccount_Click(object sender, EventArgs e)
+        {
+            Printer.Visible = false;
+            ButtonColorChange(RemoveAccount, Color.LightSeaGreen, Color.Silver, AddAccount, PrintAccounts, ModifyAccount);
+
+            LenBox.Visible = false;
+            AddNewAccount.Visible = false;
+            PassLenModBox.Visible = false;
+            ClarifyModLabel.Visible = false;
+            FindAccount.Visible = false;
+
+            ActualRemoveAccount.Visible = true;
+
+            TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
+            LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
+            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
+
+            TextBoxesVisiblityChange(true, UserFindBox, PassFindBox);
+            LabelsVisiblityChange(true, UserFindLabel, PassFindLabel);
+        }
+
+
+        /// <summary>
+        /// Prints every saved account details + UI stuff
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Print_Click(object sender, EventArgs e)
         {
-            // Just UI stuff
+            #region UI stuff
+
             Printer.Columns.Clear();
             Printer.Rows.Clear();
             Printer.Visible = true;
-            AddAccount.BackColor = Color.Silver;
-            ModifyAccount.BackColor = Color.Silver;
-            RemoveAccount.BackColor = Color.Silver;
-            PrintAccounts.BackColor = Color.LightSeaGreen;
+
+            ButtonColorChange(PrintAccounts, Color.LightSeaGreen, Color.Silver, AddAccount, ModifyAccount, RemoveAccount);
 
             TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(false, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
@@ -83,6 +170,10 @@ namespace gestione_account_password
             ActualModifyAccount.Visible = false;
 
             Printer.BringToFront();
+
+            #endregion
+
+            #region Backend
 
             // Printing the accounts
             List<string> print = PrintAccountsOnDisplay();
@@ -104,6 +195,8 @@ namespace gestione_account_password
                 var splittedString = item.Split(',');
                 Printer.Rows.Add(splittedString[0], splittedString[1], splittedString[2], splittedString[3]);
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -114,10 +207,8 @@ namespace gestione_account_password
         private void AddAccount_Click(object sender, EventArgs e)
         {
             Printer.Visible = false;
-            AddAccount.BackColor = Color.LightSeaGreen;
-            PrintAccounts.BackColor = Color.Silver;
-            ModifyAccount.BackColor = Color.Silver;
-            RemoveAccount.BackColor = Color.Silver;
+
+            ButtonColorChange(AddAccount, Color.LightSeaGreen, Color.Silver, PrintAccounts, ModifyAccount, RemoveAccount);
 
             TextBoxesVisiblityChange(true, UserBox, EmailBox, DescBox);
             LabelsVisiblityChange(true, UserLabel, EmailLabel, PassLenLabel, DescLabel, ClarifyLabel);
@@ -146,10 +237,8 @@ namespace gestione_account_password
         private void ModifyAccount_Click(object sender, EventArgs e)
         {
             Printer.Visible = false;
-            AddAccount.BackColor = Color.Silver;
-            PrintAccounts.BackColor = Color.Silver;
-            RemoveAccount.BackColor = Color.Silver;
-            ModifyAccount.BackColor = Color.LightSeaGreen;
+
+            ButtonColorChange(ModifyAccount, Color.LightSeaGreen, Color.Silver, AddAccount, PrintAccounts, RemoveAccount);
 
             LenBox.Visible = false;
             AddNewAccount.Visible = false;
@@ -166,6 +255,10 @@ namespace gestione_account_password
             TextBoxesVisiblityChange(true, UserFindBox, PassFindBox);
             LabelsVisiblityChange(true, UserFindLabel, PassFindLabel);
         }
+
+        #endregion
+
+        #region Backend methods
 
         /// <summary>
         /// Checks if the account the user wants to modify exists, if so does some UI stuff to let the user modify it
@@ -326,6 +419,7 @@ namespace gestione_account_password
         /// <param name="e"></param>
         private void AddNewAccount_Click(object sender, EventArgs e)
         {
+            // Checks if the user filled in all the fields and if the fields are correct
             if (UserBox.Text == "" || EmailBox.Text == "" || DescBox.Text == "" || LenBox.Text == "")
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
@@ -337,6 +431,7 @@ namespace gestione_account_password
                 MessageBox.Show("Fields can't contain commas.", "Error", MessageBoxButtons.OK);
             }
 
+            // Adds the new account to the list
             try
             {
                 accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
@@ -346,12 +441,15 @@ namespace gestione_account_password
                 MessageBox.Show("Password length must be between 8 and 32 characters.", "Error", MessageBoxButtons.OK);
             }
 
+            // Gets the master accounts
             FileManager fm = FileManager.Instance;
             string fileContent = fm.DefaultDeserializer(fileName);
             List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
 
+            // Iterating through the master accounts
             foreach (var ma in masterAccounts)
             {
+                // If the master account is the one logged in, then it gets updated
                 if (ma.MasterName == currentUser)
                 {
                     ma.Accounts.Clear();
@@ -359,91 +457,35 @@ namespace gestione_account_password
                 }
             }
 
+            // Serializing the new account details
             string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
             fm.DefaultSerializer(fileName, updatedJson);
         }
 
         /// <summary>
-        /// Changes visibility of the winform controls
+        /// Lets the user export the accounts details in a CSV format
         /// </summary>
-        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
-        /// <param name="textBoxes"> Every textbox that needs to change it's visibility </param>
-        private void TextBoxesVisiblityChange(bool visibility, params TextBox[] textBoxes)
-        {
-            foreach (TextBox textBox in textBoxes)
-            {
-                textBox.Visible = visibility;
-            }
-        }
-
-        /// <summary>
-        /// Changes visibility of the winform controls
-        /// </summary>
-        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
-        /// <param name="labels"> Every label that needs to change it's visibility </param>
-        private void LabelsVisiblityChange(bool visibility, params Label[] labels)
-        {
-            foreach (Label label in labels)
-            {
-                label.Visible = visibility;
-            }
-        }
-
-        /// <summary>
-        /// Changes visibility of the winform controls
-        /// </summary>
-        /// <param name="visibility"> True: Controls become visibile, false: controls become invisible </param>
-        /// <param name="checkBoxes"> Every textbox that needs to change it's visibility </param>
-        private void CheckBoxesVisiblityChange(bool visibility, params CheckBox[] checkBoxes)
-        {
-            foreach (CheckBox checkBox in checkBoxes)
-            {
-                checkBox.Visible = visibility;
-            }
-        }
-
-        private void Printer_Click(object sender, EventArgs e)
-        {
-            ActiveControl = null;
-        }
-
-        private void RemoveAccount_Click(object sender, EventArgs e)
-        {
-            Printer.Visible = false;
-            AddAccount.BackColor = Color.Silver;
-            PrintAccounts.BackColor = Color.Silver;
-            ModifyAccount.BackColor = Color.Silver;
-            RemoveAccount.BackColor = Color.LightSeaGreen;
-
-            LenBox.Visible = false;
-            AddNewAccount.Visible = false;
-            PassLenModBox.Visible = false;
-            ClarifyModLabel.Visible = false;
-            FindAccount.Visible = false;
-
-            ActualRemoveAccount.Visible = true;
-
-            TextBoxesVisiblityChange(false, UserBox, EmailBox, DescBox);
-            LabelsVisiblityChange(false, UserLabel, EmailLabel, DescLabel, ClarifyLabel, PassLenLabel);
-            CheckBoxesVisiblityChange(false, UpperCaseBox, NumbersBox, SpecialCharsBox);
-
-            TextBoxesVisiblityChange(true, UserFindBox, PassFindBox);
-            LabelsVisiblityChange(true, UserFindLabel, PassFindLabel);
-        }
-
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportInCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Gets the master account logged in
             MasterAccount ma = GetCurrentMasterAccount();
             string exportString = "DESCRIPTION,USERNAME,EMAIL,PASSWORD\n";
 
+            // Iterating through the accounts of the master account
             foreach (Account account in ma.Accounts)
             {
+                // Decrypts the password
                 string encrPass = account.Password.Password;
                 PasswordManager pass = new(encrPass);
                 string decryptedPassword = pass.DecryptPassword(currentUser);
+
+                // Adds the account details to the export string
                 exportString += $"{account.Description},{account.Name},{account.Email},{decryptedPassword}";
             }
 
+            // If the export string is the default one, then it returns an error message
             if (exportString == "DESCRIPTION,USERNAME,EMAIL,PASSWORD")
             {
                 exportString = "No accounts found";
@@ -451,60 +493,89 @@ namespace gestione_account_password
 
             FileManager fm = FileManager.Instance;
             bool result = false;
+
+                        // Lets the user choose where to save the file
             using (FolderBrowserDialog fbd = new())
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
                 {
+                    // Gets the path and the full path
                     string path = fbd.SelectedPath;
                     string fullPath = Path.Combine(path, "export.csv");
+
+                    // Exports the accounts
                     result = fm.ExportAccountsInCSV(fullPath, exportString);
                 }
             }
 
+            // If the export went right, then it shows a success message
             if (result)
             {
                 MessageBox.Show("Accounts exported successfully.", "We're all good here!");
                 return;
             }
 
+            // If the export went wrong, then it shows an error message
             MessageBox.Show("Accounts couldn't be exported.", "Something went wrong!");
         }
 
+        /// <summary>
+        /// Lets the user export the accounts details in a JSON format
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportInJSONFormatToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Gets the master account logged in
             MasterAccount ma = GetCurrentMasterAccount();
             FileManager fm = FileManager.Instance;
             bool result = false;
 
+            // Lets the user choose where to save the file
             using (FolderBrowserDialog folderDialog = new())
             {
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
+                    // Gets the path and the full path
                     string path = folderDialog.SelectedPath;
                     string fullPath = Path.Combine(path, "export.json");
+
+                    // Exports the accounts
                     result = fm.ExportAccountInJson(fullPath, ma);
                 }
             }
 
+            // If the export went right, then it shows a success message
             if (result)
             {
                 MessageBox.Show("Accounts exported successfully.", "We're all good here!");
                 return;
             }
 
+            // If the export went wrong, then it shows an error message
             MessageBox.Show("Accounts couldn't be exported.", "Something went wrong!");
         }
 
+        /// <summary>
+        /// Lets the user export the documentation in a XML format
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExportXMLDocumentationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Lets the user choose where to save the file
             using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
             {
                 if (folderDialog.ShowDialog() == DialogResult.OK)
                 {
+                    // Gets the path and the full path
                     string sourcePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "gestione_account_password.xml");
                     string destinationPath = Path.Combine(folderDialog.SelectedPath, "documentation.xml");
 
+                    // Exports the documentation
                     File.Copy(sourcePath, destinationPath, true);
+
+                    // Shows a success message
                     MessageBox.Show("Documentation saved successfully!", "We're all good here!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     try
@@ -519,13 +590,21 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Lets the user copy the content of a cell in the clipboard
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Printer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Checks if the user double clicked on a cell
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                // Copies the content of the cell in the clipboard
                 string cellText = Printer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
                 Clipboard.SetText(cellText);
 
+                // Shows a message to the user using a toolip to let them know the content has been copied
                 Rectangle cell = Printer.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
                 Point cellLocation = new(cell.X, cell.Y);
 
@@ -539,6 +618,11 @@ namespace gestione_account_password
             }
         }
 
+        /// <summary>
+        /// Lets the user remove an account
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ActualRemoveAccount_Click(object sender, EventArgs e)
         {
             // Checks if the user filled in all the fields
@@ -587,5 +671,7 @@ namespace gestione_account_password
 
             MessageBox.Show("Account couldn't be removed.", "Something went wrong!", MessageBoxButtons.OK);
         }
+
+        #endregion
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.PrintAccounts = new System.Windows.Forms.Button();
             this.AddAccount = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -56,6 +56,7 @@
             this.PassLenLabel = new System.Windows.Forms.Label();
             this.UserBox = new System.Windows.Forms.TextBox();
             this.AddAccountPanel = new System.Windows.Forms.Panel();
+            this.ActualRemoveAccount = new System.Windows.Forms.Button();
             this.ActualModifyAccount = new System.Windows.Forms.Button();
             this.PassLenModBox = new System.Windows.Forms.NumericUpDown();
             this.PassLenModLabel = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.Copy = new System.Windows.Forms.ToolTip(this.components);
             this.ModifyAccount = new System.Windows.Forms.Button();
             this.RemoveAccount = new System.Windows.Forms.Button();
-            this.ActualRemoveAccount = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.AddAccountPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PassLenModBox)).BeginInit();
@@ -127,7 +127,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(935, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(935, 28);
             this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -137,7 +137,7 @@
             this.Export,
             this.developerOptionsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(46, 24);
             this.toolStripMenuItem1.Text = "File";
             // 
             // Export
@@ -183,7 +183,7 @@
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.masterPassowrdToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // masterPassowrdToolStripMenuItem
@@ -197,9 +197,8 @@
             // ResetPassword
             // 
             this.ResetPassword.Name = "ResetPassword";
-            this.ResetPassword.Size = new System.Drawing.Size(195, 26);
+            this.ResetPassword.Size = new System.Drawing.Size(224, 26);
             this.ResetPassword.Text = "Reset password";
-            this.ResetPassword.Click += new System.EventHandler(this.ResetPassword_Click);
             // 
             // UserLabel
             // 
@@ -359,6 +358,22 @@
             this.AddAccountPanel.Name = "AddAccountPanel";
             this.AddAccountPanel.Size = new System.Drawing.Size(708, 473);
             this.AddAccountPanel.TabIndex = 0;
+            // 
+            // ActualRemoveAccount
+            // 
+            this.ActualRemoveAccount.BackColor = System.Drawing.Color.Silver;
+            this.ActualRemoveAccount.FlatAppearance.BorderSize = 0;
+            this.ActualRemoveAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ActualRemoveAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActualRemoveAccount.Location = new System.Drawing.Point(225, 100);
+            this.ActualRemoveAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ActualRemoveAccount.Name = "ActualRemoveAccount";
+            this.ActualRemoveAccount.Size = new System.Drawing.Size(229, 38);
+            this.ActualRemoveAccount.TabIndex = 37;
+            this.ActualRemoveAccount.Text = "Remove account";
+            this.ActualRemoveAccount.UseVisualStyleBackColor = false;
+            this.ActualRemoveAccount.Visible = false;
+            this.ActualRemoveAccount.Click += new System.EventHandler(this.ActualRemoveAccount_Click);
             // 
             // ActualModifyAccount
             // 
@@ -586,22 +601,22 @@
             // 
             this.Printer.AllowUserToAddRows = false;
             this.Printer.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Printer.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Printer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Printer.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.Printer.BackgroundColor = System.Drawing.SystemColors.Control;
             this.Printer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Printer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Printer.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Printer.DefaultCellStyle = dataGridViewCellStyle2;
             this.Printer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Printer.Location = new System.Drawing.Point(0, 0);
             this.Printer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -645,22 +660,6 @@
             this.RemoveAccount.Text = "Remove account";
             this.RemoveAccount.UseVisualStyleBackColor = false;
             this.RemoveAccount.Click += new System.EventHandler(this.RemoveAccount_Click);
-            // 
-            // ActualRemoveAccount
-            // 
-            this.ActualRemoveAccount.BackColor = System.Drawing.Color.Silver;
-            this.ActualRemoveAccount.FlatAppearance.BorderSize = 0;
-            this.ActualRemoveAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ActualRemoveAccount.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ActualRemoveAccount.Location = new System.Drawing.Point(225, 100);
-            this.ActualRemoveAccount.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ActualRemoveAccount.Name = "ActualRemoveAccount";
-            this.ActualRemoveAccount.Size = new System.Drawing.Size(229, 38);
-            this.ActualRemoveAccount.TabIndex = 37;
-            this.ActualRemoveAccount.Text = "Remove account";
-            this.ActualRemoveAccount.UseVisualStyleBackColor = false;
-            this.ActualRemoveAccount.Visible = false;
-            this.ActualRemoveAccount.Click += new System.EventHandler(this.ActualRemoveAccount_Click);
             // 
             // Home
             // 
