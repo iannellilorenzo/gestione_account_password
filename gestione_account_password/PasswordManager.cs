@@ -16,6 +16,7 @@ namespace gestione_account_password
     /// </summary>
     public class PasswordManager
     {
+        // Arrays of characters for the password
         private static readonly char[] _lowercaseLetters =
         {
             'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
@@ -130,6 +131,7 @@ namespace gestione_account_password
             StringBuilder pw = new();
             char[] allowedChars = LowercaseLetters;
 
+            // Add the allowed characters to the array if the user wants them
             if (caps)
                 allowedChars = ConcatArrays(allowedChars, UppercaseLetters);
             if (numbers)
@@ -155,12 +157,14 @@ namespace gestione_account_password
         /// <returns> Array of allowed characters </returns>
         private static char[] ConcatArrays(params char[][] arrays)
         {
+            // Get the total length of the array
             int totalLength = 0;
             foreach (char[] array in arrays)
             {
                 totalLength += array.Length;
             }
 
+            // Concatenate the arrays
             char[] result = new char[totalLength];
             int offset = 0;
             foreach (char[] array in arrays)
