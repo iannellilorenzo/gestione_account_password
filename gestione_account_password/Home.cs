@@ -179,20 +179,40 @@ namespace gestione_account_password
 
             MessageBox.Show("Account not found, try again.", "Error", MessageBoxButtons.OK);
         }
+
+        /// <summary>
+        /// Lets the user modify an account, changing username, email, description, and password by generating a new one
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ActualModifyAccount_Click(object sender, EventArgs e)
         {
-            MasterAccount ma = GetCurrentMasterAccount();
+            // Getting the master accounts
+            FileManager fm = FileManager.Instance;
+            string fileContent = fm.DefaultDeserializer(fileName);
+            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+
+            MasterAccount ma = new("", new(""), DateTime.Now);
             Account account = null;
 
-            foreach (Account acct in ma.Accounts)
+            // Iterating through the master accounts
+            foreach (var item in masterAccounts)
             {
-                if (acct.Name == targetAccount.Name)
+                if (item.MasterName == currentUser)
                 {
-                    account = acct;
-                    break;
+                    foreach (Account acct in item.Accounts)
+                    {
+                        // If the account is the one to modify, then it gets modified
+                        if (acct.Name == targetAccount.Name)
+                        {
+                            account = acct;
+                            break;
+                        }
+                    }
                 }
             }
 
+            // Checks to see what the user wants to modify
             if (UserModBox.Text != "")
             {
                 account.Name = UserModBox.Text;
@@ -213,11 +233,9 @@ namespace gestione_account_password
                 account.Password = new(int.Parse(PassLenModBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser);
             }
 
-            FileManager fm = FileManager.Instance;
-
-            string updatedJson = JsonConvert.SerializeObject(ma, Formatting.Indented);
+            // Serializing the new account details
+            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
             fm.DefaultSerializer(fileName, updatedJson);
-
         }
 
         /// <summary>
