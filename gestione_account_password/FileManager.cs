@@ -16,6 +16,7 @@ namespace gestione_account_password
     /// </summary>
     public sealed class FileManager
     {
+        // Singleton pattern implementation
         private static FileManager instance = null;
         private static readonly object padlock = new();
 
@@ -33,6 +34,7 @@ namespace gestione_account_password
             {
                 if (instance == null)
                 {
+                    // Locks the instance to avoid multiple threads to create multiple instances
                     lock (padlock)
                     {
                         // If the instance is null, it creates a new one
@@ -52,12 +54,14 @@ namespace gestione_account_password
         /// <exception cref="InvalidOperationException"> Thrown if the file doesn't exits, because it can't deserialized </exception>
         public string DefaultDeserializer(string fileName)
         {
+            // If the file doesn't exist, the program can't deserialize from it
             string fileContent = "";
             if (!File.Exists(fileName))
             {
                 throw new InvalidOperationException();
             }
 
+            // If the file exists, the program can deserialize from it, saving the content in a string
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Read))
             {
                 byte[] bytes = new byte[fs.Length];
@@ -76,6 +80,7 @@ namespace gestione_account_password
         /// <param name="content"> Content to write already serialized </param>
         public void DefaultSerializer(string fileName, string content)
         {
+            // Simple serialization to save the content in a file
             using (FileStream fs = new(fileName, FileMode.Create, FileAccess.Write))
             {
                 byte[] data = new UTF8Encoding(true).GetBytes(content);
@@ -95,6 +100,7 @@ namespace gestione_account_password
             // If the file doesn't exist, the master account surely can be serialized right away
             if (!File.Exists(fileName))
             {
+                // Serializing the master account
                 string toSerialize = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
                 using (FileStream fs = File.Create(fileName))
                 {
@@ -106,6 +112,7 @@ namespace gestione_account_password
                 return 0;
             }
 
+            // If the file exists, the program can deserialize from it, saving the master accounts in memory
             List<MasterAccount> masters;
             string fileContent = DefaultDeserializer(fileName);
             masters = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
@@ -123,6 +130,7 @@ namespace gestione_account_password
             masters.Add(masterAccounts[0]);
             string updatedJson = JsonConvert.SerializeObject(masters, Formatting.Indented);
 
+            // Serializing the master account
             using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
             {
                 byte[] data = new UTF8Encoding(true).GetBytes(updatedJson);
@@ -203,6 +211,7 @@ namespace gestione_account_password
         /// <returns> True if it goes right, false if not </returns>
         public bool ExportAccountInJson(string fullPath, MasterAccount masterAccountDetails)
         {
+            // Serializing the accounts to export them in a JSON file
             bool result = false;
             string exportString = JsonConvert.SerializeObject(masterAccountDetails.Accounts, Formatting.Indented);
 
