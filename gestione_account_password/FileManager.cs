@@ -76,7 +76,7 @@ namespace gestione_account_password
         /// <param name="content"> Content to write already serialized </param>
         public void DefaultSerializer(string fileName, string content)
         {
-            using (FileStream fs = new(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            using (FileStream fs = new(fileName, FileMode.Create, FileAccess.Write))
             {
                 byte[] data = new UTF8Encoding(true).GetBytes(content);
                 fs.Write(data, 0, data.Length);

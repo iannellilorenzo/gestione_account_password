@@ -60,6 +60,7 @@ namespace gestione_account_password
         {
             // Just UI stuff
             Printer.Columns.Clear();
+            Printer.Rows.Clear();
             Printer.Visible = true;
             AddAccount.BackColor = Color.Silver;
             ModifyAccount.BackColor = Color.Silver;
@@ -349,10 +350,11 @@ namespace gestione_account_password
             string fileContent = fm.DefaultDeserializer(fileName);
             List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
 
-            foreach(var ma in masterAccounts)
+            foreach (var ma in masterAccounts)
             {
                 if (ma.MasterName == currentUser)
                 {
+                    ma.Accounts.Clear();
                     ma.Accounts.AddRange(accounts);
                 }
             }
@@ -566,20 +568,19 @@ namespace gestione_account_password
                         // If the account is the one to remove, then it gets removed
                         if (acct.Name == targetAccount.Name)
                         {
-                            result = true;
                             ma.Accounts.Remove(acct);
+                            result = true;
                             break;
                         }
                     }
                 }
             }
 
-            // Serializing the new account details
-            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-            fm.DefaultSerializer(fileName, updatedJson);
-
             if (result)
             {
+                // Serializing the new account details
+                string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
+                fm.DefaultSerializer(fileName, updatedJson);
                 MessageBox.Show("Account removed successfully.", "We're all good here!", MessageBoxButtons.OK);
                 return;
             }
