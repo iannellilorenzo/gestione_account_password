@@ -126,27 +126,56 @@ namespace gestione_account_password
                 throw new ArgumentOutOfRangeException();
             }
 
-            // Allowed characters for the password
             Random rng = new();
             StringBuilder pw = new();
-            char[] allowedChars = LowercaseLetters;
 
-            // Add the allowed characters to the array if the user wants them
+            // Initialize the list of allowed characters
+            List<char> allowedChars = new(LowercaseLetters);
+
+            // List to ensure each type is included
+            List<char> mustIncludeChars = new();
+
+            // Add the required types to the allowed characters list and must include list
             if (caps)
-                allowedChars = ConcatArrays(allowedChars, UppercaseLetters);
-            if (numbers)
-                allowedChars = ConcatArrays(allowedChars, Numbers);
-            if (specialChars)
-                allowedChars = ConcatArrays(allowedChars, SpecialChars);
-
-            // Generate the password
-            for (int i = 0; i < length; i++)
             {
-                pw.Append(allowedChars[rng.Next(allowedChars.Length)]);
+                allowedChars.AddRange(UppercaseLetters);
+                mustIncludeChars.Add(UppercaseLetters[rng.Next(UppercaseLetters.Length)]);
+            }
+            if (numbers)
+            {
+                allowedChars.AddRange(Numbers);
+                mustIncludeChars.Add(Numbers[rng.Next(Numbers.Length)]);
+            }
+            if (specialChars)
+            {
+                allowedChars.AddRange(SpecialChars);
+                mustIncludeChars.Add(SpecialChars[rng.Next(SpecialChars.Length)]);
             }
 
+            // Ensure we have at least one lowercase letter
+            mustIncludeChars.Add(LowercaseLetters[rng.Next(LowercaseLetters.Length)]);
+
+            // Fill the rest of the password with random allowed characters
+            for (int i = mustIncludeChars.Count; i < length; i++)
+            {
+                pw.Append(allowedChars[rng.Next(allowedChars.Count)]);
+            }
+
+            // Append must include characters
+            foreach (char c in mustIncludeChars)
+            {
+                pw.Append(c);
+            }
+
+            // Convert StringBuilder to char array and shuffle it
+            char[] passwordArray = pw.ToString().ToCharArray();
+            passwordArray = passwordArray.OrderBy(x => rng.Next()).ToArray();
+
+            // Create the final password string
+            string password = new string(passwordArray);
+
             // Encrypt the password
-            string encryptedPassword = EncryptPassword(pw.ToString(), username);
+            string encryptedPassword = EncryptPassword(password, username);
             return encryptedPassword;
         }
 
