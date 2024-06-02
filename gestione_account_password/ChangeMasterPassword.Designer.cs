@@ -92,6 +92,7 @@
             this.Controls.Add(this.NewPassLabel);
             this.Controls.Add(this.OldPassBox);
             this.Controls.Add(this.OldPassLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ChangeMasterPassword";
             this.Text = "Change master password";
