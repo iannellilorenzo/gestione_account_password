@@ -13,6 +13,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using System.Net;
 
 namespace gestione_account_password
 {
@@ -24,7 +26,7 @@ namespace gestione_account_password
         #region Global variables
 
         private string currentUser;
-        private List<Account> accounts;
+        private Account account;
         private string fileName;
         private Account targetAccount;
 
@@ -40,7 +42,7 @@ namespace gestione_account_password
         {
             InitializeComponent();
             currentUser = user;
-            accounts = new();
+            account = new();
             fileName = "data.json";
         }
 
@@ -261,6 +263,117 @@ namespace gestione_account_password
         #region Backend methods
 
         /// <summary>
+        /// Checks if the email is in a correct format
+        /// </summary>
+        /// <param name="email"> Email to check </param>
+        /// <returns> True if is in a correct format, false if not </returns>
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Gets the current master account logged in
+        /// </summary>
+        /// <returns> Master account logged in </returns>
+        private MasterAccount GetCurrentMasterAccount()
+        {
+            // FileManager instance to deserialize
+            FileManager fm = FileManager.Instance;
+            List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
+
+            foreach (MasterAccount ma in masterAccounts)
+            {
+                // If the master account is the one logged in, then it returns it
+                if (ma.MasterName == currentUser)
+                {
+                    return ma;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Lets the user save a new account, saving username, email, password and a description of what the account is for
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddNewAccount_Click(object sender, EventArgs e)
+        {
+            string username = UserBox.Text;
+            string email = EmailBox.Text;
+            string description = DescBox.Text;
+            PasswordManager password = new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser);
+
+            // Checks if the user filled in all the fields and if the fields are correct
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(LenBox.Text))
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Email is not in a correct format.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (username.Contains(",") || email.Contains(",") || description.Contains(","))
+            {
+                MessageBox.Show("Fields can't contain commas.", "Error", MessageBoxButtons.OK);
+            }
+
+            // Creates the new account
+            try
+            {
+                account = (new(username, email, password, description));
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Password length must be between 8 and 32 characters.", "Error", MessageBoxButtons.OK);
+            }
+
+            // Gets the master accounts
+            FileManager fm = FileManager.Instance;
+            string fileContent = fm.DefaultDeserializer(fileName);
+            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+
+            bool result = false;
+
+            // Iterating through the master accounts
+            foreach (var ma in masterAccounts)
+            {
+                // If the master account is the one logged in, then it gets updated
+                if (ma.MasterName == currentUser)
+                {
+                    ma.Accounts.Add(account);
+                    result = true;
+                }
+            }
+
+            // Serializing the new account details
+            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
+            fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
+
+            if (result)
+            {
+                MessageBox.Show("Account added successfully.", "We're all good here!", MessageBoxButtons.OK);
+                return;
+            }
+
+            MessageBox.Show("Account couldn't be added.", "Something went wrong!", MessageBoxButtons.OK);
+        }
+
+        /// <summary>
         /// Checks if the account the user wants to modify exists, if so does some UI stuff to let the user modify it
         /// </summary>
         /// <param name="sender"></param>
@@ -307,6 +420,60 @@ namespace gestione_account_password
         }
 
         /// <summary>
+        /// Lets the user remove an account
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ActualRemoveAccount_Click(object sender, EventArgs e)
+        {
+            // Checks if the user filled in all the fields
+            if (string.IsNullOrEmpty(UserFindBox.Text) || string.IsNullOrEmpty(PassFindBox.Text))
+            {
+                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            // Creating a real Account object to compare with the ones in the file
+            targetAccount = new(UserFindBox.Text, "", new(PassFindBox.Text, currentUser), "");
+
+            // Getting the master accounts
+            FileManager fm = FileManager.Instance;
+            string fileContent = fm.DefaultDeserializer(fileName);
+            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
+
+            bool result = false;
+
+            // Iterating through the master accounts
+            foreach (MasterAccount ma in masterAccounts)
+            {
+                if (ma.MasterName == currentUser)
+                {
+                    foreach (Account acct in ma.Accounts)
+                    {
+                        // If the account is the one to remove, then it gets removed
+                        if (acct.Name == targetAccount.Name)
+                        {
+                            ma.Accounts.Remove(acct);
+                            result = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (result)
+            {
+                // Serializing the new account details
+                string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
+                fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
+                MessageBox.Show("Account removed successfully.", "We're all good here!", MessageBoxButtons.OK);
+                return;
+            }
+
+            MessageBox.Show("Account couldn't be removed.", "Something went wrong!", MessageBoxButtons.OK);
+        }
+
+        /// <summary>
         /// Lets the user modify an account, changing username, email, description, and password by generating a new one
         /// </summary>
         /// <param name="sender"></param>
@@ -337,20 +504,25 @@ namespace gestione_account_password
                 }
             }
 
+            string newName = UserModBox.Text;
+            string newEmail = EmailModBox.Text;
+            string newDesc = DescModBox.Text;
+
+
             // Checks to see what the user wants to modify
-            if (!string.IsNullOrEmpty(UserModBox.Text))
+            if (!string.IsNullOrEmpty(newName))
             {
-                accountToModify.Name = UserModBox.Text;
+                accountToModify.Name = newName;
             }
 
-            if (!string.IsNullOrEmpty(EmailModBox.Text))
+            if (!string.IsNullOrEmpty(newEmail) && IsValidEmail(newEmail))
             {
-                accountToModify.Email = EmailModBox.Text;
+                accountToModify.Email = newEmail;
             }
 
-            if (!string.IsNullOrEmpty(DescModBox.Text))
+            if (!string.IsNullOrEmpty(newDesc))
             {
-                accountToModify.Description = DescModBox.Text;
+                accountToModify.Description = newDesc;
             }
 
             if (PassLenModBox.Value != 7)
@@ -361,28 +533,6 @@ namespace gestione_account_password
             // Serializing the new account details
             string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
             fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
-        }
-
-        /// <summary>
-        /// Gets the current master account logged in
-        /// </summary>
-        /// <returns> Master account logged in </returns>
-        private MasterAccount GetCurrentMasterAccount()
-        {
-            // FileManager instance to deserialize
-            FileManager fm = FileManager.Instance;
-            List<MasterAccount> masterAccounts = fm.Deserializer(fileName);
-
-            foreach (MasterAccount ma in masterAccounts)
-            {
-                // If the master account is the one logged in, then it returns it
-                if (ma.MasterName == currentUser)
-                {
-                    return ma;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -413,54 +563,36 @@ namespace gestione_account_password
         }
 
         /// <summary>
-        /// Lets the user save a new account, saving username, email, password and a description of what the account is for
+        /// Lets the user copy the content of a cell in the clipboard
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddNewAccount_Click(object sender, EventArgs e)
+        private void Printer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Checks if the user filled in all the fields and if the fields are correct
-            if (string.IsNullOrEmpty(UserBox.Text) || string.IsNullOrEmpty(EmailBox.Text) || string.IsNullOrEmpty(DescBox.Text) || string.IsNullOrEmpty(LenBox.Text))
+            // Checks if the user double clicked on a cell
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
-                return;
-            }
+                // Copies the content of the cell in the clipboard
+                string cellText = Printer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                Clipboard.SetText(cellText);
 
-            if (UserBox.Text.Contains(",") || EmailBox.Text.Contains(",") || DescBox.Text.Contains(","))
-            {
-                MessageBox.Show("Fields can't contain commas.", "Error", MessageBoxButtons.OK);
-            }
+                // Shows a message to the user using a toolip to let them know the content has been copied
+                Rectangle cell = Printer.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+                Point cellLocation = new(cell.X, cell.Y);
 
-            // Adds the new account to the list
-            try
-            {
-                accounts.Add(new(UserBox.Text, EmailBox.Text, new(int.Parse(LenBox.Text), UpperCaseBox.Checked, NumbersBox.Checked, SpecialCharsBox.Checked, currentUser), DescBox.Text));
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                MessageBox.Show("Password length must be between 8 and 32 characters.", "Error", MessageBoxButtons.OK);
-            }
+                Copy.AutoPopDelay = 1000;
+                Copy.InitialDelay = 0;
+                Copy.ReshowDelay = 0;
+                Copy.ShowAlways = true;
 
-            // Gets the master accounts
-            FileManager fm = FileManager.Instance;
-            string fileContent = fm.DefaultDeserializer(fileName);
-            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
-
-            // Iterating through the master accounts
-            foreach (var ma in masterAccounts)
-            {
-                // If the master account is the one logged in, then it gets updated
-                if (ma.MasterName == currentUser)
-                {
-                    ma.Accounts.Clear();
-                    ma.Accounts.AddRange(accounts);
-                }
+                Copy.Hide(Printer);
+                Copy.Show("Successfully copied to clipboard!", Printer, cellLocation, 2000);
             }
-
-            // Serializing the new account details
-            string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-            fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
         }
+
+        #endregion
+
+        #region Tool strip menu items
 
         /// <summary>
         /// Lets the user export the accounts details in a CSV format
@@ -593,88 +725,6 @@ namespace gestione_account_password
         }
 
         /// <summary>
-        /// Lets the user copy the content of a cell in the clipboard
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Printer_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Checks if the user double clicked on a cell
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
-            {
-                // Copies the content of the cell in the clipboard
-                string cellText = Printer.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                Clipboard.SetText(cellText);
-
-                // Shows a message to the user using a toolip to let them know the content has been copied
-                Rectangle cell = Printer.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-                Point cellLocation = new(cell.X, cell.Y);
-
-                Copy.AutoPopDelay = 1000;
-                Copy.InitialDelay = 0;
-                Copy.ReshowDelay = 0;
-                Copy.ShowAlways = true;
-
-                Copy.Hide(Printer);
-                Copy.Show("Successfully copied to clipboard!", Printer, cellLocation, 2000);
-            }
-        }
-
-        /// <summary>
-        /// Lets the user remove an account
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ActualRemoveAccount_Click(object sender, EventArgs e)
-        {
-            // Checks if the user filled in all the fields
-            if (string.IsNullOrEmpty(UserFindBox.Text) || string.IsNullOrEmpty(PassFindBox.Text))
-            {
-                MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
-                return;
-            }
-
-            // Creating a real Account object to compare with the ones in the file
-            targetAccount = new(UserFindBox.Text, "", new(PassFindBox.Text, currentUser), "");
-
-            // Getting the master accounts
-            FileManager fm = FileManager.Instance;
-            string fileContent = fm.DefaultDeserializer(fileName);
-            List<MasterAccount> masterAccounts = JsonConvert.DeserializeObject<List<MasterAccount>>(fileContent);
-
-            bool result = false;
-
-            // Iterating through the master accounts
-            foreach (MasterAccount ma in masterAccounts)
-            {
-                if (ma.MasterName == currentUser)
-                {
-                    foreach (Account acct in ma.Accounts)
-                    {
-                        // If the account is the one to remove, then it gets removed
-                        if (acct.Name == targetAccount.Name)
-                        {
-                            ma.Accounts.Remove(acct);
-                            result = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            if (result)
-            {
-                // Serializing the new account details
-                string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-                fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
-                MessageBox.Show("Account removed successfully.", "We're all good here!", MessageBoxButtons.OK);
-                return;
-            }
-
-            MessageBox.Show("Account couldn't be removed.", "Something went wrong!", MessageBoxButtons.OK);
-        }
-
-        /// <summary>
         /// Checks if the user is allowed to reset the password, if so lets the user reset it
         /// </summary>
         /// <param name="sender"></param>
@@ -685,7 +735,7 @@ namespace gestione_account_password
             MasterAccount ma = GetCurrentMasterAccount();
 
             // If the user can't reset the password, then it shows an error message
-            if (ma.LastChange.AddDays(30) < DateTime.Now)
+            if (DateTime.Today < ma.LastChange.AddDays(30))
             {
                 MessageBox.Show("You can't reset your password yet.", "Error", MessageBoxButtons.OK);
                 return;

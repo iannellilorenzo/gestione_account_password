@@ -106,7 +106,7 @@ namespace gestione_account_password
         private void RegBut_Click(object sender, EventArgs e)
         {
             // Creates a new master account and it adds it to the list, so that the serialization goes right
-            MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text, NameMasterAccount.Text), DateTime.Now);
+            MasterAccount master = new(NameMasterAccount.Text, new(PassMasterAccount.Text, NameMasterAccount.Text), DateTime.Today);
             masterAccountsSaved.Add(master);
 
             // FileManager instance to serialize a new account registered

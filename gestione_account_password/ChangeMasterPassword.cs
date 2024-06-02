@@ -68,7 +68,7 @@ namespace gestione_account_password
                 {
                     // If the old password is correct, change it
                     ma.Password = new(newPassword, currentUser);
-                    ma.LastChange = DateTime.Now;
+                    ma.LastChange = DateTime.Today;
                     result = true;
                     break;
                 }
