@@ -360,7 +360,7 @@ namespace gestione_account_password
 
             // Serializing the new account details
             string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-            fm.DefaultSerializer(fileName, updatedJson);
+            fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
         }
 
         /// <summary>
@@ -459,7 +459,7 @@ namespace gestione_account_password
 
             // Serializing the new account details
             string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-            fm.DefaultSerializer(fileName, updatedJson);
+            fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
         }
 
         /// <summary>
@@ -504,7 +504,8 @@ namespace gestione_account_password
                     string fullPath = Path.Combine(path, "export.csv");
 
                     // Exports the accounts
-                    result = fm.ExportAccountsInCSV(fullPath, exportString);
+                    fm.ExportAccountsInCSV(fullPath, exportString);
+                    result = true;
                 }
             }
 
@@ -541,7 +542,8 @@ namespace gestione_account_password
                     string fullPath = Path.Combine(path, "export.json");
 
                     // Exports the accounts
-                    result = fm.ExportAccountInJson(fullPath, ma);
+                    fm.ExportAccountInJson(fullPath, ma);
+                    result = true;
                 }
             }
 
@@ -664,7 +666,7 @@ namespace gestione_account_password
             {
                 // Serializing the new account details
                 string updatedJson = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-                fm.DefaultSerializer(fileName, updatedJson);
+                fm.DefaultSerializer(fileName, updatedJson, FileMode.Create);
                 MessageBox.Show("Account removed successfully.", "We're all good here!", MessageBoxButtons.OK);
                 return;
             }

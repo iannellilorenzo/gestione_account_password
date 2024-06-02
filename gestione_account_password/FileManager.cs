@@ -78,10 +78,11 @@ namespace gestione_account_password
         /// </summary>
         /// <param name="fileName"> File name + extension </param>
         /// <param name="content"> Content to write already serialized </param>
-        public void DefaultSerializer(string fileName, string content)
+        /// <param name="fileMode"> File mode to open the file </param>
+        public void DefaultSerializer(string fileName, string content, FileMode fileMode)
         {
             // Simple serialization to save the content in a file
-            using (FileStream fs = new(fileName, FileMode.Create, FileAccess.Write))
+            using (FileStream fs = new(fileName, fileMode, FileAccess.Write))
             {
                 byte[] data = new UTF8Encoding(true).GetBytes(content);
                 fs.Write(data, 0, data.Length);
@@ -102,13 +103,7 @@ namespace gestione_account_password
             {
                 // Serializing the master account
                 string toSerialize = JsonConvert.SerializeObject(masterAccounts, Formatting.Indented);
-                using (FileStream fs = File.Create(fileName))
-                {
-                    byte[] data = new UTF8Encoding(true).GetBytes(toSerialize);
-                    fs.Write(data, 0, data.Length);
-                    fs.Close();
-                }
-
+                DefaultSerializer(fileName, toSerialize, FileMode.Create);
                 return 0;
             }
 
@@ -131,12 +126,7 @@ namespace gestione_account_password
             string updatedJson = JsonConvert.SerializeObject(masters, Formatting.Indented);
 
             // Serializing the master account
-            using (FileStream fs = new(fileName, FileMode.Open, FileAccess.Write))
-            {
-                byte[] data = new UTF8Encoding(true).GetBytes(updatedJson);
-                fs.Write(data, 0, data.Length);
-                fs.Close();
-            }
+            DefaultSerializer(fileName, updatedJson, FileMode.Open);
 
             return 0;
         }
@@ -183,24 +173,9 @@ namespace gestione_account_password
         /// </summary>
         /// <param name="fullPath"> Directory + file name + extension </param>
         /// <param name="contentToExport"> All the accounts formatted correctly and ready to be exported </param>
-        /// <returns> True if it goes right, false if not </returns>
-        public bool ExportAccountsInCSV(string fullPath, string contentToExport)
+        public void ExportAccountsInCSV(string fullPath, string contentToExport)
         {
-            bool result = false;
-            using (FileStream fs = new(fullPath, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                using (StreamWriter sw = new(fs, Encoding.UTF8))
-                {
-                    // Writing the content to the file
-                    sw.WriteLine(contentToExport);
-                    result = true;
-                    sw.Close();
-                }
-
-                fs.Close();
-            }
-
-            return result;
+            DefaultSerializer(fullPath, contentToExport, FileMode.Create);
         }
 
         /// <summary>
@@ -208,27 +183,11 @@ namespace gestione_account_password
         /// </summary>
         /// <param name="fullPath"> Directory + file name + extension </param>
         /// <param name="masterAccountDetails"> Master account to get the accounts from </param>
-        /// <returns> True if it goes right, false if not </returns>
-        public bool ExportAccountInJson(string fullPath, MasterAccount masterAccountDetails)
+        public void ExportAccountInJson(string fullPath, MasterAccount masterAccountDetails)
         {
             // Serializing the accounts to export them in a JSON file
-            bool result = false;
             string exportString = JsonConvert.SerializeObject(masterAccountDetails.Accounts, Formatting.Indented);
-
-            using (FileStream fs = new(fullPath, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                using (StreamWriter sw = new(fs, Encoding.UTF8))
-                {
-                    // Writing the content to the file
-                    sw.Write(exportString);
-                    result = true;
-                    sw.Close();
-                }
-
-                fs.Close();
-            }
-
-            return result;
+            DefaultSerializer(fullPath, exportString, FileMode.Create);
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace gestione_account_password
 {
     /// <summary>
-    /// Represents the access form of the account password management application.
+    /// Represents the access form of the account and password manager application.
     /// </summary>
     public partial class Access : Form
     {
