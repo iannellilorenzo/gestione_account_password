@@ -268,7 +268,7 @@ namespace gestione_account_password
         private void FindAccount_Click(object sender, EventArgs e)
         {
             // Checks if the user filled in all the fields
-            if (UserFindBox.Text == "" || PassFindBox.Text == "")
+            if (string.IsNullOrEmpty(UserFindBox.Text) || string.IsNullOrEmpty(PassFindBox.Text))
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
                 return;
@@ -338,17 +338,17 @@ namespace gestione_account_password
             }
 
             // Checks to see what the user wants to modify
-            if (UserModBox.Text != "")
+            if (!string.IsNullOrEmpty(UserModBox.Text))
             {
                 accountToModify.Name = UserModBox.Text;
             }
 
-            if (EmailModBox.Text != "")
+            if (!string.IsNullOrEmpty(EmailModBox.Text))
             {
                 accountToModify.Email = EmailModBox.Text;
             }
 
-            if (DescModBox.Text != "")
+            if (!string.IsNullOrEmpty(DescModBox.Text))
             {
                 accountToModify.Description = DescModBox.Text;
             }
@@ -420,7 +420,7 @@ namespace gestione_account_password
         private void AddNewAccount_Click(object sender, EventArgs e)
         {
             // Checks if the user filled in all the fields and if the fields are correct
-            if (UserBox.Text == "" || EmailBox.Text == "" || DescBox.Text == "" || LenBox.Text == "")
+            if (string.IsNullOrEmpty(UserBox.Text) || string.IsNullOrEmpty(EmailBox.Text) || string.IsNullOrEmpty(DescBox.Text) || string.IsNullOrEmpty(LenBox.Text))
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
                 return;
@@ -494,7 +494,7 @@ namespace gestione_account_password
             FileManager fm = FileManager.Instance;
             bool result = false;
 
-                        // Lets the user choose where to save the file
+            // Lets the user choose where to save the file
             using (FolderBrowserDialog fbd = new())
             {
                 if (fbd.ShowDialog() == DialogResult.OK)
@@ -628,7 +628,7 @@ namespace gestione_account_password
         private void ActualRemoveAccount_Click(object sender, EventArgs e)
         {
             // Checks if the user filled in all the fields
-            if (UserFindBox.Text == "" || PassFindBox.Text == "")
+            if (string.IsNullOrEmpty(UserFindBox.Text) || string.IsNullOrEmpty(PassFindBox.Text))
             {
                 MessageBox.Show("Please fill in all the fields.", "Error", MessageBoxButtons.OK);
                 return;
@@ -672,6 +672,30 @@ namespace gestione_account_password
             }
 
             MessageBox.Show("Account couldn't be removed.", "Something went wrong!", MessageBoxButtons.OK);
+        }
+
+        /// <summary>
+        /// Checks if the user is allowed to reset the password, if so lets the user reset it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetPassword_Click(object sender, EventArgs e)
+        {
+            // Get the master account logged in
+            MasterAccount ma = GetCurrentMasterAccount();
+
+            // If the user can't reset the password, then it shows an error message
+            if (ma.LastChange.AddDays(30) < DateTime.Now)
+            {
+                MessageBox.Show("You can't reset your password yet.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            // If the user can reset the password, then another form open so that the user can reset the master account password
+            Hide();
+            ChangeMasterPassword formChangeMasterPassword = new(currentUser);
+            formChangeMasterPassword.Show();
+            formChangeMasterPassword.BringToFront();
         }
 
         #endregion

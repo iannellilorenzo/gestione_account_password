@@ -199,6 +199,7 @@
             this.ResetPassword.Name = "ResetPassword";
             this.ResetPassword.Size = new System.Drawing.Size(224, 26);
             this.ResetPassword.Text = "Reset password";
+            this.ResetPassword.Click += new System.EventHandler(this.ResetPassword_Click);
             // 
             // UserLabel
             // 

@@ -117,7 +117,7 @@ namespace gestione_account_password
         /// <param name="specialChars"> True: special characters are allowed in the password, false: special characters aren't allowed in the password </param>
         /// <param name="username"> Used as a unique key for encryption </param>
         /// <returns> Encrypted password </returns>
-        /// <exception cref="ArgumentOutOfRangeException"> Length of the password must be between 8 and 30 chars for security reasons </exception>
+        /// <exception cref="ArgumentOutOfRangeException"> Length of the password must be between 8 and 32 chars for security reasons </exception>
         public string PasswordGenerator(int length, bool caps, bool numbers, bool specialChars, string username)
         {
             // Password must be between 8 and 32 characters for security reasons
