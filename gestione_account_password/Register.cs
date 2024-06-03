@@ -45,7 +45,7 @@ namespace gestione_account_password
         /// <param name="placeholder"> Placeholder string </param>
         private void SetPlaceholder(TextBox textBox, string placeholder)
         {
-            if (textBox.Text == "")
+            if (string.IsNullOrEmpty(textBox.Text))
             {
                 textBox.Text = placeholder;
                 textBox.ForeColor = SystemColors.GrayText;
