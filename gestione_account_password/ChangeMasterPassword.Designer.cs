@@ -33,6 +33,7 @@
             this.NewPassBox = new System.Windows.Forms.TextBox();
             this.NewPassLabel = new System.Windows.Forms.Label();
             this.ChangePassword = new System.Windows.Forms.Button();
+            this.BackToHome = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // OldPassLabel
@@ -82,11 +83,27 @@
             this.ChangePassword.UseVisualStyleBackColor = false;
             this.ChangePassword.Click += new System.EventHandler(this.ChangePassword_Click);
             // 
+            // BackToHome
+            // 
+            this.BackToHome.BackColor = System.Drawing.Color.Silver;
+            this.BackToHome.FlatAppearance.BorderSize = 0;
+            this.BackToHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BackToHome.Font = new System.Drawing.Font("Verdana", 8F);
+            this.BackToHome.Location = new System.Drawing.Point(0, 0);
+            this.BackToHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BackToHome.Name = "BackToHome";
+            this.BackToHome.Size = new System.Drawing.Size(81, 30);
+            this.BackToHome.TabIndex = 39;
+            this.BackToHome.Text = "Back";
+            this.BackToHome.UseVisualStyleBackColor = false;
+            this.BackToHome.Click += new System.EventHandler(this.BackToHome_Click);
+            // 
             // ChangeMasterPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 328);
+            this.Controls.Add(this.BackToHome);
             this.Controls.Add(this.ChangePassword);
             this.Controls.Add(this.NewPassBox);
             this.Controls.Add(this.NewPassLabel);
@@ -109,5 +126,6 @@
         private System.Windows.Forms.TextBox NewPassBox;
         private System.Windows.Forms.Label NewPassLabel;
         private System.Windows.Forms.Button ChangePassword;
+        private System.Windows.Forms.Button BackToHome;
     }
 }

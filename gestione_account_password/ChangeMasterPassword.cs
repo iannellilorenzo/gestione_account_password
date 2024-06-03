@@ -19,15 +19,17 @@ namespace gestione_account_password
     {
         private string fileName;
         private string currentUser;
+        private Form previousForm;
 
         /// <summary>
         /// Constructor for the form
         /// </summary>
         /// <param name="username"> Used as key to decrypt the old password </param>
-        public ChangeMasterPassword(string username)
+        public ChangeMasterPassword(string username, Form homeForm)
         {
             InitializeComponent();
             CenterToScreen();
+            previousForm = homeForm;
 
             fileName = "data.json";
             currentUser = username;
@@ -84,6 +86,12 @@ namespace gestione_account_password
             }
             
             MessageBox.Show("Old password is incorrect.", "Error", MessageBoxButtons.OK);
+        }
+
+        private void BackToHome_Click(object sender, EventArgs e)
+        {
+            previousForm.Show();
+            Close();
         }
     }
 }

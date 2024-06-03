@@ -743,7 +743,7 @@ namespace gestione_account_password
 
             // If the user can reset the password, then another form open so that the user can reset the master account password
             Hide();
-            ChangeMasterPassword formChangeMasterPassword = new(currentUser);
+            ChangeMasterPassword formChangeMasterPassword = new(currentUser, this);
             formChangeMasterPassword.Show();
             formChangeMasterPassword.BringToFront();
         }
