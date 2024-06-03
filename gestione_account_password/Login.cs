@@ -41,7 +41,7 @@ namespace gestione_account_password
         /// <param name="placeholder"> Placeholder string </param>
         private void SetPlaceholder(TextBox textBox, string placeholder)
         {
-            if (textBox.Text == "")
+            if (string.IsNullOrEmpty(textBox.Text))
             {
                 textBox.Text = placeholder;
                 textBox.ForeColor = SystemColors.GrayText;
@@ -61,7 +61,7 @@ namespace gestione_account_password
                 textBox.ForeColor = SystemColors.WindowText;
             }
         }
-        
+
         private void NameMasterAccount_Enter(object sender, EventArgs e)
         {
             RemovePlaceholder(NameMasterAccount, namePlaceholder);
@@ -113,8 +113,11 @@ namespace gestione_account_password
             }
             catch (InvalidOperationException)
             {
-                MessageBox.Show("Account does not exist yet, please register first. The program will shut down.", "Error", MessageBoxButtons.OK);
-                Application.Exit();
+                MessageBox.Show("Account does not exist yet, you will be redirected to the registration first", "Error", MessageBoxButtons.OK);
+                Register registerForm = new Register();
+                registerForm.Show();
+                registerForm.Focus();
+                Close();
                 return;
             }
 
